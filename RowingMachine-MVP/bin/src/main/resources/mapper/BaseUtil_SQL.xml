@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rowingMachineMVP.web.common.BaseUtilMapper">
+
+	<select id="selectCnmmCdList" resultType="HashMap">
+		SELECT
+			GRP_DTL_CD AS cmmnDtlCd
+			, GRP_DTL_NM AS cmmnDtlNm
+		FROM CMMN_DTL_CD
+		WHERE 1 = 1
+			AND DEL_YN = 'N'
+			AND USE_YN = 'Y'
+			AND GRP_CD = '${grpCd}'
+		ORDER BY SORT_NO
+	</select>
+
+</mapper>

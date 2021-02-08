@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/defaultLayout}">
+
+	<div layout:fragment="content" class="text-center">
+		<form action="" method="post" id="resultForm">
+			<input type="hidden" th:field="${quizMstrInfoVO.userId}"/>
+		</form>
+		<div>
+			<div class="display-5 text-primary my-3" th:text="${session.userNm}"></div>
+			<span class="d-block display-1 text-primary" style="font-family: 'KOTRA_BOLD-Bold';">수고하셨습니다.</span>
+			<div class="display-5 text-primary my-3" style="font-family: 'GongGothicMedium';">
+				<span>(총 소요시간 : </span>
+				<span th:text="${quizMstrInfoVO.minSolving}"></span>
+				<span>분</span>
+				<span th:text="${quizMstrInfoVO.secSolving}"></span>
+				<span>초)</span>
+			</div>
+		</div>
+		<div class="my-5">
+			<button type="button" class="btn btn-primary btn-lg btn-block px-5 py-3" onclick="kakaoLogout();">홈으로</button>
+			<button type="button" class="btn btn-primary btn-lg btn-block px-5 py-3" onclick="goStatistics('resultForm');">결과보기</button>
+		</div>
+	</div>
+
+    <th:block layout:fragment="script">
+        <script th:src="@{/js/quiz/quizFunc.js}"></script>
+    </th:block>
+
+</html>

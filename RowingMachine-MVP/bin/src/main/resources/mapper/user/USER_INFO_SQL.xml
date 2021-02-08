@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rowingMachineMVP.web.user.mapper.UserInfoMapper">
+	
+	<insert id="insertUserInfo">
+		<selectKey keyProperty="userInfoSeq" resultType="int" order="BEFORE">
+			SELECT IFNULL(MAX(USER_INFO_SEQ), 0) + 1 FROM USER_INFO
+		</selectKey>
+		INSERT INTO USER_INFO (
+			USER_INFO_SEQ
+			, USER_ID
+			, USER_NM
+			, PASSWORD
+			, REGIST_ID
+			, REGIST_NM
+		) VALUES (
+			#{userInfoSeq}
+			, #{userId}
+			, #{userNm}
+			, #{password}
+			, 'SYSTEM'
+			, 'SYSTEM'
+		)
+	</insert>
+	
+	<select id="getUserInfo" resultType="UserInfoVO">
+		SELECT
+			USER_INFO_SEQ
+			, USER_ID
+			, USER_NM
+			, PASSWORD
+			, (SELECT MAX(TAKE_REV) + 1 FROM QUIZ_USER_ANS WHERE DEL_YN = 'N' AND USER_ID = #{userId}) AS TAKE_REV
+		FROM USER_INFO
+		WHERE DEL_YN = 'N'
+			AND USER_ID = #{userId}
+	</select>
+	
+</mapper>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="util">
+
+	<sql id="getComnCodeNm">
+		(SELECT GRP_DTL_NM FROM CMMN_DTL_CD WHERE DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '${grpCd}' AND GRP_DTL_CD = ${grpDtlCd}) AS ${grpDtlNm}
+	</sql>
+
+</mapper>
