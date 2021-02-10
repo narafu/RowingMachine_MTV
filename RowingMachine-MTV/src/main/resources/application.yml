@@ -1,0 +1,48 @@
+# 공통
+
+spring:
+  profiles:
+    active: local
+
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.rowingMachineMTV.**.vo
+  configuration:
+    mapUnderscoreToCamelCase: true
+
+server:
+  port: 80
+
+
+logging:
+  level: 
+    root: INFO
+    com:
+      rowingMachineMTV: DEBUG
+
+---
+
+# local
+
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: jdbc:mysql://localhost:3306/rowing_db?autoReconnect=true
+    username: root
+    password: 1234
+
+
+---
+
+# was
+
+spring:
+  config:
+    activate:
+      on-profile: was
+  datasource:
+    url: jdbc:mysql://rds-mysql-rowingmachine.cszmhu28qmqo.ap-northeast-2.rds.amazonaws.com:3306/rowing_db?autoReconnect=true
+    username: root
+    password: root1234

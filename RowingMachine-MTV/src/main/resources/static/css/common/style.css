@@ -1,0 +1,103 @@
+body, #wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+footer {
+  margin-top: auto;
+}
+
+body {
+    font-family: 'NEXON Lv1 Gothic OTF Light';
+}
+
+hr.solid {
+    border-top: 3px solid #086972;
+}
+
+.text-primary {
+    color: #086972 !important;
+}
+
+.bg-primary {
+    background-color: #086972 !important;
+}
+.btn-outline-primary {
+    color: #086972;
+    border-color: #086972;
+}
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #086972;
+    border-color: #086972;
+}
+.btn-primary {
+    background-color: #086972;
+    border-color: #086972;
+    color: #FFF; }
+.btn-primary:hover,
+.btn-primary:focus {
+    border-color: #086972;
+    background-color: #086972;
+    color: #FFF; }
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:active:focus,
+.btn-primary:active:hover {
+    border-color: #086972;
+    background-color: #086972;
+    color: #FFF; }
+
+a {
+    color: black !important;
+    text-decoration: none;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+.nav-pills .active {
+    color: white !important;
+    background-color:  #086972 !important;
+}
+
+.border-primary {
+    border-color: #086972 !important;
+}
+
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'KOTRA_BOLD-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.1/KOTRA_BOLD-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
