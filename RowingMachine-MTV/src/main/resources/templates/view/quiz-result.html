@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout/defaultlayout">
+<html 	xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorator="layouts/defaultLayout">
 
-	<div class="container">
-
+	<div layout:fragment="content" class="container">
+		<form action="" method="post" id="resultForm">
+			<input type="hidden">
+		</form>
+		<div class="m-3 text-end">
+			<i class="fas fa-home fa-3x" onclick="goHome('resultForm');"></i>
+		</div>
 		<div class="row">
 			<div class="col-6">
 				<div class="bg-primary text-light px-3 py-2">
@@ -131,10 +135,14 @@
 			</div>
 		</div>
 		<div class="row my-5">
-			<div class="col">
+			<div class="col text-center">
 				<button type="button" class="btn btn-primary btn-lg btn-block px-5 py-3 fw-bold">예비합격증 받기</button>
 			</div>
 		</div>
 	</div>
 
+    <th:block layout:fragment="script">
+        <script th:src="@{/js/quiz.js}"></script>
+    </th:block>
+    
 </html>

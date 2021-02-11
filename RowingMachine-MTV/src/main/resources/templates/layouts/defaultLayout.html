@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html 	lang="ko" 
+        xmlns:th="http://www.thymeleaf.org" 
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+	<!-- [head] 영역 시작 -->
+	<head th:replace="fragments/head :: headFragment">
+		<title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">default</title>
+	</head>
+	<!-- [head] 영역 끝 -->
+
+	<body class="w-100 h-100">
+	
+		<!-- [header] 영역 시작 -->
+		<header th:replace="fragments/header :: headerFragment"></header>
+		<!-- [header] 영역 끝 -->
+		
+		<!-- [content] 영역 시작 -->
+		<div class="my-auto">
+			<div layout:fragment="content"></div>
+		</div>
+		<!-- [content] 영역 끝 -->
+		
+		<th:block layout:fragment="script"></th:block>
+		
+		<!-- [footer] 영역 시작 -->
+		<footer th:replace="fragments/footer :: footerFragment"></footer>
+		<!-- [footer] 영역 끝 -->
+	
+	</body>
+</html>

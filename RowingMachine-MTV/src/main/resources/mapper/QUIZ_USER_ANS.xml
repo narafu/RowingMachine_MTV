@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.RowingMachineMTV.web.index.mapper.QuizUserAnsMapper">
+	
+	<insert id="insertUserAnswer">
+		INSERT INTO QUIZ_USER_ANS (
+			QUIZ_USER_ANS_SEQ
+			, QUIZ_MSTR_INFO_SEQ
+			, USER_ID
+			, USER_ANSWER
+			, ANSWER_CHK
+			, REGIST_ID
+			, REGIST_NM
+		) VALUES (
+			#{quizUserAnsSeq}
+			, #{quizMstrInfoSeq}
+			, #{userId}
+			, #{userAnswer}
+			, (SELECT #{userAnswer} = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = #{quizMstrInfoSeq}))
+			, 'SYSTEM'
+			, 'SYSTEM'
+		)
+	</insert>
+
+</mapper>

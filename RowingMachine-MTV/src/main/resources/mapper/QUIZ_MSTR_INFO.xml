@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.RowingMachineMTV.web.index.mapper.QuizMstrInfoMapper">
+
+	<select id="getQuizTotalCnt" resultType="int">
+		SELECT
+			COUNT(*) AS TOTAL
+		FROM QUIZ_MSTR_INFO
+		WHERE DEL_YN = 'N'
+			AND SUBJECT_TYPE_CD = #{subjectTypeCd}
+	</select>
+
+	<select id="selectQuizInfo" resultType="QuizMstrInfoVO">
+		SELECT
+			@ROWNUM := @ROWNUM + 1 AS RNO
+			, QUIZ_MSTR_INFO_SEQ
+			, SUBJECT_TYPE_CD
+			, SRT_NO
+			, CONTENT
+			, ANSWER
+			, DEL_YN
+			, REGIST_ID
+			, REGIST_NM
+			, REG_TS
+			, MDFY_TS
+			, DEL_TS
+		FROM QUIZ_MSTR_INFO
+		WHERE (@ROWNUM:=0)=0
+			AND DEL_YN = 'N'
+			AND SUBJECT_TYPE_CD = #{subjectTypeCd}
+			AND SRT_NO = #{srtNo}
+	</select>
+
+</mapper>

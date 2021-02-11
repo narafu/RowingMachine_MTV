@@ -54,8 +54,8 @@ a {
     text-decoration: none;
 }
 
-a:hover {
-    cursor: pointer;
+a:hover, button:hover, i:hover {
+    cursor: pointer !important;
 }
 
 .nav-pills .active {
@@ -100,4 +100,20 @@ a:hover {
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+}
+
+h1 {
+	font-family: 'NEXON Lv1 Gothic OTF Bold';
+}
+
+i:hover {
+	color: #086972;
+}
+
+i.active {
+	color: #086972;	
+}
+
+i {
+	color: black;
 }
