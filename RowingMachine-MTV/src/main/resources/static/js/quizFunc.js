@@ -1,8 +1,9 @@
 
-$('.btn-grp i').click(function () {
-	$(this).toggleClass('active');
-	$(this).siblings().removeClass('active');
-});
+function trigger(obj, answer) {
+	$(obj).toggleClass('active');
+	$(obj).siblings().removeClass('active');
+	$('#userAnswer').val(answer);
+}
 
 function startQuiz(param) {
 
@@ -29,8 +30,11 @@ function goHome(param) {
 	}
 }
 
-function trigger(answer) {
-	$('#userAnswer').val(answer);
+function goStatistics(param) {
+	var form = $('#' + param);
+	form.attr('action', '/statistics.do');
+	form.attr('target', '');
+	form.submit();
 }
 
 function goQuiz(index) {

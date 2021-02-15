@@ -5,7 +5,16 @@
 	
 	<insert id="mergeUserAnswer">
 		<selectKey keyProperty="quizUserAnsSeq" resultType="int" order="BEFORE">
-			SELECT IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1 FROM QUIZ_USER_ANS
+			SELECT
+			<choose>
+				<when test="quizUserAnsSeq == 0">
+					IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1
+				</when>
+				<otherwise>
+					#{quizUserAnsSeq}
+				</otherwise>
+			</choose>
+				FROM QUIZ_USER_ANS LIMIT 1
 		</selectKey>
 		INSERT INTO QUIZ_USER_ANS (
 			QUIZ_USER_ANS_SEQ
@@ -24,10 +33,10 @@
 				THEN 'T' ELSE 'F' END
 			, 'SYSTEM'
 			, 'SYSTEM'
-		) ON DUPLICATE KEY
-		UPDATE USER_ANSWER = #{userAnswer}
+		) ON DUPLICATE KEY UPDATE
+			USER_ANSWER = #{userAnswer}
 			, ANSWER_CHK = (SELECT CASE WHEN (SELECT 'O' = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = #{quizMstrInfoSeq})) = '1'
-				THEN 'T' ELSE 'F' END FROM DUAL)
+				THEN 'T' ELSE 'F' END)
 	</insert>
 	
 	<select id="selectQuizResultList" resultType="QuizMstrInfoVO">

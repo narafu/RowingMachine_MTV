@@ -3,57 +3,26 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorator="layouts/defaultLayout">
 
-	<div layout:fragment="content" class="container">
+	<div layout:fragment="content" class="text-center">
 		<form action="" method="post" id="resultForm">
-			<input type="hidden">
+			<input type="hidden" th:field="${quizMstrInfoVO.userId}"/>
 		</form>
-		
-		<div class="m-3 text-end">
-			<i class="fas fa-home fa-3x" onclick="goHome('resultForm');"></i>
-		</div>
-		<div class="row">
-			<div class="col-6">
-				<div class="bg-primary text-light px-3 py-2">
-					<span class="d-block display-5 text-center">변호사시험 합계예측 결과</span>
-					<span class="d-block display-5 text-center fw-bold">: ??.? %의 확률로 합격 예상</span>
-				</div>
-				<div>
-					그래프
-				</div>
-			</div>
-			<div class="col-6">
-				<table class="table table-sm table-striped caption-top table-bordered border-primary align-middle text-center">
-					<thead>
-						<caption>헌법</caption>
-						<tr>
-							<th scope="col">문제</th>
-							<th scope="col" colspan="10">정답</th>
-						</tr>
-					</thead>
-					<tbody>
-						<th:block th:each="list : ${quizResultList}">
-							<tr>
-								<th scope="row" th:text="${list.quizMstrInfoSeq}"></th>
-								<td th:text="${list.userId}"></td>
-								<td th:text="${list.srtNo}"></td>
-								<td th:text="${list.answer}"></td>
-								<td th:text="${list.userAnswer}"></td>
-								<td th:text="${list.answerChk}"></td>
-							</tr>
-						</th:block>
-					</tbody>
-				</table>
+		<div>
+			<span class="d-block display-1 text-primary fw-bold">수고하셨습니다.</span>
+			<div class="display-5 text-primary my-3">
+				<span>(총 소요시간 : </span>
+				<span>???</span>
+				<span>분)</span>
 			</div>
 		</div>
-		<div class="row my-5">
-			<div class="col text-center">
-				<button type="button" class="btn btn-primary btn-lg btn-block px-5 py-3 fw-bold">예비합격증 받기</button>
-			</div>
+		<div class="my-5">
+			<button type="button" class="btn btn-primary btn-lg btn-block px-5 py-3" onclick="goHome('resultForm');">홈으로</button>
+			<button type="button" class="btn btn-primary btn-lg btn-block px-5 py-3" onclick="goStatistics('resultForm');">결과보기</button>
 		</div>
 	</div>
 
     <th:block layout:fragment="script">
         <script th:src="@{/js/quizFunc.js}"></script>
     </th:block>
-    
+
 </html>

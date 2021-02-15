@@ -44,16 +44,30 @@ public class IndexController {
 
 		QuizMstrInfoVO quizMstrInfoVO = new QuizMstrInfoVO();
 
+		// 과목코드 셋팅
 		if (StringUtils.isEmpty(quizMstrInfoVO.getSubjectTypeCd())) {
-			quizMstrInfoVO.setSubjectTypeCd("10"); // 과목코드 셋팅
+			quizMstrInfoVO.setSubjectTypeCd("10");
 		}
+
+		// 문제번호 셋팅
 		if (quizMstrInfoVO.getSrtNo() == 0) {
-			quizMstrInfoVO.setSrtNo(1); // 문제번호 셋팅
+			quizMstrInfoVO.setSrtNo(1);
 		}
+
 		quizMstrInfoVO = quizService.selectQuizInfo(quizMstrInfoVO);
 		model.addAttribute("quizMstrInfoVO", quizMstrInfoVO);
 
 		return "view/quizMain";
+	}
+
+	@RequestMapping("quizAnsSave.do")
+	@ResponseBody
+	public int quizAnsSave(QuizMstrInfoVO param, Model model) {
+
+		// 유저 문제풀이 기록
+		int result = quizService.mergeUserAnswer(param);
+
+		return result;
 	}
 
 	@RequestMapping("quizAjax.do")
@@ -64,29 +78,19 @@ public class IndexController {
 
 		return "view/quizMain :: #quizDiv";
 	}
-	
-	@RequestMapping("quizAnsSave.do")
-	@ResponseBody
-	public int quizAnsSave(QuizMstrInfoVO param, Model model) {
-		
-		// 풀이 기록
-		int result = quizService.mergeUserAnswer(param);
-		
-		return result;
-	}
 
 	@RequestMapping("quizResult.do")
 	public String quizResult(QuizMstrInfoVO param, Model model) {
-
-		List<QuizMstrInfoVO> quizResultList = quizService.selectQuizResultList(param);
-		model.addAttribute("quizResultList", quizResultList);
-
+		model.addAttribute("quizMstrInfoVO", param);
 		return "view/quizResult";
 	}
 
 	@RequestMapping("statistics.do")
-	public String statistics() {
+	public String statistics(QuizMstrInfoVO param, Model model) {
 
+		List<QuizMstrInfoVO> quizResultList = quizService.selectQuizResultList(param);
+		model.addAttribute("quizResultList", quizResultList);
+		
 		return "view/statistics";
 	}
 

@@ -28,8 +28,8 @@
 					</div>
 					<div>권장 풀이시간이 15분 34초 남았어요!</div>
 				</div>
-				<div class="my-5">
-					<div id="quizDiv">
+				<div class="my-5" id="quizDiv">
+					<div>
 						<input type="hidden" th:field="${quizMstrInfoVO.quizMstrInfoSeq}"/>
 						<input type="hidden" th:field="${quizMstrInfoVO.quizUserAnsSeq}"/>
 						<input type="hidden" th:field="${quizMstrInfoVO.subjectTypeCd}"/>
@@ -39,15 +39,14 @@
 						<div>문 <span th:text="${quizMstrInfoVO.srtNo}"></span>.</div>
 						<div class="lh-lg">
 							<th:block th:text="${quizMstrInfoVO.content}"/>
-							<th:block th:text="${quizMstrInfoVO.userAnswer}"/>
 						</div>
 					</div>
 					<div class="d-flex justify-content-around align-items-center my-5 text-center btn-grp">
 						<i class="fas fa-check-circle fa-5x"
-							th:classappend="${quizMstrInfoVO.userAnswer} == 'O' ? active" onclick="trigger('O')"></i>
+							th:classappend="${quizMstrInfoVO.userAnswer} == 'O' ? active" onclick="trigger(this, 'O')"></i>
 						<!-- <i class="far fa-check-circle fa-5x"></i> -->
 						<i class="fas fa-times-circle fa-5x"
-							th:classappend="${quizMstrInfoVO.userAnswer} == 'X' ? active" onclick="trigger('X')"></i>
+							th:classappend="${quizMstrInfoVO.userAnswer} == 'X' ? active" onclick="trigger(this, 'X')"></i>
 						<!-- <i class="far fa-times-circle fa-5x"></i> -->
 					</div>
 				</div>
