@@ -1,17 +1,18 @@
 package com.RowingMachineMTV.web.index.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.RowingMachineMTV.web.index.vo.QuizMstrInfoVO;
-import com.RowingMachineMTV.web.index.vo.UserQuizVO;
 
 @Mapper
 public interface QuizUserAnsMapper {
 
 	int getQuizTotalCnt(QuizMstrInfoVO param);
 
-	QuizMstrInfoVO selectQuizInfo(QuizMstrInfoVO param);
+	int mergeUserAnswer(QuizMstrInfoVO quizMstrInfoVO);
 
-	int insertUserAnswer(UserQuizVO userQuizVO);
+	List<QuizMstrInfoVO> selectQuizResultList(QuizMstrInfoVO quizMstrInfoVO);
 
 }

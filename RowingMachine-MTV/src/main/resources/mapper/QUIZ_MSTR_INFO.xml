@@ -13,21 +13,18 @@
 
 	<select id="selectQuizInfo" resultType="QuizMstrInfoVO">
 		SELECT
-			@ROWNUM := @ROWNUM + 1 AS RNO
-			, QUIZ_MSTR_INFO_SEQ
+			QUIZ_MSTR_INFO_SEQ
 			, SUBJECT_TYPE_CD
 			, SRT_NO
 			, CONTENT
 			, ANSWER
-			, DEL_YN
-			, REGIST_ID
-			, REGIST_NM
-			, REG_TS
-			, MDFY_TS
-			, DEL_TS
+			, (SELECT USER_ANSWER FROM QUIZ_USER_ANS
+				WHERE USER_ID = #{userId}
+					AND SUBJECT_TYPE_CD = #{subjectTypeCd}
+					AND SRT_NO = #{srtNo}
+				ORDER BY REG_TS DESC LIMIT 1) AS USER_ANSWER
 		FROM QUIZ_MSTR_INFO
-		WHERE (@ROWNUM:=0)=0
-			AND DEL_YN = 'N'
+		WHERE DEL_YN = 'N'
 			AND SUBJECT_TYPE_CD = #{subjectTypeCd}
 			AND SRT_NO = #{srtNo}
 	</select>

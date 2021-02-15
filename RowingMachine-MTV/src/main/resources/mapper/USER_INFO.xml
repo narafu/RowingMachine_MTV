@@ -4,6 +4,9 @@
 <mapper namespace="com.RowingMachineMTV.web.index.mapper.UserInfoMapper">
 	
 	<insert id="insertUserInfo">
+		<selectKey keyProperty="userInfoSeq" resultType="int" order="BEFORE">
+			SELECT IFNULL(MAX(USER_INFO_SEQ), 0) + 1 FROM USER_INFO
+		</selectKey>
 		INSERT INTO USER_INFO (
 			USER_INFO_SEQ
 			, USER_ID

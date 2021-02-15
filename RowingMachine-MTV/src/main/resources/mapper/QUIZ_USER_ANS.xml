@@ -3,7 +3,10 @@
 
 <mapper namespace="com.RowingMachineMTV.web.index.mapper.QuizUserAnsMapper">
 	
-	<insert id="insertUserAnswer">
+	<insert id="mergeUserAnswer">
+		<selectKey keyProperty="quizUserAnsSeq" resultType="int" order="BEFORE">
+			SELECT IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1 FROM QUIZ_USER_ANS
+		</selectKey>
 		INSERT INTO QUIZ_USER_ANS (
 			QUIZ_USER_ANS_SEQ
 			, QUIZ_MSTR_INFO_SEQ
@@ -17,10 +20,32 @@
 			, #{quizMstrInfoSeq}
 			, #{userId}
 			, #{userAnswer}
-			, (SELECT #{userAnswer} = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = #{quizMstrInfoSeq}))
+			, CASE WHEN (SELECT 'O' = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = #{quizMstrInfoSeq})) = '1'
+				THEN 'T' ELSE 'F' END
 			, 'SYSTEM'
 			, 'SYSTEM'
-		)
+		) ON DUPLICATE KEY
+		UPDATE USER_ANSWER = #{userAnswer}
+			, ANSWER_CHK = (SELECT CASE WHEN (SELECT 'O' = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = #{quizMstrInfoSeq})) = '1'
+				THEN 'T' ELSE 'F' END FROM DUAL)
 	</insert>
+	
+	<select id="selectQuizResultList" resultType="QuizMstrInfoVO">
+		SELECT
+			ROW_NUMBER() OVER(ORDER BY B.SUBJECT_TYPE_CD, B.SRT_NO) AS RNO
+			, A.QUIZ_USER_ANS_SEQ
+		    , A.USER_ID
+		    , A.USER_ANSWER
+		    , A.ANSWER_CHK
+		    , A.TAKE_REV
+			, B.QUIZ_MSTR_INFO_SEQ
+		    , B.SUBJECT_TYPE_CD
+		    , B.SRT_NO
+		    , B.ANSWER
+		FROM QUIZ_USER_ANS A, QUIZ_MSTR_INFO B
+		WHERE A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ
+			AND A.DEL_YN = 'N' AND B.DEL_YN = 'N'
+			AND A.USER_ID = #{userId}
+	</select>
 
 </mapper>

@@ -11,5 +11,12 @@ public class QuizMstrInfoVO extends BaseVO {
 	private String content;
 	private String answer;
 
+	private int quizUserAnsSeq;
+	private String userId;
+	private String userAnswer;
+	private String answerChk;
+	private int takeRev;
+	
 	private int quizTotalCnt;
+	private int quizTrueCnt;
 }

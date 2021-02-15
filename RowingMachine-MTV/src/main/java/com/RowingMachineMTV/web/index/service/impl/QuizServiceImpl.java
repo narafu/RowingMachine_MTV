@@ -1,5 +1,7 @@
 package com.RowingMachineMTV.web.index.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,7 +9,6 @@ import com.RowingMachineMTV.web.index.mapper.QuizMstrInfoMapper;
 import com.RowingMachineMTV.web.index.mapper.QuizUserAnsMapper;
 import com.RowingMachineMTV.web.index.service.QuizService;
 import com.RowingMachineMTV.web.index.vo.QuizMstrInfoVO;
-import com.RowingMachineMTV.web.index.vo.UserQuizVO;
 
 @Service
 public class QuizServiceImpl implements QuizService {
@@ -19,16 +20,21 @@ public class QuizServiceImpl implements QuizService {
 	private QuizUserAnsMapper quizUserAnsMapper;
 
 	@Override
-	public QuizMstrInfoVO selectQuizInfo(QuizMstrInfoVO quizMstrInfoVO) {
-		int quizTotalCnt = quizMstrInfoMapper.getQuizTotalCnt(quizMstrInfoVO);
-		quizMstrInfoVO = quizMstrInfoMapper.selectQuizInfo(quizMstrInfoVO);
-		quizMstrInfoVO.setQuizMstrInfoSeq(quizTotalCnt);
+	public QuizMstrInfoVO selectQuizInfo(QuizMstrInfoVO param) {
+		int quizTotalCnt = quizMstrInfoMapper.getQuizTotalCnt(param);
+		QuizMstrInfoVO quizMstrInfoVO = quizMstrInfoMapper.selectQuizInfo(param);
+		quizMstrInfoVO.setQuizTotalCnt(quizTotalCnt);
 		return quizMstrInfoVO;
 	}
 
 	@Override
-	public int insertUserAnswer(UserQuizVO userQuizVO) {
-		return quizUserAnsMapper.insertUserAnswer(userQuizVO);
+	public int mergeUserAnswer(QuizMstrInfoVO quizMstrInfoVO) {
+		return quizUserAnsMapper.mergeUserAnswer(quizMstrInfoVO);
+	}
+
+	@Override
+	public List<QuizMstrInfoVO> selectQuizResultList(QuizMstrInfoVO quizMstrInfoVO) {
+		return quizUserAnsMapper.selectQuizResultList(quizMstrInfoVO);
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.RowingMachineMTV.web.index.controller;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.apache.groovy.parser.antlr4.util.StringUtils;
@@ -7,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.RowingMachineMTV.web.index.service.QuizService;
 import com.RowingMachineMTV.web.index.service.UserService;
 import com.RowingMachineMTV.web.index.vo.QuizMstrInfoVO;
-import com.RowingMachineMTV.web.index.vo.UserQuizVO;
 import com.RowingMachineMTV.web.index.vo.UserInfoVO;
 
 @Controller
@@ -26,62 +27,61 @@ public class IndexController {
 
 	@RequestMapping(value = { "", "index.do" })
 	public String index(Model model) {
-		UserQuizVO userQuizVO = new UserQuizVO();
-		model.addAttribute("userQuizVO", userQuizVO);
+		UserInfoVO userVO = new UserInfoVO();
+		model.addAttribute("userVO", userVO);
 		return "view/index";
 	}
 
-	@RequestMapping("quiz-main.do")
-	public String quizMain(UserInfoVO userVO, QuizMstrInfoVO param, Model model) {
+	@RequestMapping("quizMain.do")
+	public String quizMain(UserInfoVO userVO, Model model) {
 
-		QuizMstrInfoVO quizMstrInfoVO = param;
-		
 		if (StringUtils.isEmpty(userVO.getUserId())) {
 			String uuid = UUID.randomUUID().toString();
 			userVO.setUserId(uuid);
 		}
-		userService.insertUserInfo(userVO);
+		userService.insertUserInfo(userVO); // 유저 DB등록
 		model.addAttribute("userVO", userVO);
 
+		QuizMstrInfoVO quizMstrInfoVO = new QuizMstrInfoVO();
+
 		if (StringUtils.isEmpty(quizMstrInfoVO.getSubjectTypeCd())) {
-			quizMstrInfoVO.setSubjectTypeCd("10");
+			quizMstrInfoVO.setSubjectTypeCd("10"); // 과목코드 셋팅
 		}
 		if (quizMstrInfoVO.getSrtNo() == 0) {
-			quizMstrInfoVO.setSrtNo(1);
+			quizMstrInfoVO.setSrtNo(1); // 문제번호 셋팅
 		}
 		quizMstrInfoVO = quizService.selectQuizInfo(quizMstrInfoVO);
-		model.addAttribute("quizVO", quizMstrInfoVO);
+		model.addAttribute("quizMstrInfoVO", quizMstrInfoVO);
 
-		UserQuizVO userQuizVO = new UserQuizVO();
-		model.addAttribute("userQuizVO", userQuizVO);
-
-		return "view/quiz-main";
+		return "view/quizMain";
 	}
 
-	@RequestMapping("quiz-ajax.do")
-	public String quizAjax(UserQuizVO userQuizVO, QuizMstrInfoVO param, Model model) {
+	@RequestMapping("quizAjax.do")
+	public String quizAjax(QuizMstrInfoVO param, Model model) {
 
-		quizService.insertUserAnswer(userQuizVO);
+		QuizMstrInfoVO quizMstrInfoVO = quizService.selectQuizInfo(param);
+		model.addAttribute("quizMstrInfoVO", quizMstrInfoVO);
 
-		int quizTotalCnt = param.getQuizTotalCnt();
-		int srtNo = param.getSrtNo();
-
-		if (quizTotalCnt > srtNo) {
-			QuizMstrInfoVO quizVO = quizService.selectQuizInfo(param);
-			model.addAttribute("quizVO", quizVO);
-
-			return "view/quiz-main :: #quizDiv";
-			
-		} else {
-
-			return "redirect: /quiz-result.do";
-		}
+		return "view/quizMain :: #quizDiv";
+	}
+	
+	@RequestMapping("quizAnsSave.do")
+	@ResponseBody
+	public int quizAnsSave(QuizMstrInfoVO param, Model model) {
+		
+		// 풀이 기록
+		int result = quizService.mergeUserAnswer(param);
+		
+		return result;
 	}
 
-	@RequestMapping("quiz-result.do")
-	public String quizResult() {
+	@RequestMapping("quizResult.do")
+	public String quizResult(QuizMstrInfoVO param, Model model) {
 
-		return "view/quiz-result";
+		List<QuizMstrInfoVO> quizResultList = quizService.selectQuizResultList(param);
+		model.addAttribute("quizResultList", quizResultList);
+
+		return "view/quizResult";
 	}
 
 	@RequestMapping("statistics.do")
