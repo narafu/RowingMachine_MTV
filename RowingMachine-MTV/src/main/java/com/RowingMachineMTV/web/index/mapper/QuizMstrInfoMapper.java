@@ -9,6 +9,6 @@ public interface QuizMstrInfoMapper {
 
 	int getQuizTotalCnt(QuizMstrInfoVO quizMstrInfoVO);
 
-	QuizMstrInfoVO selectQuizInfo(QuizMstrInfoVO QuizMstrInfoVO);
+	QuizMstrInfoVO getQuizInfo(QuizMstrInfoVO QuizMstrInfoVO);
 
 }

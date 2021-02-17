@@ -25,22 +25,33 @@ public class IndexController {
 	@Autowired
 	private QuizService quizService;
 
-	@RequestMapping(value = { "", "index.do" })
+	@RequestMapping(value = { "", "quiz/index.do" })
 	public String index(Model model) {
 		UserInfoVO userVO = new UserInfoVO();
 		model.addAttribute("userVO", userVO);
-		return "view/index";
+		return "view/quiz/index";
 	}
 
-	@RequestMapping("quizMain.do")
-	public String quizMain(UserInfoVO userVO, Model model) {
-
-		if (StringUtils.isEmpty(userVO.getUserId())) {
+	@RequestMapping("quiz/main.do")
+	public String quizMain(UserInfoVO param, Model model) {
+		
+		String userId = param.getUserId();
+		
+		if (StringUtils.isEmpty(userId)) {
 			String uuid = UUID.randomUUID().toString();
-			userVO.setUserId(uuid);
+			param.setUserId(uuid);
+			param.setUserNm("guest");
+		} else {
+			String[] userNm = userId.split("@");
+			param.setUserNm(userNm[0]);
 		}
-		userService.insertUserInfo(userVO); // 유저 DB등록
-		model.addAttribute("userVO", userVO);
+		
+		UserInfoVO userVO = userService.getUserInfo(param); // 유저 조회
+		if(userVO == null) {
+			userService.insertUserInfo(param); // 유저 DB등록
+		}
+		
+		model.addAttribute("userVO", param);
 
 		QuizMstrInfoVO quizMstrInfoVO = new QuizMstrInfoVO();
 
@@ -54,13 +65,13 @@ public class IndexController {
 			quizMstrInfoVO.setSrtNo(1);
 		}
 
-		quizMstrInfoVO = quizService.selectQuizInfo(quizMstrInfoVO);
+		quizMstrInfoVO = quizService.getQuizInfo(quizMstrInfoVO);
 		model.addAttribute("quizMstrInfoVO", quizMstrInfoVO);
 
-		return "view/quizMain";
+		return "view/quiz/main";
 	}
 
-	@RequestMapping("quizAnsSave.do")
+	@RequestMapping("quiz/answer.do")
 	@ResponseBody
 	public int quizAnsSave(QuizMstrInfoVO param, Model model) {
 		// 유저 문제풀이 기록
@@ -68,24 +79,26 @@ public class IndexController {
 		return result;
 	}
 
-	@RequestMapping("quizAjax.do")
+	@RequestMapping("quiz/quizAjax.do")
 	public String quizAjax(QuizMstrInfoVO param, Model model) {
-		QuizMstrInfoVO quizMstrInfoVO = quizService.selectQuizInfo(param);
+		QuizMstrInfoVO quizMstrInfoVO = quizService.getQuizInfo(param);
 		model.addAttribute("quizMstrInfoVO", quizMstrInfoVO);
-		return "view/quizMain :: #quizDiv";
+		return "view/quiz/main :: #quizDiv";
 	}
 
-	@RequestMapping("quizResult.do")
+	@RequestMapping("quiz/result.do")
 	public String quizResult(QuizMstrInfoVO param, Model model) {
 		model.addAttribute("quizMstrInfoVO", param);
-		return "view/quizResult";
+		return "view/quiz/result";
 	}
 
-	@RequestMapping("statistics.do")
+	@RequestMapping("quiz/statistics.do")
 	public String statistics(QuizMstrInfoVO param, Model model) {
 		List<QuizMstrInfoVO> quizResultList = quizService.selectQuizResultList(param);
 		model.addAttribute("quizResultList", quizResultList);
-		return "view/statistics";
+		List<QuizMstrInfoVO> quizCntList = quizService.getQuizCntList(param);
+		model.addAttribute("quizCntList", quizCntList);
+		return "view/quiz/statistics";
 	}
 
 }

@@ -6,4 +6,8 @@ public interface UserService {
 
 	int insertUserInfo(UserInfoVO userVO);
 
+	UserInfoVO getUserInfo(UserInfoVO userVO);
+
+	int updateUserInfo(UserInfoVO param);
+
 }

@@ -9,4 +9,8 @@ public interface UserInfoMapper {
 
 	int insertUserInfo(UserInfoVO userVO);
 
+	UserInfoVO getUserInfo(UserInfoVO userVO);
+
+	int updateUserInfo(UserInfoVO userVO);
+
 }

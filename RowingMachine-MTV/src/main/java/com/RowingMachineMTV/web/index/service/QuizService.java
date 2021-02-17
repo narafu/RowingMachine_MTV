@@ -6,10 +6,12 @@ import com.RowingMachineMTV.web.index.vo.QuizMstrInfoVO;
 
 public interface QuizService {
 
-	QuizMstrInfoVO selectQuizInfo(QuizMstrInfoVO quizVO);
+	QuizMstrInfoVO getQuizInfo(QuizMstrInfoVO quizVO);
 
 	int mergeUserAnswer(QuizMstrInfoVO quizMstrInfoVO);
 
 	List<QuizMstrInfoVO> selectQuizResultList(QuizMstrInfoVO quizMstrInfoVO);
+
+	List<QuizMstrInfoVO> getQuizCntList(QuizMstrInfoVO param);
 
 }

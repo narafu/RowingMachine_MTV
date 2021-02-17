@@ -18,4 +18,14 @@ public class UserServiceImpl implements UserService {
 		return userInfoMapper.insertUserInfo(userVO);
 	}
 
+	@Override
+	public UserInfoVO getUserInfo(UserInfoVO userVO) {
+		return userInfoMapper.getUserInfo(userVO);
+	}
+
+	@Override
+	public int updateUserInfo(UserInfoVO userVO) {
+		return userInfoMapper.updateUserInfo(userVO);
+	}
+
 }

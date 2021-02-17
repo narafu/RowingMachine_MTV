@@ -20,9 +20,9 @@ public class QuizServiceImpl implements QuizService {
 	private QuizUserAnsMapper quizUserAnsMapper;
 
 	@Override
-	public QuizMstrInfoVO selectQuizInfo(QuizMstrInfoVO param) {
+	public QuizMstrInfoVO getQuizInfo(QuizMstrInfoVO param) {
 		int quizTotalCnt = quizMstrInfoMapper.getQuizTotalCnt(param);
-		QuizMstrInfoVO quizMstrInfoVO = quizMstrInfoMapper.selectQuizInfo(param);
+		QuizMstrInfoVO quizMstrInfoVO = quizMstrInfoMapper.getQuizInfo(param);
 		quizMstrInfoVO.setQuizTotalCnt(quizTotalCnt);
 		return quizMstrInfoVO;
 	}
@@ -35,6 +35,11 @@ public class QuizServiceImpl implements QuizService {
 	@Override
 	public List<QuizMstrInfoVO> selectQuizResultList(QuizMstrInfoVO quizMstrInfoVO) {
 		return quizUserAnsMapper.selectQuizResultList(quizMstrInfoVO);
+	}
+
+	@Override
+	public List<QuizMstrInfoVO> getQuizCntList(QuizMstrInfoVO param) {
+		return quizUserAnsMapper.getQuizCntList(param);
 	}
 
 }

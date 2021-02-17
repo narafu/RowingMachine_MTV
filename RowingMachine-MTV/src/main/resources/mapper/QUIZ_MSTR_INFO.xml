@@ -11,10 +11,15 @@
 			AND SUBJECT_TYPE_CD = #{subjectTypeCd}
 	</select>
 
-	<select id="selectQuizInfo" resultType="QuizMstrInfoVO">
+	<select id="getQuizInfo" resultType="QuizMstrInfoVO">
 		SELECT
 			A.QUIZ_MSTR_INFO_SEQ
 			, A.SUBJECT_TYPE_CD
+			, <include refid="util.getComnCodeNm">
+				<property name="grpCd" value="002"/>
+				<property name="grpDtlCd" value="A.SUBJECT_TYPE_CD"/>
+				<property name="grpDtlNm" value="SUBJECT_TYPE_NM"/>
+			</include>
 			, A.SRT_NO
 			, A.CONTENT
 			, A.ANSWER

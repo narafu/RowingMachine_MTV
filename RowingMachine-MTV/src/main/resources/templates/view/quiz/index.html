@@ -16,7 +16,7 @@
 			<h1 class="display-1 text-primary">심심풀이 테스트</h1>
 		</div>
 		<div class="my-5">
-			<button type="button" class="btn btn-primary btn-lg btn-block px-5 py-3 text-light" onclick="startQuiz('startForm')">시작하기</button>
+			<button type="button" class="btn btn-primary btn-lg btn-block px-5 py-3 text-light" onclick="kakaoLogin()">시작하기</button>
 		</div>
 		<div>
 			<span class="d-block">현직 변호사가 고른 문제들로 변호사시험 합격을 예측해보세요!</span> <span
@@ -27,6 +27,6 @@
 	</div>
 
     <th:block layout:fragment="script">
-        <script th:src="@{/js/quizFunc.js}"></script>
+        <script th:src="@{/js/quiz/quizFunc.js}"></script>
     </th:block>
 </html>

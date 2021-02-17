@@ -23,5 +23,20 @@
 			, 'SYSTEM'
 		)
 	</insert>
-
+	
+	<select id="getUserInfo" resultType="UserInfoVO">
+		SELECT
+			USER_INFO_SEQ
+			, USER_ID
+			, USER_NM
+			, PASSWORD
+			, (SELECT MAX(TAKE_REV) + 1 FROM QUIZ_USER_ANS WHERE DEL_YN = 'N' AND USER_ID = #{userId}) AS TAKE_REV
+		FROM USER_INFO
+		WHERE DEL_YN = 'N'
+			AND USER_ID = #{userId}
+	</select>
+	
+	<update id="updateUserInfo">
+	</update>
+	
 </mapper>

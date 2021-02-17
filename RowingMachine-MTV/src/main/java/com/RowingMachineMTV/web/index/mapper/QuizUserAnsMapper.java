@@ -15,4 +15,6 @@ public interface QuizUserAnsMapper {
 
 	List<QuizMstrInfoVO> selectQuizResultList(QuizMstrInfoVO quizMstrInfoVO);
 
+	List<QuizMstrInfoVO> getQuizCntList(QuizMstrInfoVO param);
+
 }
