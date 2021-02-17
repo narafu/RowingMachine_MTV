@@ -8,11 +8,13 @@
 			<input type="hidden" th:field="${quizMstrInfoVO.userId}"/>
 		</form>
 		<div>
-			<span class="d-block display-1 text-primary fw-bold">수고하셨습니다.</span>
-			<div class="display-5 text-primary my-3">
+			<span class="d-block display-1 text-primary" style="font-family: 'KOTRA_BOLD-Bold';">수고하셨습니다.</span>
+			<div class="display-5 text-primary my-3" style="font-family: 'GongGothicMedium';">
 				<span>(총 소요시간 : </span>
-				<span>???</span>
-				<span>분)</span>
+				<span th:text="${quizMstrInfoVO.minSolving}"></span>
+				<span>분</span>
+				<span th:text="${quizMstrInfoVO.secSolving}"></span>
+				<span>초)</span>
 			</div>
 		</div>
 		<div class="my-5">

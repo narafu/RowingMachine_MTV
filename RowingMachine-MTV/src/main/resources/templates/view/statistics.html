@@ -12,35 +12,38 @@
 			<i class="fas fa-home fa-3x" onclick="goHome('resultForm');"></i>
 		</div>
 		<div class="row">
-			<div class="col-6">
-				<div class="bg-primary text-light px-3 py-2">
-					<span class="d-block display-5 text-center">변호사시험 합계예측 결과</span>
-					<span class="d-block display-5 text-center fw-bold">: ??.? %의 확률로 합격 예상</span>
+			<div class="col-md">
+				<div class="bg-primary text-light px-4 py-3">
+					<span class="d-block fs-1 text-center" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">변호사시험 합계예측 결과</span>
+					<span class="d-block text-center fs-2" style="font-family: 'GongGothicMedium';">: ??.? %의 확률로 합격 예상</span>
 				</div>
 				<div>
 					그래프
 				</div>
 			</div>
-			<div class="col-6">
+			<div class="col-md">
 				<table class="table table-sm table-striped caption-top table-bordered border-primary align-middle text-center">
 					<thead>
-						<caption>헌법</caption>
-						<tr>
+						<caption class="fs-5">헌법</caption>
+						<!-- <tr>
 							<th scope="col">문제</th>
-							<th scope="col" colspan="10">정답</th>
-						</tr>
+							<th scope="col">정답</th>
+						</tr> -->
 					</thead>
 					<tbody>
-						<th:block th:each="list : ${quizResultList}">
 							<tr>
-								<th scope="row" th:text="${list.quizMstrInfoSeq}"></th>
-								<td th:text="${list.userId}"></td>
-								<td th:text="${list.srtNo}"></td>
-								<td th:text="${list.answer}"></td>
-								<td th:text="${list.userAnswer}"></td>
-								<td th:text="${list.answerChk}"></td>
+								<th scope="row">정답</th>
+								<th:block th:each="list : ${quizResultList}">
+									<td class="fw-bold" colspan="2" th:text="${list.answer}"></td>
+								</th:block>
 							</tr>
-						</th:block>
+							<tr>
+								<th scope="row">채점</th>
+								<th:block th:each="list : ${quizResultList}">
+									<td th:text="${list.userAnswer == '' ? 'X' : list.userAnswer}"></td>
+									<td th:text="${list.answerChk}"></td>
+								</th:block>
+							</tr>
 					</tbody>
 				</table>
 			</div>

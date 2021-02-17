@@ -63,19 +63,15 @@ public class IndexController {
 	@RequestMapping("quizAnsSave.do")
 	@ResponseBody
 	public int quizAnsSave(QuizMstrInfoVO param, Model model) {
-
 		// 유저 문제풀이 기록
 		int result = quizService.mergeUserAnswer(param);
-
 		return result;
 	}
 
 	@RequestMapping("quizAjax.do")
 	public String quizAjax(QuizMstrInfoVO param, Model model) {
-
 		QuizMstrInfoVO quizMstrInfoVO = quizService.selectQuizInfo(param);
 		model.addAttribute("quizMstrInfoVO", quizMstrInfoVO);
-
 		return "view/quizMain :: #quizDiv";
 	}
 
@@ -87,10 +83,8 @@ public class IndexController {
 
 	@RequestMapping("statistics.do")
 	public String statistics(QuizMstrInfoVO param, Model model) {
-
 		List<QuizMstrInfoVO> quizResultList = quizService.selectQuizResultList(param);
 		model.addAttribute("quizResultList", quizResultList);
-		
 		return "view/statistics";
 	}
 
