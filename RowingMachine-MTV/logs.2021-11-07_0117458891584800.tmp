@@ -1,0 +1,41 @@
+8859980 [Thread-162] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-12 - Shutdown initiated...
+8859987 [Thread-162] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-12 - Shutdown completed.
+8860074 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - Starting RowingMachineMvpApplication using Java 13.0.2 on X571GT with PID 24236 (C:\Users\HeungSoo\git\RowingMachine_MTV\RowingMachine-MTV\target\classes started by HeungSoo in C:\Users\HeungSoo\git\RowingMachine_MTV\RowingMachine-MTV)
+8860074 [restartedMain] DEBUG c.r.web.RowingMachineMvpApplication - Running with Spring Boot v2.5.6, Spring v5.3.12
+8860074 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - The following profiles are active: local
+8860325 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 80 (http)
+8860330 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+8860330 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+8860346 [restartedMain] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring embedded WebApplicationContext
+8860346 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 271 ms
+8860473 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+8860482 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 80 (http) with context path ''
+8860485 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - Started RowingMachineMvpApplication in 0.437 seconds (JVM running for 8861.721)
+8860486 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+8876103 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - Starting RowingMachineMvpApplication using Java 13.0.2 on X571GT with PID 24236 (C:\Users\HeungSoo\git\RowingMachine_MTV\RowingMachine-MTV\target\classes started by HeungSoo in C:\Users\HeungSoo\git\RowingMachine_MTV\RowingMachine-MTV)
+8876104 [restartedMain] DEBUG c.r.web.RowingMachineMvpApplication - Running with Spring Boot v2.5.6, Spring v5.3.12
+8876104 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - The following profiles are active: local
+8876354 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 80 (http)
+8876354 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+8876354 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+8876371 [restartedMain] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring embedded WebApplicationContext
+8876371 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 266 ms
+8876482 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+8876489 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 80 (http) with context path ''
+8876493 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - Started RowingMachineMvpApplication in 0.414 seconds (JVM running for 8877.729)
+8876494 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+8888021 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - Starting RowingMachineMvpApplication using Java 13.0.2 on X571GT with PID 24236 (C:\Users\HeungSoo\git\RowingMachine_MTV\RowingMachine-MTV\target\classes started by HeungSoo in C:\Users\HeungSoo\git\RowingMachine_MTV\RowingMachine-MTV)
+8888021 [restartedMain] DEBUG c.r.web.RowingMachineMvpApplication - Running with Spring Boot v2.5.6, Spring v5.3.12
+8888021 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - The following profiles are active: local
+8888273 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 80 (http)
+8888274 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+8888274 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+8888293 [restartedMain] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring embedded WebApplicationContext
+8888293 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 270 ms
+8888427 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+8888434 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 80 (http) with context path ''
+8888436 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - Started RowingMachineMvpApplication in 0.442 seconds (JVM running for 8889.672)
+8888437 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+8899785 [http-nio-80-exec-1] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+8899786 [http-nio-80-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+8899787 [http-nio-80-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms

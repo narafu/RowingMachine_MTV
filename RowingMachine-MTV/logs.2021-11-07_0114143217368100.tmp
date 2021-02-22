@@ -1,0 +1,39 @@
+5506468 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==>  Preparing: SELECT COUNT(*) AS TOTAL FROM QUIZ_MSTR_INFO WHERE DEL_YN = 'N' AND SUBJECT_TYPE_CD = ?
+5506470 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==> Parameters: 10(String)
+5506471 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - <==      Total: 1
+5506471 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizInfo - ==>  Preparing: SELECT A.QUIZ_MSTR_INFO_SEQ , A.SUBJECT_TYPE_CD , (SELECT GRP_DTL_NM FROM CMMN_DTL_CD WHERE DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '002' AND GRP_DTL_CD = A.SUBJECT_TYPE_CD) AS SUBJECT_TYPE_NM , A.SRT_NO , A.CONTENT , A.ANSWER , B.QUIZ_USER_ANS_SEQ , B.USER_ID , B.USER_ANSWER , B.ANSWER_CHK FROM QUIZ_MSTR_INFO A LEFT JOIN ( SELECT * FROM QUIZ_USER_ANS WHERE USER_ID = ? ) B ON A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ WHERE A.DEL_YN = 'N' AND A.SUBJECT_TYPE_CD = ? AND A.SRT_NO = (SELECT LEAST(?, (SELECT MAX(SRT_NO) FROM QUIZ_MSTR_INFO WHERE SUBJECT_TYPE_CD = ?)))
+5506471 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizInfo - ==> Parameters: null, 10(String), 1(Integer), 10(String)
+5506472 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizInfo - <==      Total: 1
+5526276 [Thread-70] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Shutdown initiated...
+5526297 [Thread-70] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Shutdown completed.
+5526374 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - Starting RowingMachineMvpApplication using Java 13.0.2 on X571GT with PID 24236 (C:\Users\HeungSoo\git\RowingMachine_MTV\RowingMachine-MTV\target\classes started by HeungSoo in C:\Users\HeungSoo\git\RowingMachine_MTV\RowingMachine-MTV)
+5526374 [restartedMain] DEBUG c.r.web.RowingMachineMvpApplication - Running with Spring Boot v2.5.6, Spring v5.3.12
+5526374 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - The following profiles are active: local
+5526620 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 80 (http)
+5526621 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+5526621 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+5526638 [restartedMain] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring embedded WebApplicationContext
+5526638 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 263 ms
+5526792 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+5526798 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 80 (http) with context path ''
+5526801 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - Started RowingMachineMvpApplication in 0.454 seconds (JVM running for 5528.036)
+5526802 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+5582224 [http-nio-80-exec-1] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+5582226 [http-nio-80-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+5582226 [http-nio-80-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+5589035 [http-nio-80-exec-6] WARN  o.a.c.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [698] milliseconds.
+5589064 [http-nio-80-exec-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Starting...
+5589079 [http-nio-80-exec-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Start completed.
+5589079 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.selectQuizMstrInfoSeqAll - ==>  Preparing: SELECT QUIZ_MSTR_INFO_SEQ FROM QUIZ_MSTR_INFO WHERE DEL_YN = 'N' ORDER BY SUBJECT_TYPE_CD, SRT_NO
+5589079 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.selectQuizMstrInfoSeqAll - ==> Parameters: 
+5589086 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.selectQuizMstrInfoSeqAll - <==      Total: 12
+5589086 [http-nio-80-exec-7] DEBUG c.r.w.u.m.U.getUserInfo - ==>  Preparing: SELECT USER_INFO_SEQ , USER_ID , USER_NM , PASSWORD , (SELECT MAX(TAKE_REV) + 1 FROM QUIZ_USER_ANS WHERE DEL_YN = 'N' AND USER_ID = ?) AS TAKE_REV FROM USER_INFO WHERE DEL_YN = 'N' AND USER_ID = ?
+5589086 [http-nio-80-exec-7] DEBUG c.r.w.u.m.U.getUserInfo - ==> Parameters: null, null
+5589088 [http-nio-80-exec-7] DEBUG c.r.w.u.m.U.getUserInfo - <==      Total: 0
+5589089 [http-nio-80-exec-7] DEBUG c.r.w.u.m.U.insertUserInfo!selectKey - ==>  Preparing: SELECT IFNULL(MAX(USER_INFO_SEQ), 0) + 1 FROM USER_INFO
+5589089 [http-nio-80-exec-7] DEBUG c.r.w.u.m.U.insertUserInfo!selectKey - ==> Parameters: 
+5589090 [http-nio-80-exec-7] DEBUG c.r.w.u.m.U.insertUserInfo!selectKey - <==      Total: 1
+5589090 [http-nio-80-exec-7] DEBUG c.r.w.u.m.U.insertUserInfo - ==>  Preparing: INSERT INTO USER_INFO ( USER_INFO_SEQ , USER_ID , USER_NM , PASSWORD , REGIST_ID , REGIST_NM ) VALUES ( ? , ? , ? , ? , 'SYSTEM' , 'SYSTEM' )
+5589091 [http-nio-80-exec-7] DEBUG c.r.w.u.m.U.insertUserInfo - ==> Parameters: 106(Integer), 0958802e-8317-4fa8-90b8-657bd998ff53(String), GUEST(String), null
+5589098 [http-nio-80-exec-7] DEBUG c.r.w.u.m.U.insertUserInfo - <==    Updates: 1
+5589100 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - ==>  Preparing: SELECT IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1 FROM QUIZ_USER_ANS LIMIT 1

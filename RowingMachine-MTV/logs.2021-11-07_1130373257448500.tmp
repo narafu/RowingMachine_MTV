@@ -1,0 +1,64 @@
+6516779 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - ==> Parameters: 19(Integer), 6(Integer), f7188e03-8f5e-44aa-92e0-b065613603e0(String), null, null, 6(Integer)
+6516783 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - <==    Updates: 1
+6516784 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - ==>  Preparing: SELECT IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1 FROM QUIZ_USER_ANS LIMIT 1
+6516784 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - ==> Parameters: 
+6516784 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - <==      Total: 1
+6516784 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - ==>  Preparing: INSERT INTO QUIZ_USER_ANS ( QUIZ_USER_ANS_SEQ , QUIZ_MSTR_INFO_SEQ , USER_ID , USER_ANSWER , ANSWER_CHK , REGIST_ID , REGIST_NM ) VALUES ( ? , ? , ? , ? , CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END , 'SYSTEM' , 'SYSTEM' )
+6516785 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - ==> Parameters: 20(Integer), 7(Integer), f7188e03-8f5e-44aa-92e0-b065613603e0(String), null, null, 7(Integer)
+6516787 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - <==    Updates: 1
+6516787 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - ==>  Preparing: SELECT IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1 FROM QUIZ_USER_ANS LIMIT 1
+6516787 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - ==> Parameters: 
+6516788 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - <==      Total: 1
+6516788 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - ==>  Preparing: INSERT INTO QUIZ_USER_ANS ( QUIZ_USER_ANS_SEQ , QUIZ_MSTR_INFO_SEQ , USER_ID , USER_ANSWER , ANSWER_CHK , REGIST_ID , REGIST_NM ) VALUES ( ? , ? , ? , ? , CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END , 'SYSTEM' , 'SYSTEM' )
+6516789 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - ==> Parameters: 21(Integer), 8(Integer), f7188e03-8f5e-44aa-92e0-b065613603e0(String), null, null, 8(Integer)
+6516791 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - <==    Updates: 1
+6516791 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - ==>  Preparing: SELECT IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1 FROM QUIZ_USER_ANS LIMIT 1
+6516791 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - ==> Parameters: 
+6516792 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - <==      Total: 1
+6516792 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - ==>  Preparing: INSERT INTO QUIZ_USER_ANS ( QUIZ_USER_ANS_SEQ , QUIZ_MSTR_INFO_SEQ , USER_ID , USER_ANSWER , ANSWER_CHK , REGIST_ID , REGIST_NM ) VALUES ( ? , ? , ? , ? , CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END , 'SYSTEM' , 'SYSTEM' )
+6516792 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - ==> Parameters: 22(Integer), 9(Integer), f7188e03-8f5e-44aa-92e0-b065613603e0(String), null, null, 9(Integer)
+6516795 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - <==    Updates: 1
+6516795 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - ==>  Preparing: SELECT IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1 FROM QUIZ_USER_ANS LIMIT 1
+6516795 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - ==> Parameters: 
+6516795 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - <==      Total: 1
+6516796 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - ==>  Preparing: INSERT INTO QUIZ_USER_ANS ( QUIZ_USER_ANS_SEQ , QUIZ_MSTR_INFO_SEQ , USER_ID , USER_ANSWER , ANSWER_CHK , REGIST_ID , REGIST_NM ) VALUES ( ? , ? , ? , ? , CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END , 'SYSTEM' , 'SYSTEM' )
+6516796 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - ==> Parameters: 23(Integer), 10(Integer), f7188e03-8f5e-44aa-92e0-b065613603e0(String), null, null, 10(Integer)
+6516798 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - <==    Updates: 1
+6516798 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - ==>  Preparing: SELECT IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1 FROM QUIZ_USER_ANS LIMIT 1
+6516798 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - ==> Parameters: 
+6516799 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - <==      Total: 1
+6516799 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - ==>  Preparing: INSERT INTO QUIZ_USER_ANS ( QUIZ_USER_ANS_SEQ , QUIZ_MSTR_INFO_SEQ , USER_ID , USER_ANSWER , ANSWER_CHK , REGIST_ID , REGIST_NM ) VALUES ( ? , ? , ? , ? , CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END , 'SYSTEM' , 'SYSTEM' )
+6516799 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - ==> Parameters: 24(Integer), 11(Integer), f7188e03-8f5e-44aa-92e0-b065613603e0(String), null, null, 11(Integer)
+6516801 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - <==    Updates: 1
+6516801 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - ==>  Preparing: SELECT IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1 FROM QUIZ_USER_ANS LIMIT 1
+6516802 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - ==> Parameters: 
+6516802 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - <==      Total: 1
+6516802 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - ==>  Preparing: INSERT INTO QUIZ_USER_ANS ( QUIZ_USER_ANS_SEQ , QUIZ_MSTR_INFO_SEQ , USER_ID , USER_ANSWER , ANSWER_CHK , REGIST_ID , REGIST_NM ) VALUES ( ? , ? , ? , ? , CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END , 'SYSTEM' , 'SYSTEM' )
+6516803 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - ==> Parameters: 25(Integer), 12(Integer), f7188e03-8f5e-44aa-92e0-b065613603e0(String), null, null, 12(Integer)
+6516805 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - <==    Updates: 1
+6516805 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - ==>  Preparing: SELECT IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1 FROM QUIZ_USER_ANS LIMIT 1
+6516805 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - ==> Parameters: 
+6516806 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer!selectKey - <==      Total: 1
+6516806 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - ==>  Preparing: INSERT INTO QUIZ_USER_ANS ( QUIZ_USER_ANS_SEQ , QUIZ_MSTR_INFO_SEQ , USER_ID , USER_ANSWER , ANSWER_CHK , REGIST_ID , REGIST_NM ) VALUES ( ? , ? , ? , ? , CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END , 'SYSTEM' , 'SYSTEM' )
+6516806 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - ==> Parameters: 26(Integer), 13(Integer), f7188e03-8f5e-44aa-92e0-b065613603e0(String), null, null, 13(Integer)
+6516808 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.insertUserAnswer - <==    Updates: 1
+6516823 [http-nio-80-exec-7] DEBUG c.r.w.c.B.selectCnmmCdList - ==>  Preparing: SELECT GRP_DTL_CD AS cmmnDtlCd , GRP_DTL_NM AS cmmnDtlNm FROM CMMN_DTL_CD WHERE 1 = 1 AND DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '001' ORDER BY SORT_NO
+6516824 [http-nio-80-exec-7] DEBUG c.r.w.c.B.selectCnmmCdList - ==> Parameters: 
+6516825 [http-nio-80-exec-7] DEBUG c.r.w.c.B.selectCnmmCdList - <==      Total: 3
+6516826 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==>  Preparing: SELECT COUNT(*) AS TOTAL FROM QUIZ_MSTR_INFO WHERE DEL_YN = 'N' AND SUBJECT_TYPE_CD = ?
+6516826 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==> Parameters: 10(String)
+6516826 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - <==      Total: 1
+6516826 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizInfo - ==>  Preparing: SELECT A.QUIZ_MSTR_INFO_SEQ , A.SUBJECT_TYPE_CD , (SELECT GRP_DTL_NM FROM CMMN_DTL_CD WHERE DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '002' AND GRP_DTL_CD = A.SUBJECT_TYPE_CD) AS SUBJECT_TYPE_NM , A.SRT_NO , A.CONTENT , A.ANSWER , B.QUIZ_USER_ANS_SEQ , B.USER_ID , B.USER_ANSWER , B.ANSWER_CHK FROM QUIZ_MSTR_INFO A LEFT JOIN ( SELECT * FROM QUIZ_USER_ANS WHERE USER_ID = ? ) B ON A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ WHERE A.DEL_YN = 'N' AND A.SUBJECT_TYPE_CD = ? AND A.SRT_NO = (SELECT LEAST(?, (SELECT MAX(SRT_NO) FROM QUIZ_MSTR_INFO WHERE SUBJECT_TYPE_CD = ?)))
+6516827 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizInfo - ==> Parameters: f7188e03-8f5e-44aa-92e0-b065613603e0(String), 10(String), 1(Integer), 10(String)
+6516827 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizInfo - <==      Total: 1
+6517080 [http-nio-80-exec-10] DEBUG c.r.w.c.B.selectCnmmCdList - ==>  Preparing: SELECT GRP_DTL_CD AS cmmnDtlCd , GRP_DTL_NM AS cmmnDtlNm FROM CMMN_DTL_CD WHERE 1 = 1 AND DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '001' ORDER BY SORT_NO
+6517081 [http-nio-80-exec-10] DEBUG c.r.w.c.B.selectCnmmCdList - ==> Parameters: 
+6517082 [http-nio-80-exec-10] DEBUG c.r.w.c.B.selectCnmmCdList - <==      Total: 3
+6517083 [http-nio-80-exec-10] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==>  Preparing: SELECT COUNT(*) AS TOTAL FROM QUIZ_MSTR_INFO WHERE DEL_YN = 'N' AND SUBJECT_TYPE_CD = ?
+6517083 [http-nio-80-exec-10] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==> Parameters: 10(String)
+6517084 [http-nio-80-exec-10] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - <==      Total: 1
+6517084 [http-nio-80-exec-10] DEBUG c.r.w.q.m.Q.getQuizInfo - ==>  Preparing: SELECT A.QUIZ_MSTR_INFO_SEQ , A.SUBJECT_TYPE_CD , (SELECT GRP_DTL_NM FROM CMMN_DTL_CD WHERE DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '002' AND GRP_DTL_CD = A.SUBJECT_TYPE_CD) AS SUBJECT_TYPE_NM , A.SRT_NO , A.CONTENT , A.ANSWER , B.QUIZ_USER_ANS_SEQ , B.USER_ID , B.USER_ANSWER , B.ANSWER_CHK FROM QUIZ_MSTR_INFO A LEFT JOIN ( SELECT * FROM QUIZ_USER_ANS WHERE USER_ID = ? ) B ON A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ WHERE A.DEL_YN = 'N' AND A.SUBJECT_TYPE_CD = ? AND A.SRT_NO = (SELECT LEAST(?, (SELECT MAX(SRT_NO) FROM QUIZ_MSTR_INFO WHERE SUBJECT_TYPE_CD = ?)))
+6517085 [http-nio-80-exec-10] DEBUG c.r.w.q.m.Q.getQuizInfo - ==> Parameters: f7188e03-8f5e-44aa-92e0-b065613603e0(String), 10(String), 1(Integer), 10(String)
+6517086 [http-nio-80-exec-10] DEBUG c.r.w.q.m.Q.getQuizInfo - <==      Total: 1
+6517157 [http-nio-80-exec-1] DEBUG c.r.w.c.B.selectCnmmCdList - ==>  Preparing: SELECT GRP_DTL_CD AS cmmnDtlCd , GRP_DTL_NM AS cmmnDtlNm FROM CMMN_DTL_CD WHERE 1 = 1 AND DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '001' ORDER BY SORT_NO
+6517158 [http-nio-80-exec-1] DEBUG c.r.w.c.B.selectCnmmCdList - ==> Parameters: 

@@ -117,3 +117,9 @@ i.active {
 i {
 	color: black;
 }
+
+.quizTd:hover {
+	background-color: #086972;
+	cursor: pointer;
+	color: white !important;
+}

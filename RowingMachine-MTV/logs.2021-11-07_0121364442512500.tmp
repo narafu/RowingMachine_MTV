@@ -1,0 +1,49 @@
+211678 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+211696 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+211782 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - Starting RowingMachineMvpApplication using Java 13.0.2 on X571GT with PID 15420 (C:\Users\HeungSoo\git\RowingMachine_MTV\RowingMachine-MTV\target\classes started by HeungSoo in C:\Users\HeungSoo\git\RowingMachine_MTV\RowingMachine-MTV)
+211783 [restartedMain] DEBUG c.r.web.RowingMachineMvpApplication - Running with Spring Boot v2.5.6, Spring v5.3.12
+211783 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - The following profiles are active: local
+212035 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 80 (http)
+212041 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+212041 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+212061 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+212061 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 277 ms
+212209 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+212217 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 80 (http) with context path ''
+212220 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - Started RowingMachineMvpApplication in 0.471 seconds (JVM running for 213.471)
+212221 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+247865 [http-nio-80-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+247866 [http-nio-80-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+247867 [http-nio-80-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+252397 [http-nio-80-exec-3] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+252413 [http-nio-80-exec-3] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+252413 [http-nio-80-exec-3] DEBUG c.r.w.u.m.U.getUserInfo - ==>  Preparing: SELECT USER_INFO_SEQ , USER_ID , USER_NM , PASSWORD , (SELECT MAX(TAKE_REV) + 1 FROM QUIZ_USER_ANS WHERE DEL_YN = 'N' AND USER_ID = ?) AS TAKE_REV FROM USER_INFO WHERE DEL_YN = 'N' AND USER_ID = ?
+252413 [http-nio-80-exec-3] DEBUG c.r.w.u.m.U.getUserInfo - ==> Parameters: narafu@kakao.com(String), narafu@kakao.com(String)
+252414 [http-nio-80-exec-3] DEBUG c.r.w.u.m.U.getUserInfo - <==      Total: 1
+252432 [http-nio-80-exec-4] DEBUG c.r.w.c.B.selectCnmmCdList - ==>  Preparing: SELECT GRP_DTL_CD AS cmmnDtlCd , GRP_DTL_NM AS cmmnDtlNm FROM CMMN_DTL_CD WHERE 1 = 1 AND DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '001' ORDER BY SORT_NO
+252432 [http-nio-80-exec-4] DEBUG c.r.w.c.B.selectCnmmCdList - ==> Parameters: 
+252434 [http-nio-80-exec-4] DEBUG c.r.w.c.B.selectCnmmCdList - <==      Total: 3
+252435 [http-nio-80-exec-4] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==>  Preparing: SELECT COUNT(*) AS TOTAL FROM QUIZ_MSTR_INFO WHERE DEL_YN = 'N' AND SUBJECT_TYPE_CD = ?
+252435 [http-nio-80-exec-4] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==> Parameters: 10(String)
+252437 [http-nio-80-exec-4] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - <==      Total: 1
+252437 [http-nio-80-exec-4] DEBUG c.r.w.q.m.Q.getQuizInfo - ==>  Preparing: SELECT A.QUIZ_MSTR_INFO_SEQ , A.SUBJECT_TYPE_CD , (SELECT GRP_DTL_NM FROM CMMN_DTL_CD WHERE DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '002' AND GRP_DTL_CD = A.SUBJECT_TYPE_CD) AS SUBJECT_TYPE_NM , A.SRT_NO , A.CONTENT , A.ANSWER , B.QUIZ_USER_ANS_SEQ , B.USER_ID , B.USER_ANSWER , B.ANSWER_CHK FROM QUIZ_MSTR_INFO A LEFT JOIN ( SELECT * FROM QUIZ_USER_ANS WHERE USER_ID = ? ) B ON A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ WHERE A.DEL_YN = 'N' AND A.SUBJECT_TYPE_CD = ? AND A.SRT_NO = (SELECT LEAST(?, (SELECT MAX(SRT_NO) FROM QUIZ_MSTR_INFO WHERE SUBJECT_TYPE_CD = ?)))
+252437 [http-nio-80-exec-4] DEBUG c.r.w.q.m.Q.getQuizInfo - ==> Parameters: null, 10(String), 1(Integer), 10(String)
+252439 [http-nio-80-exec-4] DEBUG c.r.w.q.m.Q.getQuizInfo - <==      Total: 1
+252618 [http-nio-80-exec-7] DEBUG c.r.w.c.B.selectCnmmCdList - ==>  Preparing: SELECT GRP_DTL_CD AS cmmnDtlCd , GRP_DTL_NM AS cmmnDtlNm FROM CMMN_DTL_CD WHERE 1 = 1 AND DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '001' ORDER BY SORT_NO
+252619 [http-nio-80-exec-7] DEBUG c.r.w.c.B.selectCnmmCdList - ==> Parameters: 
+252619 [http-nio-80-exec-7] DEBUG c.r.w.c.B.selectCnmmCdList - <==      Total: 3
+252620 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==>  Preparing: SELECT COUNT(*) AS TOTAL FROM QUIZ_MSTR_INFO WHERE DEL_YN = 'N' AND SUBJECT_TYPE_CD = ?
+252620 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==> Parameters: 10(String)
+252621 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - <==      Total: 1
+252621 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizInfo - ==>  Preparing: SELECT A.QUIZ_MSTR_INFO_SEQ , A.SUBJECT_TYPE_CD , (SELECT GRP_DTL_NM FROM CMMN_DTL_CD WHERE DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '002' AND GRP_DTL_CD = A.SUBJECT_TYPE_CD) AS SUBJECT_TYPE_NM , A.SRT_NO , A.CONTENT , A.ANSWER , B.QUIZ_USER_ANS_SEQ , B.USER_ID , B.USER_ANSWER , B.ANSWER_CHK FROM QUIZ_MSTR_INFO A LEFT JOIN ( SELECT * FROM QUIZ_USER_ANS WHERE USER_ID = ? ) B ON A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ WHERE A.DEL_YN = 'N' AND A.SUBJECT_TYPE_CD = ? AND A.SRT_NO = (SELECT LEAST(?, (SELECT MAX(SRT_NO) FROM QUIZ_MSTR_INFO WHERE SUBJECT_TYPE_CD = ?)))
+252621 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizInfo - ==> Parameters: null, 10(String), 1(Integer), 10(String)
+252623 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizInfo - <==      Total: 1
+252672 [http-nio-80-exec-8] DEBUG c.r.w.c.B.selectCnmmCdList - ==>  Preparing: SELECT GRP_DTL_CD AS cmmnDtlCd , GRP_DTL_NM AS cmmnDtlNm FROM CMMN_DTL_CD WHERE 1 = 1 AND DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '001' ORDER BY SORT_NO
+252672 [http-nio-80-exec-8] DEBUG c.r.w.c.B.selectCnmmCdList - ==> Parameters: 
+252673 [http-nio-80-exec-8] DEBUG c.r.w.c.B.selectCnmmCdList - <==      Total: 3
+252674 [http-nio-80-exec-8] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==>  Preparing: SELECT COUNT(*) AS TOTAL FROM QUIZ_MSTR_INFO WHERE DEL_YN = 'N' AND SUBJECT_TYPE_CD = ?
+252674 [http-nio-80-exec-8] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==> Parameters: 10(String)
+252674 [http-nio-80-exec-8] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - <==      Total: 1
+252675 [http-nio-80-exec-8] DEBUG c.r.w.q.m.Q.getQuizInfo - ==>  Preparing: SELECT A.QUIZ_MSTR_INFO_SEQ , A.SUBJECT_TYPE_CD , (SELECT GRP_DTL_NM FROM CMMN_DTL_CD WHERE DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '002' AND GRP_DTL_CD = A.SUBJECT_TYPE_CD) AS SUBJECT_TYPE_NM , A.SRT_NO , A.CONTENT , A.ANSWER , B.QUIZ_USER_ANS_SEQ , B.USER_ID , B.USER_ANSWER , B.ANSWER_CHK FROM QUIZ_MSTR_INFO A LEFT JOIN ( SELECT * FROM QUIZ_USER_ANS WHERE USER_ID = ? ) B ON A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ WHERE A.DEL_YN = 'N' AND A.SUBJECT_TYPE_CD = ? AND A.SRT_NO = (SELECT LEAST(?, (SELECT MAX(SRT_NO) FROM QUIZ_MSTR_INFO WHERE SUBJECT_TYPE_CD = ?)))
+252675 [http-nio-80-exec-8] DEBUG c.r.w.q.m.Q.getQuizInfo - ==> Parameters: null, 10(String), 1(Integer), 10(String)
+252677 [http-nio-80-exec-8] DEBUG c.r.w.q.m.Q.getQuizInfo - <==      Total: 1

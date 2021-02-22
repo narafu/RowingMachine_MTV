@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- Modal : moveQuizNullMsg-->
+<div class="modal fade" id="lastPageModal" data-bs-backdrop="static"
+	data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="mb-3 text-center">
+					<label for="message-text" class="col-form-label d-grid">
+						<span>답을 선택하지 않았습니다.(나중에 다시 답을 입력할 수 있습니다.)</span>
+						<span>다음 문제로 가시겠습니까?</span>
+					</label>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" th:onclick="|quizAnsSave(${srtNo})|">Next</button>
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+			</div>
+		 </div>
+	</div>
+</div>

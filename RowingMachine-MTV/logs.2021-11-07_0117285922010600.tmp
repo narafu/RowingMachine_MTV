@@ -1,0 +1,45 @@
+8574399 [Thread-154] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-11 - Shutdown initiated...
+8574419 [Thread-154] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-11 - Shutdown completed.
+8574500 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - Starting RowingMachineMvpApplication using Java 13.0.2 on X571GT with PID 24236 (C:\Users\HeungSoo\git\RowingMachine_MTV\RowingMachine-MTV\target\classes started by HeungSoo in C:\Users\HeungSoo\git\RowingMachine_MTV\RowingMachine-MTV)
+8574500 [restartedMain] DEBUG c.r.web.RowingMachineMvpApplication - Running with Spring Boot v2.5.6, Spring v5.3.12
+8574500 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - The following profiles are active: local
+8574747 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 80 (http)
+8574752 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+8574752 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+8574768 [restartedMain] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring embedded WebApplicationContext
+8574769 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 268 ms
+8574883 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+8574890 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 80 (http) with context path ''
+8574893 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - Started RowingMachineMvpApplication in 0.419 seconds (JVM running for 8576.128)
+8574893 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+8611248 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - Starting RowingMachineMvpApplication using Java 13.0.2 on X571GT with PID 24236 (C:\Users\HeungSoo\git\RowingMachine_MTV\RowingMachine-MTV\target\classes started by HeungSoo in C:\Users\HeungSoo\git\RowingMachine_MTV\RowingMachine-MTV)
+8611248 [restartedMain] DEBUG c.r.web.RowingMachineMvpApplication - Running with Spring Boot v2.5.6, Spring v5.3.12
+8611248 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - The following profiles are active: local
+8611470 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 80 (http)
+8611470 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+8611470 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+8611501 [restartedMain] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring embedded WebApplicationContext
+8611501 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 252 ms
+8611621 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+8611627 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 80 (http) with context path ''
+8611630 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - Started RowingMachineMvpApplication in 0.418 seconds (JVM running for 8612.866)
+8611631 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+8621484 [http-nio-80-exec-1] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+8621484 [http-nio-80-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+8621485 [http-nio-80-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+8731772 [http-nio-80-exec-10] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-12 - Starting...
+8731797 [http-nio-80-exec-10] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-12 - Start completed.
+8731797 [http-nio-80-exec-10] DEBUG c.r.w.u.m.U.getUserInfo - ==>  Preparing: SELECT USER_INFO_SEQ , USER_ID , USER_NM , PASSWORD , (SELECT MAX(TAKE_REV) + 1 FROM QUIZ_USER_ANS WHERE DEL_YN = 'N' AND USER_ID = ?) AS TAKE_REV FROM USER_INFO WHERE DEL_YN = 'N' AND USER_ID = ?
+8731797 [http-nio-80-exec-10] DEBUG c.r.w.u.m.U.getUserInfo - ==> Parameters: (String), (String)
+8731798 [http-nio-80-exec-10] DEBUG c.r.w.u.m.U.getUserInfo - <==      Total: 0
+8731799 [http-nio-80-exec-10] DEBUG c.r.w.u.m.U.insertUserInfo!selectKey - ==>  Preparing: SELECT IFNULL(MAX(USER_INFO_SEQ), 0) + 1 FROM USER_INFO
+8731799 [http-nio-80-exec-10] DEBUG c.r.w.u.m.U.insertUserInfo!selectKey - ==> Parameters: 
+8731799 [http-nio-80-exec-10] DEBUG c.r.w.u.m.U.insertUserInfo!selectKey - <==      Total: 1
+8731800 [http-nio-80-exec-10] DEBUG c.r.w.u.m.U.insertUserInfo - ==>  Preparing: INSERT INTO USER_INFO ( USER_INFO_SEQ , USER_ID , USER_NM , PASSWORD , REGIST_ID , REGIST_NM ) VALUES ( ? , ? , ? , ? , 'SYSTEM' , 'SYSTEM' )
+8731800 [http-nio-80-exec-10] DEBUG c.r.w.u.m.U.insertUserInfo - ==> Parameters: 121(Integer), d8b26dac-80c7-485a-a527-7e8d6659441a(String), GUEST(String), null
+8731803 [http-nio-80-exec-10] DEBUG c.r.w.u.m.U.insertUserInfo - <==    Updates: 1
+8731803 [http-nio-80-exec-10] DEBUG c.r.w.q.m.Q.selectQuizMstrInfoSeqAll - ==>  Preparing: SELECT QUIZ_MSTR_INFO_SEQ FROM QUIZ_MSTR_INFO WHERE DEL_YN = 'N' ORDER BY SUBJECT_TYPE_CD, SRT_NO
+8731803 [http-nio-80-exec-10] DEBUG c.r.w.q.m.Q.selectQuizMstrInfoSeqAll - ==> Parameters: 
+8731804 [http-nio-80-exec-10] DEBUG c.r.w.q.m.Q.selectQuizMstrInfoSeqAll - <==      Total: 12
+8731804 [http-nio-80-exec-10] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - ==>  Preparing: SELECT IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1 FROM QUIZ_USER_ANS LIMIT 1
+8731804 [http-nio-80-exec-10] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - ==> Parameters: 

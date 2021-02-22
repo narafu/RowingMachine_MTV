@@ -54,64 +54,92 @@ function trigger(obj, answer) {
 	$('#userAnswer').val(answer);
 }
 
-function goHome(param) {
-	let form = $('#' + param);
-	if (confirm("홈으로 가면, 모든 기록이 지워집니다. 이동하시겠습니까?")) {
-		kakaoLogout();
-		form.attr('action', '/quiz/index.do');
-		form.attr('target', '');
-		form.submit();
-	}
+function invitation() {
+	let url = '/quiz/modal/invitation';
+	let userNm = $('#userNm').val();
+	$.ajax(url, { 'userNm': userNm }).done(function (modalHtml) {
+		$('#modal').html(modalHtml);
+		var inviteMsgModal = new bootstrap.Modal(document.getElementById('inviteMsgModal'))
+		inviteMsgModal.show()
+	})
 }
 
-function goStatistics(param) {
-	let form = $('#' + param);
-	form.attr('action', '/quiz/statistics.do');
-	form.attr('target', '');
-	form.submit();
+function goHome() {
+	let url = '/quiz/modal/goHomeModal';
+	$.ajax(url).done(function (modalHtml) {
+		$('#modalDiv').html(modalHtml);
+		var goHomeMsgModal = new bootstrap.Modal(document.getElementById('goHomeModal'));
+		goHomeMsgModal.show();
+	})
 }
 
-function goQuiz(index) {
+function goQuiz(obj) {
 
-	let nextSrtNo = Number($('#srtNo').val()) + Number(index);
-	let total = $('#quizTotalCnt').val();
-
-	if (!nextSrtNo) {
-		alert("첫 번째 문제입니다.");
-		return;
-	} else if (total < nextSrtNo) {
-		if (confirm("마지막 문제입니다. \n결과로 이동하시겠습니까?")) {
-			quizAnsSave();
-		}
-	} else {
-		if (!$('.active').length) {
-			if (confirm("답을 선택하지 않았습니다. 다음 문제로 가시겠습니까?")) {
-				quizAnsSave(index);
-			}
+	if (obj == 'prev') {
+		let srtNo = parseInt($('#srtNo').val()) - 1;
+		if (!srtNo) {
+			let url = '/quiz/modal/firstPageModal?srtNo=' + srtNo;
+			$.ajax(url).done(function (modalHtml) {
+				$('#modalDiv').html(modalHtml);
+				var firstPageModal = new bootstrap.Modal(document.getElementById('firstPageModal'));
+				firstPageModal.show();
+			})
 		} else {
-			quizAnsSave(index);
+			quizAnsSave(srtNo);
+		};
+	}
+
+	if (obj == 'next') {
+
+		let quizTotalCnt = $('#quizTotalCnt').val();
+		let srtNo = parseInt($('#srtNo').val()) + 1;
+
+		if (!$('.active').length) {
+			let url = '/quiz/modal/quizNullModal?srtNo=' + srtNo;
+			$.ajax(url).done(function (modalHtml) {
+				$('#modalDiv').html(modalHtml);
+				var quizNullModal = new bootstrap.Modal(document.getElementById('quizNullModal'));
+				quizNullModal.show();
+			})
 		}
+
+		if (srtNo > quizTotalCnt) {
+			let url = '/quiz/modal/lastPageModal?srtNo=' + srtNo;
+			$.ajax(url).done(function (modalHtml) {
+				$('#modalDiv').html(modalHtml);
+				var lastPageModal = new bootstrap.Modal(document.getElementById('lastPageModal'));
+				lastPageModal.show();
+			})
+		} else {
+			quizAnsSave(srtNo);
+		};
+	}
+
+	if (obj == 'result') {
+		let url = '/quiz/modal/resultPageModal?srtNo=0';
+		$.ajax(url).done(function (modalHtml) {
+			$('#modalDiv').html(modalHtml);
+			var resultPageModal = new bootstrap.Modal(document.getElementById('resultPageModal'));
+			resultPageModal.show();
+		})
 	}
 }
 
-function quizAnsSave(index) {
+function quizAnsSave(srtNo) {
 	let url = '/quiz/answer.do';
 	let param = $('#quizForm').serialize();
 	$.post(url, param, function (result) {
 		if (result) {
-			moveQuiz(index);
+			movePage(srtNo);
 		} else {
 			alert("오류가 발생하였습니다.");
 		}
 	});
 }
 
-function moveQuiz(index) {
-
+function movePage(srtNo) {
 	let form = $('#quizForm');
-
-	if (!index) { // 결과 페이지
-
+	if (!srtNo) { // 결과 페이지
 		let duration = Number(getCountTimer());
 		let secondsRemaining = $('#count-down-timer').text().split(':');
 		let timeSolving = duration - (Number(secondsRemaining[0]) * 60 + Number(secondsRemaining[1]));
@@ -124,34 +152,51 @@ function moveQuiz(index) {
 		form.submit();
 
 	} else { // 다음 문제
-
-		let url = '/quiz/quizAjax.do';
-		let srtNo = Number($('#srtNo').val()) + Number(index);
-		$('#srtNo').val(srtNo);
-
-		$.post(url, form.serialize(), function (result) {
-			$('i.active').removeClass('active');
-			$('#quizDiv').replaceWith(result);
-		});
+		var subjectTypeCd = $('#subjectTypeCd').val();
+		moveQuiz(subjectTypeCd, srtNo);
 	}
+}
+
+function moveQuiz(subjectTypeCd, srtNo) {
+	$('#subjectTypeCd').val(subjectTypeCd);
+	$('#srtNo').val(srtNo);
+	let url = '/quiz/quizAjax.do';
+	let form = $('#quizForm');
+	$.post(url, form.serialize(), function (result) {
+		$('i.active').removeClass('active');
+		$('#quizDiv').replaceWith(result);
+	});
+}
+function goStatistics(param) {
+	let form = $('#' + param);
+	form.attr('action', '/quiz/statistics.do');
+	form.attr('target', '');
+	form.submit();
+}
+
+function goQuizMain() {
+	let form = $('#startForm');
+	form.attr('action', '/quiz/index.do');
+	form.attr('target', '');
+	form.submit();
 }
 
 //카카오 로그인
 function kakaoLogin() {
+	// Kakao.init('e48108dd0d2c5884764f47d3937cc0d8');
 	Kakao.Auth.login({
 		success: function (response) {
 			Kakao.API.request({
 				url: '/v2/user/me',
 				success: function (response) {
-					let form = $('#startForm');
 					let userId = response['kakao_account']['email'];
 					if (userId == undefined) {
-						userId = prompt("이메일을 입력하시면, 혜택이 제공됩니다. 입력하시겠습니까?");
+						var loginMsgModal = new bootstrap.Modal(document.getElementById('loginMsg'))
+						loginMsgModal.show()
+					} else {
+						$('#userId').val(userId);
+						goQuizMain();
 					}
-					$('#userId').val(userId);
-					form.attr('action', '/quiz/main.do');
-					form.attr('target', '');
-					form.submit();
 				},
 				fail: function (error) {
 					console.log(error)
@@ -166,11 +211,13 @@ function kakaoLogin() {
 
 //카카오 로그아웃
 function kakaoLogout() {
+	Kakao.init('e48108dd0d2c5884764f47d3937cc0d8');
 	if (Kakao.Auth.getAccessToken()) {
 		Kakao.API.request({
 			url: '/v1/user/unlink',
 			success: function (response) {
 				console.log(response)
+				location.replace('/quiz/index.do');
 			},
 			fail: function (error) {
 				console.log(error)
@@ -178,4 +225,10 @@ function kakaoLogout() {
 		})
 		Kakao.Auth.setAccessToken(undefined)
 	}
+}
+
+function selectQuiz() {
+	let subjectTypeCd = $('#subjectType :selected').val();
+	let quizNo = $('#quizNo :selected').val();
+	moveQuiz(subjectTypeCd, quizNo);
 }

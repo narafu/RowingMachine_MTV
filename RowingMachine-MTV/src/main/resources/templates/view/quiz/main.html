@@ -1,102 +1,111 @@
 <!DOCTYPE html>
-<html 	xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorator="layouts/defaultLayout">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/defaultLayout}">
 
 <head>
     <title>quiz</title>
 </head>
 
-	<div layout:fragment="content" class="container-sm">
-	
-	<h1 class="text-center" id="count-down-timer"></h1>
-	
-		<form action="" method="post" id="quizForm">
-			<input type="hidden" th:field="${userVO.userId}"/>
-			<input type="hidden" th:field="${userVO.userNm}"/>
-			<input type="hidden" th:field="${quizMstrInfoVO.secSolving}"/>
-			<input type="hidden" th:field="${quizMstrInfoVO.minSolving}"/>
+<div layout:fragment="content" class="">
 
-			<div class="row">
-				<div class="col-2 text-center my-auto">
-					<i class="fas fa-angle-left fa-3x" onclick="goQuiz('-1');"></i>
-					<!-- <i class="fas fa-chevron-circle-left fa-3x btn-prev-awesome"></i> -->
+
+	<form action="" method="post" id="quizForm">
+		<input type="hidden" th:field="${session.userId}"/>
+		<input type="hidden" th:field="${session.userNm}"/>
+		<input type="hidden" th:field="${quizMstrInfoVO.secSolving}"/>
+		<input type="hidden" th:field="${quizMstrInfoVO.minSolving}"/>
+
+		<div class="mx-5 px-5">
+			<h1 class="text-center" id="count-down-timer"></h1>
+		</div>
+
+		<div class="row">
+			<div class="col-2 text-center my-auto">
+				<i class="fas fa-angle-left fa-3x" onclick="goQuiz('prev');"></i>
+				<!-- <i class="fas fa-chevron-circle-left fa-3x btn-prev-awesome"></i> -->
+			</div>
+
+			<div class="col-8">
+				<div>
+					<div class="m-3 d-flex justify-content-end">
+						<div>
+							<i class="fas fa-home fa-3x mx-3" onclick="goHome();"></i>
+							<i class="fas fa-poll fa-3x" onclick="goQuiz('result');"></i>
+						</div>
+					</div>
+					<div class="progress">
+						<div class="progress-bar progress-bar-striped progress-bar-animated" id="progress-bar" role="progressbar" style="width: 100%;">105%</div>
+					</div>
 				</div>
-	
-				<div class="col-8">
+
+				<div class="d-flex flex-column justify-content-between my-5" id="quizDiv" style="min-height: 500px;">
 					<div>
-						<div class="m-3 d-flex justify-content-between">
+						<input type="hidden" th:field="${quizMstrInfoVO.quizMstrInfoSeq}"/>
+						<input type="hidden" th:field="${quizMstrInfoVO.quizUserAnsSeq}"/>
+						<input type="hidden" th:field="${quizMstrInfoVO.subjectTypeCd}"/>
+						<input type="hidden" th:field="${quizMstrInfoVO.srtNo}"/>
+						<input type="hidden" th:field="${quizMstrInfoVO.quizTotalCnt}"/>
+						<input type="hidden" th:field="${quizMstrInfoVO.userAnswer}"/>
+						
+						<div class="m-3 d-flex justify-content-between align-items-center">
+							<div>
+								<div class="fs-5 fw-bold">
+									<span th:text="|${'Q' + quizMstrInfoVO.srtNo + '.'}|"></span>
+									<button type="button" class="btn btn-primary mx-2" onclick="cmntr();">해설</button>
+								</div>
+							</div>
 							<div class="row row-cols-lg-auto g-3 align-items-center">
 								<div class="col-12">
-									<select class="form-select form-select-lg fx-bold" aria-label=".form-select-lg example">
-										<option value="10">헌법</option>
-										<option value="20">형법</option>
-										<option value="30">민법</option>
+									<select class="form-select form-select-lg fx-bold" aria-label=".form-select-lg example"
+										onchange="selectQuiz();" id="subjectType">
+										<th:block th:each=cnmmCd:${cnmmCdList}>
+											<option th:value="${cnmmCd.cmmnDtlCd}" th:text="${cnmmCd.cmmnDtlNm}"
+												th:selected="${cnmmCd.cmmnDtlCd == quizMstrInfoVO.subjectTypeCd}"/>
+										</th:block>
 									</select>
 								</div>
-								<div class="col-12">
-									<select class="form-select form-select-lg fx-bold" aria-label=".form-select-lg example">
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
+								<div class="col-12" th:with="totalCnt=${quizMstrInfoVO.quizTotalCnt}">
+									<select class="form-select form-select-lg fx-bold" aria-label=".form-select-lg example"
+										onchange="selectQuiz();" id="quizNo">
+										<th:block th:each="num : ${#numbers.sequence(1, totalCnt)}">
+											<option th:value="${num}" th:text="${num}"
+												th:selected="${num == quizMstrInfoVO.srtNo}"/>
+										</th:block>
 									</select>
 								</div>
 							</div>
-							<div>
-								<i class="fas fa-home fa-3x" onclick="goHome('quizForm');"></i>
-							</div>
 						</div>
-						<div class="progress">
-							<div class="progress-bar progress-bar-striped progress-bar-animated" id="progress-bar" role="progressbar" style="width: 100%;">105%</div>
+						
+						<div class="lh-lg fs-5">
+							<th:block th:utext="${quizMstrInfoVO.content}"/>
 						</div>
 					</div>
-		
-					<div class="my-5" id="quizDiv">
-						<div>
-							<input type="hidden" th:field="${quizMstrInfoVO.quizMstrInfoSeq}"/>
-							<input type="hidden" th:field="${quizMstrInfoVO.quizUserAnsSeq}"/>
-							<input type="hidden" th:field="${quizMstrInfoVO.subjectTypeCd}"/>
-							<input type="hidden" th:field="${quizMstrInfoVO.srtNo}"/>
-							<input type="hidden" th:field="${quizMstrInfoVO.quizTotalCnt}"/>
-							<input type="hidden" th:field="${quizMstrInfoVO.userAnswer}"/>
-							<input type="hidden" th:field="${quizMstrInfoVO.takeRev}"/>
-							<div class="fs-5 fw-bold">Q<span th:text="${quizMstrInfoVO.srtNo}"></span>.</div>
-							<div class="lh-lg fs-5">
-								<th:block th:text="${quizMstrInfoVO.content}"/>
-							</div>
-						</div>
-						<div class="d-flex justify-content-around align-items-center my-5 text-center btn-grp">
-							<i class="fas fa-check-circle fa-5x"
-								th:classappend="${quizMstrInfoVO.userAnswer} == 'O' ? active" onclick="trigger(this, 'O')"></i>
-							<!-- <i class="far fa-check-circle fa-5x"></i> -->
-							<i class="fas fa-times-circle fa-5x"
-								th:classappend="${quizMstrInfoVO.userAnswer} == 'X' ? active" onclick="trigger(this, 'X')"></i>
-							<!-- <i class="far fa-times-circle fa-5x"></i> -->
-						</div>
+					
+					<div id="cmntrDiv" th:utext="${quizMstrInfoVO.cmntr}"></div>
+					
+					<div class="d-flex justify-content-around align-items-center my-5 text-center btn-grp">
+						<i class="fas fa-check-circle fa-5x"
+							th:classappend="${quizMstrInfoVO.userAnswer} == 'O' ? active" onclick="trigger(this, 'O')"></i>
+						<!-- <i class="far fa-check-circle fa-5x"></i> -->
+						<i class="fas fa-times-circle fa-5x"
+							th:classappend="${quizMstrInfoVO.userAnswer} == 'X' ? active" onclick="trigger(this, 'X')"></i>
+						<!-- <i class="far fa-times-circle fa-5x"></i> -->
 					</div>
-				</div>
-				
-				<div class="col-2 text-center my-auto">
-					<i class="fas fa-angle-right fa-3x" onclick="goQuiz('1');"></i>
-					<!-- <i class="fas fa-chevron-circle-right fa-3x"></i> -->
 				</div>
 			</div>
-		</form>
-		
-	</div>
+			
+			<div class="col-2 text-center my-auto">
+				<i class="fas fa-angle-right fa-3x" onclick="goQuiz('next');"></i>
+				<!-- <i class="fas fa-chevron-circle-right fa-3x"></i> -->
+			</div>
+		</div>
+	</form>
+	
+</div>
 
-	<th:block layout:fragment="script">
-		<script>
-			$(function() {
-				var userNm = $('#userNm').val();
-				if(userNm != '') {
-					alert(userNm + '님 환영합니다.');
-				}
-			})
-		</script>
-		<script th:src="@{/js/quiz/quizFunc.js}"></script>
-	</th:block>
+<th:block layout:fragment="script">
+	<script th:src="@{/js/quiz/quizFunc.js}"></script>
+</th:block>
 
 </html>

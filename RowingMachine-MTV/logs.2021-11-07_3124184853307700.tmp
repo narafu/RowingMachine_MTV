@@ -1,0 +1,30 @@
+324825 [http-nio-80-exec-10] DEBUG c.r.w.u.m.U.getUserInfo - ==>  Preparing: SELECT USER_INFO_SEQ , USER_ID , USER_NM , PASSWORD , (SELECT MAX(TAKE_REV) + 1 FROM QUIZ_USER_ANS WHERE DEL_YN = 'N' AND USER_ID = ?) AS TAKE_REV FROM USER_INFO WHERE DEL_YN = 'N' AND USER_ID = ?
+324828 [http-nio-80-exec-10] DEBUG c.r.w.u.m.U.getUserInfo - ==> Parameters: narafu@kakao.com(String), narafu@kakao.com(String)
+324829 [http-nio-80-exec-10] DEBUG c.r.w.u.m.U.getUserInfo - <==      Total: 1
+324847 [http-nio-80-exec-1] DEBUG c.r.w.c.B.selectCnmmCdList - ==>  Preparing: SELECT GRP_DTL_CD AS cmmnDtlCd , GRP_DTL_NM AS cmmnDtlNm FROM CMMN_DTL_CD WHERE 1 = 1 AND DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '001' ORDER BY SORT_NO
+324847 [http-nio-80-exec-1] DEBUG c.r.w.c.B.selectCnmmCdList - ==> Parameters: 
+324849 [http-nio-80-exec-1] DEBUG c.r.w.c.B.selectCnmmCdList - <==      Total: 3
+324849 [http-nio-80-exec-1] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==>  Preparing: SELECT COUNT(*) AS TOTAL FROM QUIZ_MSTR_INFO WHERE DEL_YN = 'N' AND SUBJECT_TYPE_CD = ?
+324849 [http-nio-80-exec-1] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==> Parameters: 10(String)
+324850 [http-nio-80-exec-1] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - <==      Total: 1
+324850 [http-nio-80-exec-1] DEBUG c.r.w.q.m.Q.getQuizInfo - ==>  Preparing: SELECT A.QUIZ_MSTR_INFO_SEQ , A.SUBJECT_TYPE_CD , (SELECT GRP_DTL_NM FROM CMMN_DTL_CD WHERE DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '002' AND GRP_DTL_CD = A.SUBJECT_TYPE_CD) AS SUBJECT_TYPE_NM , A.SRT_NO , A.CONTENT , A.ANSWER , B.QUIZ_USER_ANS_SEQ , B.USER_ID , B.USER_ANSWER , B.ANSWER_CHK FROM QUIZ_MSTR_INFO A LEFT JOIN ( SELECT * FROM QUIZ_USER_ANS WHERE USER_ID = ? ) B ON A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ WHERE A.DEL_YN = 'N' AND A.SUBJECT_TYPE_CD = ? AND A.SRT_NO = (SELECT LEAST(?, (SELECT MAX(SRT_NO) FROM QUIZ_MSTR_INFO WHERE SUBJECT_TYPE_CD = ?)))
+324850 [http-nio-80-exec-1] DEBUG c.r.w.q.m.Q.getQuizInfo - ==> Parameters: narafu@kakao.com(String), 10(String), 1(Integer), 10(String)
+324851 [http-nio-80-exec-1] DEBUG c.r.w.q.m.Q.getQuizInfo - <==      Total: 1
+324995 [http-nio-80-exec-4] DEBUG c.r.w.c.B.selectCnmmCdList - ==>  Preparing: SELECT GRP_DTL_CD AS cmmnDtlCd , GRP_DTL_NM AS cmmnDtlNm FROM CMMN_DTL_CD WHERE 1 = 1 AND DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '001' ORDER BY SORT_NO
+324995 [http-nio-80-exec-4] DEBUG c.r.w.c.B.selectCnmmCdList - ==> Parameters: 
+324996 [http-nio-80-exec-4] DEBUG c.r.w.c.B.selectCnmmCdList - <==      Total: 3
+324997 [http-nio-80-exec-4] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==>  Preparing: SELECT COUNT(*) AS TOTAL FROM QUIZ_MSTR_INFO WHERE DEL_YN = 'N' AND SUBJECT_TYPE_CD = ?
+324997 [http-nio-80-exec-4] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==> Parameters: 10(String)
+324999 [http-nio-80-exec-4] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - <==      Total: 1
+324999 [http-nio-80-exec-4] DEBUG c.r.w.q.m.Q.getQuizInfo - ==>  Preparing: SELECT A.QUIZ_MSTR_INFO_SEQ , A.SUBJECT_TYPE_CD , (SELECT GRP_DTL_NM FROM CMMN_DTL_CD WHERE DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '002' AND GRP_DTL_CD = A.SUBJECT_TYPE_CD) AS SUBJECT_TYPE_NM , A.SRT_NO , A.CONTENT , A.ANSWER , B.QUIZ_USER_ANS_SEQ , B.USER_ID , B.USER_ANSWER , B.ANSWER_CHK FROM QUIZ_MSTR_INFO A LEFT JOIN ( SELECT * FROM QUIZ_USER_ANS WHERE USER_ID = ? ) B ON A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ WHERE A.DEL_YN = 'N' AND A.SUBJECT_TYPE_CD = ? AND A.SRT_NO = (SELECT LEAST(?, (SELECT MAX(SRT_NO) FROM QUIZ_MSTR_INFO WHERE SUBJECT_TYPE_CD = ?)))
+325000 [http-nio-80-exec-4] DEBUG c.r.w.q.m.Q.getQuizInfo - ==> Parameters: narafu@kakao.com(String), 10(String), 1(Integer), 10(String)
+325001 [http-nio-80-exec-4] DEBUG c.r.w.q.m.Q.getQuizInfo - <==      Total: 1
+325042 [http-nio-80-exec-5] DEBUG c.r.w.c.B.selectCnmmCdList - ==>  Preparing: SELECT GRP_DTL_CD AS cmmnDtlCd , GRP_DTL_NM AS cmmnDtlNm FROM CMMN_DTL_CD WHERE 1 = 1 AND DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '001' ORDER BY SORT_NO
+325043 [http-nio-80-exec-5] DEBUG c.r.w.c.B.selectCnmmCdList - ==> Parameters: 
+325044 [http-nio-80-exec-5] DEBUG c.r.w.c.B.selectCnmmCdList - <==      Total: 3
+325044 [http-nio-80-exec-5] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==>  Preparing: SELECT COUNT(*) AS TOTAL FROM QUIZ_MSTR_INFO WHERE DEL_YN = 'N' AND SUBJECT_TYPE_CD = ?
+325044 [http-nio-80-exec-5] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==> Parameters: 10(String)
+325044 [http-nio-80-exec-5] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - <==      Total: 1
+325045 [http-nio-80-exec-5] DEBUG c.r.w.q.m.Q.getQuizInfo - ==>  Preparing: SELECT A.QUIZ_MSTR_INFO_SEQ , A.SUBJECT_TYPE_CD , (SELECT GRP_DTL_NM FROM CMMN_DTL_CD WHERE DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '002' AND GRP_DTL_CD = A.SUBJECT_TYPE_CD) AS SUBJECT_TYPE_NM , A.SRT_NO , A.CONTENT , A.ANSWER , B.QUIZ_USER_ANS_SEQ , B.USER_ID , B.USER_ANSWER , B.ANSWER_CHK FROM QUIZ_MSTR_INFO A LEFT JOIN ( SELECT * FROM QUIZ_USER_ANS WHERE USER_ID = ? ) B ON A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ WHERE A.DEL_YN = 'N' AND A.SUBJECT_TYPE_CD = ? AND A.SRT_NO = (SELECT LEAST(?, (SELECT MAX(SRT_NO) FROM QUIZ_MSTR_INFO WHERE SUBJECT_TYPE_CD = ?)))
+325045 [http-nio-80-exec-5] DEBUG c.r.w.q.m.Q.getQuizInfo - ==> Parameters: narafu@kakao.com(String), 10(String), 1(Integer), 10(String)
+325046 [http-nio-80-exec-5] DEBUG c.r.w.q.m.Q.getQuizInfo - <==      Total: 1

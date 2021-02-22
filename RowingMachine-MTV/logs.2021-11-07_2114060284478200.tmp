@@ -1,0 +1,64 @@
+5506064 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer - ==> Parameters: 1218(Integer), 6(Integer), 167f3d03-e339-4f19-9eeb-d6e81b892fbd(String), null, null, 6(Integer), null, null, 6(Integer)
+5506068 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer - <==    Updates: 1
+5506068 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - ==>  Preparing: SELECT IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1 FROM QUIZ_USER_ANS LIMIT 1
+5506068 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - ==> Parameters: 
+5506069 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - <==      Total: 1
+5506069 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer - ==>  Preparing: INSERT INTO QUIZ_USER_ANS ( QUIZ_USER_ANS_SEQ , QUIZ_MSTR_INFO_SEQ , USER_ID , USER_ANSWER , ANSWER_CHK , REGIST_ID , REGIST_NM ) VALUES ( ? , ? , ? , ? , CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END , 'SYSTEM' , 'SYSTEM' ) ON DUPLICATE KEY UPDATE USER_ANSWER = ? , ANSWER_CHK = (SELECT CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END)
+5506069 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer - ==> Parameters: 1219(Integer), 7(Integer), 167f3d03-e339-4f19-9eeb-d6e81b892fbd(String), null, null, 7(Integer), null, null, 7(Integer)
+5506071 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer - <==    Updates: 1
+5506072 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - ==>  Preparing: SELECT IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1 FROM QUIZ_USER_ANS LIMIT 1
+5506072 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - ==> Parameters: 
+5506072 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - <==      Total: 1
+5506072 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer - ==>  Preparing: INSERT INTO QUIZ_USER_ANS ( QUIZ_USER_ANS_SEQ , QUIZ_MSTR_INFO_SEQ , USER_ID , USER_ANSWER , ANSWER_CHK , REGIST_ID , REGIST_NM ) VALUES ( ? , ? , ? , ? , CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END , 'SYSTEM' , 'SYSTEM' ) ON DUPLICATE KEY UPDATE USER_ANSWER = ? , ANSWER_CHK = (SELECT CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END)
+5506073 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer - ==> Parameters: 1220(Integer), 8(Integer), 167f3d03-e339-4f19-9eeb-d6e81b892fbd(String), null, null, 8(Integer), null, null, 8(Integer)
+5506075 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer - <==    Updates: 1
+5506075 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - ==>  Preparing: SELECT IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1 FROM QUIZ_USER_ANS LIMIT 1
+5506076 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - ==> Parameters: 
+5506076 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - <==      Total: 1
+5506076 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer - ==>  Preparing: INSERT INTO QUIZ_USER_ANS ( QUIZ_USER_ANS_SEQ , QUIZ_MSTR_INFO_SEQ , USER_ID , USER_ANSWER , ANSWER_CHK , REGIST_ID , REGIST_NM ) VALUES ( ? , ? , ? , ? , CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END , 'SYSTEM' , 'SYSTEM' ) ON DUPLICATE KEY UPDATE USER_ANSWER = ? , ANSWER_CHK = (SELECT CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END)
+5506076 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer - ==> Parameters: 1221(Integer), 9(Integer), 167f3d03-e339-4f19-9eeb-d6e81b892fbd(String), null, null, 9(Integer), null, null, 9(Integer)
+5506079 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer - <==    Updates: 1
+5506079 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - ==>  Preparing: SELECT IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1 FROM QUIZ_USER_ANS LIMIT 1
+5506079 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - ==> Parameters: 
+5506080 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - <==      Total: 1
+5506080 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer - ==>  Preparing: INSERT INTO QUIZ_USER_ANS ( QUIZ_USER_ANS_SEQ , QUIZ_MSTR_INFO_SEQ , USER_ID , USER_ANSWER , ANSWER_CHK , REGIST_ID , REGIST_NM ) VALUES ( ? , ? , ? , ? , CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END , 'SYSTEM' , 'SYSTEM' ) ON DUPLICATE KEY UPDATE USER_ANSWER = ? , ANSWER_CHK = (SELECT CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END)
+5506080 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer - ==> Parameters: 1222(Integer), 11(Integer), 167f3d03-e339-4f19-9eeb-d6e81b892fbd(String), null, null, 11(Integer), null, null, 11(Integer)
+5506083 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer - <==    Updates: 1
+5506083 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - ==>  Preparing: SELECT IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1 FROM QUIZ_USER_ANS LIMIT 1
+5506083 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - ==> Parameters: 
+5506083 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - <==      Total: 1
+5506084 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer - ==>  Preparing: INSERT INTO QUIZ_USER_ANS ( QUIZ_USER_ANS_SEQ , QUIZ_MSTR_INFO_SEQ , USER_ID , USER_ANSWER , ANSWER_CHK , REGIST_ID , REGIST_NM ) VALUES ( ? , ? , ? , ? , CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END , 'SYSTEM' , 'SYSTEM' ) ON DUPLICATE KEY UPDATE USER_ANSWER = ? , ANSWER_CHK = (SELECT CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END)
+5506084 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer - ==> Parameters: 1223(Integer), 12(Integer), 167f3d03-e339-4f19-9eeb-d6e81b892fbd(String), null, null, 12(Integer), null, null, 12(Integer)
+5506086 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer - <==    Updates: 1
+5506086 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - ==>  Preparing: SELECT IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1 FROM QUIZ_USER_ANS LIMIT 1
+5506087 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - ==> Parameters: 
+5506087 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - <==      Total: 1
+5506087 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer - ==>  Preparing: INSERT INTO QUIZ_USER_ANS ( QUIZ_USER_ANS_SEQ , QUIZ_MSTR_INFO_SEQ , USER_ID , USER_ANSWER , ANSWER_CHK , REGIST_ID , REGIST_NM ) VALUES ( ? , ? , ? , ? , CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END , 'SYSTEM' , 'SYSTEM' ) ON DUPLICATE KEY UPDATE USER_ANSWER = ? , ANSWER_CHK = (SELECT CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END)
+5506087 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer - ==> Parameters: 1224(Integer), 13(Integer), 167f3d03-e339-4f19-9eeb-d6e81b892fbd(String), null, null, 13(Integer), null, null, 13(Integer)
+5506090 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.mergeUserAnswer - <==    Updates: 1
+5506091 [http-nio-80-exec-3] DEBUG c.r.w.c.B.selectCnmmCdList - ==>  Preparing: SELECT GRP_DTL_CD AS cmmnDtlCd , GRP_DTL_NM AS cmmnDtlNm FROM CMMN_DTL_CD WHERE 1 = 1 AND DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '001' ORDER BY SORT_NO
+5506091 [http-nio-80-exec-3] DEBUG c.r.w.c.B.selectCnmmCdList - ==> Parameters: 
+5506092 [http-nio-80-exec-3] DEBUG c.r.w.c.B.selectCnmmCdList - <==      Total: 3
+5506092 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==>  Preparing: SELECT COUNT(*) AS TOTAL FROM QUIZ_MSTR_INFO WHERE DEL_YN = 'N' AND SUBJECT_TYPE_CD = ?
+5506092 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==> Parameters: 10(String)
+5506092 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - <==      Total: 1
+5506093 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.getQuizInfo - ==>  Preparing: SELECT A.QUIZ_MSTR_INFO_SEQ , A.SUBJECT_TYPE_CD , (SELECT GRP_DTL_NM FROM CMMN_DTL_CD WHERE DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '002' AND GRP_DTL_CD = A.SUBJECT_TYPE_CD) AS SUBJECT_TYPE_NM , A.SRT_NO , A.CONTENT , A.ANSWER , B.QUIZ_USER_ANS_SEQ , B.USER_ID , B.USER_ANSWER , B.ANSWER_CHK FROM QUIZ_MSTR_INFO A LEFT JOIN ( SELECT * FROM QUIZ_USER_ANS WHERE USER_ID = ? ) B ON A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ WHERE A.DEL_YN = 'N' AND A.SUBJECT_TYPE_CD = ? AND A.SRT_NO = (SELECT LEAST(?, (SELECT MAX(SRT_NO) FROM QUIZ_MSTR_INFO WHERE SUBJECT_TYPE_CD = ?)))
+5506093 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.getQuizInfo - ==> Parameters: null, 10(String), 1(Integer), 10(String)
+5506094 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.getQuizInfo - <==      Total: 1
+5506157 [http-nio-80-exec-4] DEBUG c.r.w.q.m.Q.selectQuizMstrInfoSeqAll - ==>  Preparing: SELECT QUIZ_MSTR_INFO_SEQ FROM QUIZ_MSTR_INFO WHERE DEL_YN = 'N' ORDER BY SUBJECT_TYPE_CD, SRT_NO
+5506157 [http-nio-80-exec-4] DEBUG c.r.w.q.m.Q.selectQuizMstrInfoSeqAll - ==> Parameters: 
+5506158 [http-nio-80-exec-4] DEBUG c.r.w.q.m.Q.selectQuizMstrInfoSeqAll - <==      Total: 12
+5506158 [http-nio-80-exec-4] DEBUG c.r.w.u.m.U.getUserInfo - ==>  Preparing: SELECT USER_INFO_SEQ , USER_ID , USER_NM , PASSWORD , (SELECT MAX(TAKE_REV) + 1 FROM QUIZ_USER_ANS WHERE DEL_YN = 'N' AND USER_ID = ?) AS TAKE_REV FROM USER_INFO WHERE DEL_YN = 'N' AND USER_ID = ?
+5506158 [http-nio-80-exec-4] DEBUG c.r.w.u.m.U.getUserInfo - ==> Parameters: (String), (String)
+5506159 [http-nio-80-exec-4] DEBUG c.r.w.u.m.U.getUserInfo - <==      Total: 0
+5506159 [http-nio-80-exec-4] DEBUG c.r.w.u.m.U.insertUserInfo!selectKey - ==>  Preparing: SELECT IFNULL(MAX(USER_INFO_SEQ), 0) + 1 FROM USER_INFO
+5506159 [http-nio-80-exec-4] DEBUG c.r.w.u.m.U.insertUserInfo!selectKey - ==> Parameters: 
+5506160 [http-nio-80-exec-4] DEBUG c.r.w.u.m.U.insertUserInfo!selectKey - <==      Total: 1
+5506160 [http-nio-80-exec-4] DEBUG c.r.w.u.m.U.insertUserInfo - ==>  Preparing: INSERT INTO USER_INFO ( USER_INFO_SEQ , USER_ID , USER_NM , PASSWORD , REGIST_ID , REGIST_NM ) VALUES ( ? , ? , ? , ? , 'SYSTEM' , 'SYSTEM' )
+5506160 [http-nio-80-exec-4] DEBUG c.r.w.u.m.U.insertUserInfo - ==> Parameters: 103(Integer), dd39b31f-14be-41cd-8e14-43b904ac6d9a(String), GUEST(String), null
+5506163 [http-nio-80-exec-4] DEBUG c.r.w.u.m.U.insertUserInfo - <==    Updates: 1
+5506163 [http-nio-80-exec-4] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - ==>  Preparing: SELECT IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1 FROM QUIZ_USER_ANS LIMIT 1
+5506164 [http-nio-80-exec-4] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - ==> Parameters: 
+5506164 [http-nio-80-exec-4] DEBUG c.r.w.q.m.Q.mergeUserAnswer!selectKey - <==      Total: 1
+5506164 [http-nio-80-exec-4] DEBUG c.r.w.q.m.Q.mergeUserAnswer - ==>  Preparing: INSERT INTO QUIZ_USER_ANS ( QUIZ_USER_ANS_SEQ , QUIZ_MSTR_INFO_SEQ , USER_ID , USER_ANSWER , ANSWER_CHK , REGIST_ID , REGIST_NM ) VALUES ( ? , ? , ? , ? , CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END , 'SYSTEM' , 'SYSTEM' ) ON DUPLICATE KEY UPDATE USER_ANSWER = ? , ANSWER_CHK = (SELECT CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END)
+5506165 [http-nio-80-exec-4] DEBUG c.r.w.q.m.Q.mergeUserAnswer - ==> Parameters: 1225(Integer), 1(Integer), dd39b31f-14be-41cd-8e14-43b904ac6d9a(String), null, null, 1(Integer), null, null, 1(Integer)

@@ -1,0 +1,28 @@
+8213807 [http-nio-80-exec-3] DEBUG c.r.w.q.m.Q.getQuizCntList - <==      Total: 0
+8395970 [http-nio-80-exec-7] DEBUG c.r.w.c.B.selectCnmmCdList - ==>  Preparing: SELECT GRP_DTL_CD AS cmmnDtlCd , GRP_DTL_NM AS cmmnDtlNm FROM CMMN_DTL_CD WHERE 1 = 1 AND DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '001' ORDER BY SORT_NO
+8395970 [http-nio-80-exec-7] DEBUG c.r.w.c.B.selectCnmmCdList - ==> Parameters: 
+8395971 [http-nio-80-exec-7] DEBUG c.r.w.c.B.selectCnmmCdList - <==      Total: 3
+8395971 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.selectQuizResultList - ==>  Preparing: SELECT ROW_NUMBER() OVER(ORDER BY A.SUBJECT_TYPE_CD, A.SRT_NO) AS RNO , A.QUIZ_MSTR_INFO_SEQ , A.SUBJECT_TYPE_CD , A.SRT_NO , A.ANSWER , B.QUIZ_USER_ANS_SEQ , B.USER_ID , B.USER_ANSWER , B.ANSWER_CHK FROM QUIZ_MSTR_INFO A LEFT JOIN QUIZ_USER_ANS B ON A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ WHERE 1 = 1 AND A.DEL_YN = 'N' AND B.USER_ID = ? ORDER BY A.SUBJECT_TYPE_CD, A.SRT_NO
+8395976 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.selectQuizResultList - ==> Parameters: narafu@kakao.com(String)
+8395977 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.selectQuizResultList - <==      Total: 13
+8395977 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizCntList - ==>  Preparing: SELECT SUBJECT_TYPE_CD , (SELECT GRP_DTL_NM FROM CMMN_DTL_CD WHERE DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '001' AND GRP_DTL_CD = A.SUBJECT_TYPE_CD) AS SUBJECT_TYPE_NM , COUNT(*) AS QUIZ_TOTAL_CNT , COUNT(CASE WHEN ANSWER_CHK = 'T' THEN 1 END) AS QUIZ_TRUE_CNT FROM QUIZ_MSTR_INFO A LEFT JOIN QUIZ_USER_ANS B ON A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ WHERE 1 = 1 AND A.DEL_YN = 'N' AND B.USER_ID = ? GROUP BY SUBJECT_TYPE_CD ORDER BY SUBJECT_TYPE_CD
+8395978 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizCntList - ==> Parameters: narafu@kakao.com(String)
+8395979 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.getQuizCntList - <==      Total: 3
+8396178 [http-nio-80-exec-8] DEBUG c.r.w.c.B.selectCnmmCdList - ==>  Preparing: SELECT GRP_DTL_CD AS cmmnDtlCd , GRP_DTL_NM AS cmmnDtlNm FROM CMMN_DTL_CD WHERE 1 = 1 AND DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '001' ORDER BY SORT_NO
+8396178 [http-nio-80-exec-8] DEBUG c.r.w.c.B.selectCnmmCdList - ==> Parameters: 
+8396179 [http-nio-80-exec-8] DEBUG c.r.w.c.B.selectCnmmCdList - <==      Total: 3
+8396179 [http-nio-80-exec-8] DEBUG c.r.w.q.m.Q.selectQuizResultList - ==>  Preparing: SELECT ROW_NUMBER() OVER(ORDER BY A.SUBJECT_TYPE_CD, A.SRT_NO) AS RNO , A.QUIZ_MSTR_INFO_SEQ , A.SUBJECT_TYPE_CD , A.SRT_NO , A.ANSWER , B.QUIZ_USER_ANS_SEQ , B.USER_ID , B.USER_ANSWER , B.ANSWER_CHK FROM QUIZ_MSTR_INFO A LEFT JOIN QUIZ_USER_ANS B ON A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ WHERE 1 = 1 AND A.DEL_YN = 'N' AND B.USER_ID = ? ORDER BY A.SUBJECT_TYPE_CD, A.SRT_NO
+8396179 [http-nio-80-exec-8] DEBUG c.r.w.q.m.Q.selectQuizResultList - ==> Parameters: null
+8396180 [http-nio-80-exec-8] DEBUG c.r.w.q.m.Q.selectQuizResultList - <==      Total: 0
+8396180 [http-nio-80-exec-8] DEBUG c.r.w.q.m.Q.getQuizCntList - ==>  Preparing: SELECT SUBJECT_TYPE_CD , (SELECT GRP_DTL_NM FROM CMMN_DTL_CD WHERE DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '001' AND GRP_DTL_CD = A.SUBJECT_TYPE_CD) AS SUBJECT_TYPE_NM , COUNT(*) AS QUIZ_TOTAL_CNT , COUNT(CASE WHEN ANSWER_CHK = 'T' THEN 1 END) AS QUIZ_TRUE_CNT FROM QUIZ_MSTR_INFO A LEFT JOIN QUIZ_USER_ANS B ON A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ WHERE 1 = 1 AND A.DEL_YN = 'N' AND B.USER_ID = ? GROUP BY SUBJECT_TYPE_CD ORDER BY SUBJECT_TYPE_CD
+8396180 [http-nio-80-exec-8] DEBUG c.r.w.q.m.Q.getQuizCntList - ==> Parameters: null
+8396181 [http-nio-80-exec-8] DEBUG c.r.w.q.m.Q.getQuizCntList - <==      Total: 0
+8396302 [http-nio-80-exec-10] DEBUG c.r.w.c.B.selectCnmmCdList - ==>  Preparing: SELECT GRP_DTL_CD AS cmmnDtlCd , GRP_DTL_NM AS cmmnDtlNm FROM CMMN_DTL_CD WHERE 1 = 1 AND DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '001' ORDER BY SORT_NO
+8396302 [http-nio-80-exec-10] DEBUG c.r.w.c.B.selectCnmmCdList - ==> Parameters: 
+8396303 [http-nio-80-exec-10] DEBUG c.r.w.c.B.selectCnmmCdList - <==      Total: 3
+8396303 [http-nio-80-exec-10] DEBUG c.r.w.q.m.Q.selectQuizResultList - ==>  Preparing: SELECT ROW_NUMBER() OVER(ORDER BY A.SUBJECT_TYPE_CD, A.SRT_NO) AS RNO , A.QUIZ_MSTR_INFO_SEQ , A.SUBJECT_TYPE_CD , A.SRT_NO , A.ANSWER , B.QUIZ_USER_ANS_SEQ , B.USER_ID , B.USER_ANSWER , B.ANSWER_CHK FROM QUIZ_MSTR_INFO A LEFT JOIN QUIZ_USER_ANS B ON A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ WHERE 1 = 1 AND A.DEL_YN = 'N' AND B.USER_ID = ? ORDER BY A.SUBJECT_TYPE_CD, A.SRT_NO
+8396303 [http-nio-80-exec-10] DEBUG c.r.w.q.m.Q.selectQuizResultList - ==> Parameters: null
+8396304 [http-nio-80-exec-10] DEBUG c.r.w.q.m.Q.selectQuizResultList - <==      Total: 0
+8396304 [http-nio-80-exec-10] DEBUG c.r.w.q.m.Q.getQuizCntList - ==>  Preparing: SELECT SUBJECT_TYPE_CD , (SELECT GRP_DTL_NM FROM CMMN_DTL_CD WHERE DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '001' AND GRP_DTL_CD = A.SUBJECT_TYPE_CD) AS SUBJECT_TYPE_NM , COUNT(*) AS QUIZ_TOTAL_CNT , COUNT(CASE WHEN ANSWER_CHK = 'T' THEN 1 END) AS QUIZ_TRUE_CNT FROM QUIZ_MSTR_INFO A LEFT JOIN QUIZ_USER_ANS B ON A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ WHERE 1 = 1 AND A.DEL_YN = 'N' AND B.USER_ID = ? GROUP BY SUBJECT_TYPE_CD ORDER BY SUBJECT_TYPE_CD
+8396304 [http-nio-80-exec-10] DEBUG c.r.w.q.m.Q.getQuizCntList - ==> Parameters: null
+8396305 [http-nio-80-exec-10] DEBUG c.r.w.q.m.Q.getQuizCntList - <==      Total: 0

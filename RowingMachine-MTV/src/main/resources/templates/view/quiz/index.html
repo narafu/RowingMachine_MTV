@@ -1,32 +1,59 @@
 <!DOCTYPE html>
-<html 	xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorator="layouts/defaultLayout">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/defaultLayout}">
 
 <head>
     <title>index</title>
 </head>
 
-	<div layout:fragment="content" class="text-center">
-		<form action="" method="post" id="startForm">
-			<input type="hidden" th:field="${userVO.userId}">
-		</form>
+	<div layout:fragment="content" class="text-center py-5 my-5">
 		<div>
-			<h1 class="display-5 text-primary">제11회 변호사시험 합격예측</h1>
+			<h1 class="display-4 text-primary">제11회 변호사시험 합격예측</h1>
 			<h1 class="display-1 text-primary">심심풀이 테스트</h1>
 		</div>
 		<div class="my-5">
 			<button type="button" class="btn btn-primary btn-lg btn-block px-5 py-3 text-light" onclick="kakaoLogin()">시작하기</button>
 		</div>
 		<div>
-			<span class="d-block">현직 변호사가 고른 문제들로 변호사시험 합격을 예측해보세요!</span> <span
-				class="d-block">헌법, 형법, 민법을 테스트하는 데 소요되는 시간은 총 30분입니다.</span> <span
-				class="d-block">제 11회 변호사시험 합격여부를 예측하고, 결과를 친구들과 공유해보세요!</span> <span
-				class="d-block">* 테스트 화면은 '컴퓨터'와 '태블릿'에 최적화되어 있습니다.</span>
+			<span class="d-block fs-5">현직 변호사가 고른 문제들로 변호사시험 합격을 예측해보세요!</span>
+			<span class="d-block fs-5">헌법, 형법, 민법을 테스트하는 데 소요되는 시간은 총 30분입니다.</span>
+			<span class="d-block fs-5">제 11회 변호사시험 합격여부를 예측하고, 결과를 친구들과 공유해보세요!</span>
+			<span class="d-block fs-5">* 테스트 화면은 '컴퓨터'와 '태블릿'에 최적화되어 있습니다.</span>
 		</div>
+	
+		<!-- Modal -->
+		<div class="modal fade" id="loginMsg" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="btn-close" aria-label="Close" onclick="window.location.reload();"></button>
+					</div>
+					<div class="modal-body">
+						<form action="" method="post" id="startForm">
+							<div class="mb-3">
+								<label for="message-text" class="col-form-label d-grid">
+									<span>이메일을 동의하지 않으셨습니다.</span>
+									<span>이메일을 입력하시면, 혜택이 제공됩니다.</span>
+								</label>
+								<input type="text" class="form-control" th:field="${userVO.userId}">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" onclick="goQuizMain();">Start</button>
+						<button type="button" class="btn btn-secondary" onclick="window.location.reload();">Close</button>
+					</div>
+				 </div>
+			</div>
+		</div>
+		
 	</div>
 
     <th:block layout:fragment="script">
         <script th:src="@{/js/quiz/quizFunc.js}"></script>
+    	<script>
+    		kakaoLogout();
+    	</script>
     </th:block>
 </html>
