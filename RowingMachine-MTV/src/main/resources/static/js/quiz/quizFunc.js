@@ -75,6 +75,15 @@ function goHome() {
 
 function goQuiz(obj) {
 
+	// if (!$('.active').length) {
+	// 	let url = '/quiz/modal/quizNullModal?srtNo=' + srtNo;
+	// 	$.ajax(url).done(function (modalHtml) {
+	// 		$('#modalDiv').html(modalHtml);
+	// 		var quizNullModal = new bootstrap.Modal(document.getElementById('quizNullModal'));
+	// 		quizNullModal.show();
+	// 	})
+	// }
+
 	if (obj == 'prev') {
 		let srtNo = parseInt($('#srtNo').val()) - 1;
 		if (!srtNo) {
@@ -85,33 +94,31 @@ function goQuiz(obj) {
 				firstPageModal.show();
 			})
 		} else {
-			quizAnsSave(srtNo);
+			quizAnsSave(srtNo, 'N');
 		};
 	}
 
 	if (obj == 'next') {
-
-		let quizTotalCnt = $('#quizTotalCnt').val();
 		let srtNo = parseInt($('#srtNo').val()) + 1;
+		let selectedSubjectType = $('#subjectType option:selected').val();
+		let lastSubjectType = $('#subjectType option:last').val();
+		let selectedqQizNo = $('#quizNo option:selected').val();
+		let lastQuizNo = $('#quizNo option:last').val();
 
-		if (!$('.active').length) {
-			let url = '/quiz/modal/quizNullModal?srtNo=' + srtNo;
-			$.ajax(url).done(function (modalHtml) {
-				$('#modalDiv').html(modalHtml);
-				var quizNullModal = new bootstrap.Modal(document.getElementById('quizNullModal'));
-				quizNullModal.show();
-			})
-		}
-
-		if (srtNo > quizTotalCnt) {
-			let url = '/quiz/modal/lastPageModal?srtNo=' + srtNo;
+		if (selectedSubjectType == lastSubjectType && selectedqQizNo == lastQuizNo) {
+			let url = '/quiz/modal/lastPageModal?srtNo=0';
 			$.ajax(url).done(function (modalHtml) {
 				$('#modalDiv').html(modalHtml);
 				var lastPageModal = new bootstrap.Modal(document.getElementById('lastPageModal'));
 				lastPageModal.show();
 			})
 		} else {
-			quizAnsSave(srtNo);
+			if(selectedqQizNo == lastQuizNo) {
+				var subjectTypeCd = $('#subjectType option:selected').next().val();
+				$('#subjectTypeCd').val(subjectTypeCd);
+				srtNo = 1;
+			}
+			quizAnsSave(srtNo, 'N');
 		};
 	}
 
@@ -125,11 +132,14 @@ function goQuiz(obj) {
 	}
 }
 
-function quizAnsSave(srtNo) {
+function quizAnsSave(srtNo, modalYn) {
 	let url = '/quiz/answer.do';
 	let param = $('#quizForm').serialize();
 	$.post(url, param, function (result) {
 		if (result) {
+			if (modalYn == 'Y') {
+				$('#modalDiv .modal').modal('hide');
+			}
 			movePage(srtNo);
 		} else {
 			alert("오류가 발생하였습니다.");
@@ -153,15 +163,15 @@ function movePage(srtNo) {
 
 	} else { // 다음 문제
 		var subjectTypeCd = $('#subjectTypeCd').val();
-		moveQuiz(subjectTypeCd, srtNo);
+		moveQuiz(subjectTypeCd, srtNo, 'quizForm');
 	}
 }
 
-function moveQuiz(subjectTypeCd, srtNo) {
+function moveQuiz(subjectTypeCd, srtNo, param) {
 	$('#subjectTypeCd').val(subjectTypeCd);
 	$('#srtNo').val(srtNo);
 	let url = '/quiz/quizAjax.do';
-	let form = $('#quizForm');
+	let form = $('#' + param);
 	$.post(url, form.serialize(), function (result) {
 		$('i.active').removeClass('active');
 		$('#quizDiv').replaceWith(result);
@@ -230,5 +240,10 @@ function kakaoLogout() {
 function selectQuiz() {
 	let subjectTypeCd = $('#subjectType :selected').val();
 	let quizNo = $('#quizNo :selected').val();
-	moveQuiz(subjectTypeCd, quizNo);
+	moveQuiz(subjectTypeCd, quizNo, 'quizForm');
+}
+
+function toggleCmntr() {
+	$('#cmntrDiv').slideToggle();
+	$('#cmntrDiv').scroll();
 }

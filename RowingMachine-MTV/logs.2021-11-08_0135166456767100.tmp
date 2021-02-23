@@ -1,0 +1,31 @@
+10783501 [http-nio-80-exec-5] DEBUG c.r.w.q.m.Q.getQuizInfo - ==>  Preparing: SELECT A.QUIZ_MSTR_INFO_SEQ , A.SUBJECT_TYPE_CD , (SELECT GRP_DTL_NM FROM CMMN_DTL_CD WHERE DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '002' AND GRP_DTL_CD = A.SUBJECT_TYPE_CD) AS SUBJECT_TYPE_NM , A.SRT_NO , A.CONTENT , A.ANSWER , A.CMNTR , B.QUIZ_USER_ANS_SEQ , B.USER_ID , B.USER_ANSWER , B.ANSWER_CHK FROM QUIZ_MSTR_INFO A LEFT JOIN ( SELECT * FROM QUIZ_USER_ANS WHERE USER_ID = ? ) B ON A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ WHERE A.DEL_YN = 'N' AND A.SUBJECT_TYPE_CD = ? AND A.SRT_NO = (SELECT LEAST(?, (SELECT MAX(SRT_NO) FROM QUIZ_MSTR_INFO WHERE SUBJECT_TYPE_CD = ?)))
+10783503 [http-nio-80-exec-5] DEBUG c.r.w.q.m.Q.getQuizInfo - ==> Parameters: narafu@kakao.com(String), 30(String), 4(Integer), 30(String)
+10783508 [http-nio-80-exec-5] DEBUG c.r.w.q.m.Q.getQuizInfo - <==      Total: 1
+10785043 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.updateUserAnswer - ==>  Preparing: UPDATE QUIZ_USER_ANS SET QUIZ_MSTR_INFO_SEQ = ? , USER_ANSWER = ? , ANSWER_CHK = CASE WHEN (SELECT ? = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = ?)) = '1' THEN 'T' ELSE 'F' END WHERE QUIZ_USER_ANS_SEQ = ?
+10785043 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.updateUserAnswer - ==> Parameters: 13(Integer), (String), (String), 13(Integer), 13(Integer)
+10785044 [http-nio-80-exec-7] DEBUG c.r.w.q.m.Q.updateUserAnswer - <==    Updates: 1
+10785049 [http-nio-80-exec-6] DEBUG c.r.w.c.B.selectCnmmCdList - ==>  Preparing: SELECT GRP_DTL_CD AS cmmnDtlCd , GRP_DTL_NM AS cmmnDtlNm FROM CMMN_DTL_CD WHERE 1 = 1 AND DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '001' ORDER BY SORT_NO
+10785050 [http-nio-80-exec-6] DEBUG c.r.w.c.B.selectCnmmCdList - ==> Parameters: 
+10785050 [http-nio-80-exec-6] DEBUG c.r.w.c.B.selectCnmmCdList - <==      Total: 3
+10785050 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==>  Preparing: SELECT COUNT(*) AS TOTAL FROM QUIZ_MSTR_INFO WHERE DEL_YN = 'N' AND SUBJECT_TYPE_CD = ?
+10785050 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - ==> Parameters: 30(String)
+10785051 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.getQuizTotalCnt - <==      Total: 1
+10785051 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.getQuizInfo - ==>  Preparing: SELECT A.QUIZ_MSTR_INFO_SEQ , A.SUBJECT_TYPE_CD , (SELECT GRP_DTL_NM FROM CMMN_DTL_CD WHERE DEL_YN = 'N' AND USE_YN = 'Y' AND GRP_CD = '002' AND GRP_DTL_CD = A.SUBJECT_TYPE_CD) AS SUBJECT_TYPE_NM , A.SRT_NO , A.CONTENT , A.ANSWER , A.CMNTR , B.QUIZ_USER_ANS_SEQ , B.USER_ID , B.USER_ANSWER , B.ANSWER_CHK FROM QUIZ_MSTR_INFO A LEFT JOIN ( SELECT * FROM QUIZ_USER_ANS WHERE USER_ID = ? ) B ON A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ WHERE A.DEL_YN = 'N' AND A.SUBJECT_TYPE_CD = ? AND A.SRT_NO = (SELECT LEAST(?, (SELECT MAX(SRT_NO) FROM QUIZ_MSTR_INFO WHERE SUBJECT_TYPE_CD = ?)))
+10785051 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.getQuizInfo - ==> Parameters: narafu@kakao.com(String), 30(String), 4(Integer), 30(String)
+10785052 [http-nio-80-exec-6] DEBUG c.r.w.q.m.Q.getQuizInfo - <==      Total: 1
+2024 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - Starting RowingMachineMvpApplication using Java 13.0.2 on X571GT with PID 27956 (C:\Users\HeungSoo\git\RowingMachine_MTV\RowingMachine-MTV\target\classes started by HeungSoo in C:\Users\HeungSoo\git\RowingMachine_MTV\RowingMachine-MTV)
+2025 [restartedMain] DEBUG c.r.web.RowingMachineMvpApplication - Running with Spring Boot v2.5.6, Spring v5.3.12
+2026 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - The following profiles are active: local
+2478 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2479 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+4050 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 80 (http)
+4068 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+4068 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+4202 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+4203 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1723 ms
+5344 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+6108 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 80 (http) with context path ''
+6120 [restartedMain] INFO  c.r.web.RowingMachineMvpApplication - Started RowingMachineMvpApplication in 4.89 seconds (JVM running for 7.841)
+6171 [http-nio-80-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+6172 [http-nio-80-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+6173 [http-nio-80-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms

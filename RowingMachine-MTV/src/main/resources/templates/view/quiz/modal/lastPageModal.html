@@ -12,15 +12,17 @@
 			<div class="modal-body">
 				<div class="mb-3 text-center">
 					<label for="message-text" class="col-form-label d-grid">
-						<span>답을 선택하지 않았습니다.(나중에 다시 답을 입력할 수 있습니다.)</span>
-						<span>다음 문제로 가시겠습니까?</span>
+						<span>마지막 문제입니다.</span>
+						<span>(풀지 않은 문제는 오답처리 됩니다.)</span>
+						<span>결과로 이동하시겠습니?</span>
 					</label>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" th:onclick="|quizAnsSave(${srtNo})|">Next</button>
+				<button type="button" class="btn btn-primary" th:onclick="|quizAnsSave(${srtNo}, 'Y')|">Next</button>
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 			</div>
 		 </div>
 	</div>
 </div>
+</html>

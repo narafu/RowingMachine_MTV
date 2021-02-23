@@ -6,23 +6,26 @@
 	<div layout:fragment="content" class="container">
 		<form action="" method="post" id="resultForm">
 			<input type="hidden" th:field="${quizMstrInfoVO.userId}"/>
+			<input type="hidden" th:field="${quizMstrInfoVO.subjectTypeCd}"/>
+			<input type="hidden" th:field="${quizMstrInfoVO.srtNo}"/>
 		</form>
-		
+
 		<div class="m-3 text-end">
 			<i class="fas fa-home fa-3x" onclick="goHome();"></i>
 		</div>
 		<div class="row">
+		
 			<div class="col-md">
 				<div class="bg-primary text-light px-4 py-3">
 					<span class="d-block fs-1 text-center" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">변호사시험 합계예측 결과</span>
-					<span class="d-block text-center fs-2" style="font-family: 'GongGothicMedium';">: ??.? %의 확률로 합격 예상</span>
+					<span class="d-block text-center fs-2" style="font-family: 'GongGothicMedium';">: <span id="totalResultRatio"></span> %의 확률로 합격 예상</span>
 				</div>
 				<div >
 					<canvas id="myChart"></canvas>
 				</div>
 			</div>
-			<div class="col-md">
 			
+			<div class="col-md">
 				<div class="display-5 text-primary my-3" th:text="${session.userNm}"></div>
 
 				<th:block th:each="quizCnt : ${quizCntList}">
@@ -41,11 +44,11 @@
 						</thead> -->
 						<tbody>
 							<tr>
-								<td class="fw-bold quizTd" colspan="2" 
+								<td class="fw-bold quizTd" colspan="2"
 									th:each="result : ${quizResultList}"
 									th:if="${result.subjectTypeCd == cnmmCd.cmmnDtlCd}"
 									th:text="${result.srtNo}"
-									th:onclick="|moveQuiz(10, ${result.srtNo})|">
+									th:onclick="moveQuiz([[${result.subjectTypeCd}]], [[${result.srtNo}]], 'resultForm')">
 								</td>
 							</tr>
 							<tr>
@@ -59,23 +62,31 @@
 						</tbody>
 					</table>
 				</th:block>
-				
 			</div>
+			
 		</div>
+		
+		<div id="quizDiv"></div>
+		
 		<div class="row my-5">
 			<div class="col text-center">
-				<button type="button" class="btn btn-primary btn-lg btn-block px-5 py-3 fw-bold">예비합격증 받기</button>
+				<button type="button" class="btn btn-primary btn-lg btn-block px-5 py-3 fw-bold">
+					<span>예비합격증 받기</span>
+					<img alt="" src="/images/lawyer_badge.png" class="mx-1" style="width: 30px">
+				</button>
 			</div>
 		</div>
 	</div>
-	
+
 <th:block layout:fragment="script">
 	<script type="text/javascript">
-		
+
 		var quizResultLaw10 = $('[name=quizTrueCnt10]').val() / $('[name=quizTotalCnt10]').val() * 100;
 		var quizResultLaw20 = $('[name=quizTrueCnt20]').val() / $('[name=quizTotalCnt20]').val() * 100;
 		var quizResultLaw30 = $('[name=quizTrueCnt30]').val() / $('[name=quizTotalCnt30]').val() * 100;
-		
+		var totalResultRatio = (quizResultLaw10 + quizResultLaw20 + quizResultLaw30) / 3;
+		$('#totalResultRatio').text(totalResultRatio.toFixed(1));
+
 		var context = document.getElementById('myChart').getContext('2d');
 		var myChart = new Chart(context
 				, {
@@ -83,7 +94,7 @@
 					, data: { // 차트에 들어갈 데이터
 						labels: ['헌법', '형법', '민법'] //x 축
 						, datasets: [ //데이터
-							{ 
+							{
 								label: '결과' //차트 제목
 								, fill: false // line 형태일 때, 선 안쪽을 채우는지 안채우는지
 								, data: [quizResultLaw10, quizResultLaw20, quizResultLaw30] //x축 label에 대응되는 데이터 값
@@ -102,17 +113,18 @@
 						]
 					}
 				, options: {
-					scales: {
-						yAxes: [
-							{ ticks:
-								{ beginAtZero: true }
-							}
-						]
-					}
-				}
+			        maintainAspectRatio: true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
+			        scales: {
+			            yAxes: [{
+			                ticks: {
+			                    beginAtZero:true
+			                }
+			            }]
+			        }
+			    }
 			});
 	</script>
 	<script th:src="@{/js/quiz/quizFunc.js}"></script>
 </th:block>
-	
+
 </html>
