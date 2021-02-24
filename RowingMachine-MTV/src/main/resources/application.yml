@@ -54,6 +54,6 @@ spring:
     activate:
       on-profile: was
   datasource:
-    url: jdbc:mysql://rds-mysql-rowingmachine.cszmhu28qmqo.ap-northeast-2.rds.amazonaws.com:3306/rowing_db?autoReconnect=true
+    url: jdbc:mysql://rowingmachine.cakioqitx4ac.ap-northeast-2.rds.amazonaws.com:3306/rowing_db?autoReconnect=true
     username: root
     password: root1234
