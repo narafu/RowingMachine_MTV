@@ -2,7 +2,7 @@
 
 spring:
   profiles:
-    active: local
+    active: was
 
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
