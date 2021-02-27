@@ -8,10 +8,10 @@
 		<version>2.5.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.RowingMachine-MTV.web</groupId>
-	<artifactId>RowingMachine-MTV</artifactId>
+	<groupId>com.RowingMachine-MVP.web</groupId>
+	<artifactId>RowingMachine-MVP</artifactId>
 	<version>1.0</version>
-	<name>RowingMachine-MTV</name>
+	<name>RowingMachine-MVP</name>
 	<description>RowingMachine Project</description>
 	<properties>
 		<java.version>11</java.version>
