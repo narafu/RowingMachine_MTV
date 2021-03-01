@@ -1,4 +1,4 @@
-package com.RowingMachineMVP.web;
+package com.rowingMachineMVP.web;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
