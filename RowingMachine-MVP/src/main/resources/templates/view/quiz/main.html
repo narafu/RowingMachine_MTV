@@ -55,8 +55,8 @@
 									<button type="button" class="btn btn-primary mx-2" onclick="toggleCmntr();">해설</button>
 								</div>
 							</div>
-							<div class="row row-cols-lg-auto g-3 align-items-center">
-								<div class="col-12">
+							<div class="row g-3 w-50 align-items-center">
+								<div class="col">
 									<select class="form-select form-select-lg fx-bold" aria-label=".form-select-lg example"
 										onchange="selectQuiz();" id="subjectType">
 										<th:block th:each=cnmmCd:${cnmmCdList}>
@@ -65,7 +65,7 @@
 										</th:block>
 									</select>
 								</div>
-								<div class="col-12" th:with="totalCnt=${quizMstrInfoVO.quizTotalCnt}">
+								<div class="col" th:with="totalCnt=${quizMstrInfoVO.quizTotalCnt}">
 									<select class="form-select form-select-lg fx-bold" aria-label=".form-select-lg example"
 										onchange="selectQuiz();" id="quizNo">
 										<th:block th:each="num : ${#numbers.sequence(1, totalCnt)}">
