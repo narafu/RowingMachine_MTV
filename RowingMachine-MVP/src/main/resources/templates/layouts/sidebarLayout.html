@@ -35,13 +35,18 @@
 		<!-- header -->
 		<header th:replace="fragments/header :: headerFragment"></header>
 		
-		<div class="my-5 py-5">
+		<div class="my-5 py-5 d-flex">
+			<!-- sidebar -->
+			<div class="col-2" id="sidebar">
+				<div th:replace="fragments/leftSidebar :: sidebarFragment"></div>
+			</div>
 		
 			<!-- content -->
-			<div class="col-12 container-lg">
+			<div class="col-8 container-lg">
 				<div layout:fragment="content"></div>
 			</div>
 
+			<div class="col-2"></div>
 		</div>
 		
 		<!-- modal -->

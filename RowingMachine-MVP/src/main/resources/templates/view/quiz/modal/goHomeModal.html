@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
+<!-- Modal : goHomeModal-->
 <div class="modal fade" id="goHomeModal" data-bs-backdrop="static"
 	data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
@@ -16,7 +18,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" onclick="kakaoLogout()">Next</button>
+				<button type="button" class="btn btn-primary" onclick="location.replace('/quiz/index.do');">Next</button>
 				<!-- <button type="button" class="btn btn-primary" onclick="	">Next</button> -->
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 			</div>

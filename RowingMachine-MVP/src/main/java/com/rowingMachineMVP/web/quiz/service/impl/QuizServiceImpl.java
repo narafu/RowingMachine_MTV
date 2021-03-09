@@ -1,6 +1,7 @@
 package com.rowingMachineMVP.web.quiz.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,7 @@ import com.rowingMachineMVP.web.quiz.mapper.QuizMstrInfoMapper;
 import com.rowingMachineMVP.web.quiz.mapper.QuizUserAnsMapper;
 import com.rowingMachineMVP.web.quiz.service.QuizService;
 import com.rowingMachineMVP.web.quiz.vo.QuizMstrInfoVO;
-import com.rowingMachineMVP.web.quiz.vo.UserInfoVO;
+import com.rowingMachineMVP.web.user.vo.UserInfoVO;
 
 @Service
 public class QuizServiceImpl implements QuizService {
@@ -44,20 +45,13 @@ public class QuizServiceImpl implements QuizService {
 	}
 
 	@Override
-	public int insertSelectQuizAll(UserInfoVO userVO) {
-		List<Integer> seqList = quizUserAnsMapper.selectQuizMstrInfoSeqAll();
-		for (int seq : seqList) {
-			QuizMstrInfoVO quizMstrInfoVO = new QuizMstrInfoVO();
-			quizMstrInfoVO.setQuizMstrInfoSeq(seq);
-			quizMstrInfoVO.setUserId(userVO.getUserId());
-			quizUserAnsMapper.insertUserAnswer(quizMstrInfoVO);
+	public int mergeSelectQuizAll(UserInfoVO userVO) {
+		List<Map<String, String>> mapList = quizUserAnsMapper.selectQuizUsrAnsSeqAll(userVO);
+		for (Map<String, String> map : mapList) {
+			map.put("userId", userVO.getUserId());
+			quizUserAnsMapper.mergeUserAnswer(map);
 		}
-		return seqList.size();
-	}	
-
-	@Override
-	public List<Integer> selectQuizMstrInfoSeqAll() {
-		return quizUserAnsMapper.selectQuizMstrInfoSeqAll();
+		return mapList.size();
 	}
 
 }

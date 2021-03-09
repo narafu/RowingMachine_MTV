@@ -20,10 +20,10 @@ public class QuizMstrInfoVO extends BaseVO {
 	private String userAnswer;
 	private String answerChk;
 	private int takeRev = 1;
-	
+
 	private int secSolving;
 	private int minSolving;
-	
+
 	private int quizTotalCnt;
 	private int quizTrueCnt;
 }

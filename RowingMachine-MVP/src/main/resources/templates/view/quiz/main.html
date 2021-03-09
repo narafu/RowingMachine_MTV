@@ -15,7 +15,7 @@
 		<input type="hidden" th:field="${session.userNm}"/>
 		<input type="hidden" th:field="${quizMstrInfoVO.secSolving}"/>
 		<input type="hidden" th:field="${quizMstrInfoVO.minSolving}"/>
-
+		
 		<div class="mx-5 px-5">
 			<h1 class="text-center" id="count-down-timer"></h1>
 		</div>
@@ -50,9 +50,12 @@
 						
 						<div class="m-3 d-flex justify-content-between align-items-center">
 							<div>
-								<div class="fs-5 fw-bold">
-									<span th:text="|${'Q' + quizMstrInfoVO.srtNo + '.'}|"></span>
-									<button type="button" class="btn btn-primary mx-2" onclick="toggleCmntr();">해설</button>
+								<div class="fs-4 fw-bold d-flex" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">
+									<div style="width: 100px">
+										<span th:text="${quizMstrInfoVO.subjectTypeNm}"></span>
+										<span th:text="${#strings.length(quizMstrInfoVO.srtNo) == 1 ? '0' + quizMstrInfoVO.srtNo : quizMstrInfoVO.srtNo}"></span>
+									</div>
+									<button type="button" class="btn btn-primary mx-3" onclick="toggleCmntr();">해설</button>
 								</div>
 							</div>
 							<div class="row g-3 w-50 align-items-center">
@@ -102,11 +105,13 @@
 			</div>
 		</div>
 	</form>
-	
 </div>
 
 <th:block layout:fragment="script">
 	<script th:src="@{/js/quiz/quizFunc.js}"></script>
+	<script>
+		invitation();
+	</script>
 </th:block>
 
 </html>

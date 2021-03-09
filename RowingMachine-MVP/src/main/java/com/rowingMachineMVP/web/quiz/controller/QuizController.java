@@ -13,17 +13,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rowingMachineMVP.web.common.BaseUtil;
 import com.rowingMachineMVP.web.quiz.service.QuizService;
-import com.rowingMachineMVP.web.quiz.service.UserService;
 import com.rowingMachineMVP.web.quiz.vo.QuizMstrInfoVO;
-import com.rowingMachineMVP.web.quiz.vo.UserInfoVO;
+import com.rowingMachineMVP.web.user.service.UserService;
+import com.rowingMachineMVP.web.user.vo.UserInfoVO;
 
 @Controller
 @RequestMapping("/")
 public class QuizController {
+
+	@Autowired
+	private HttpSession httpSession;
 
 	@Autowired
 	private BaseUtil baseUtil;
@@ -50,9 +52,12 @@ public class QuizController {
 			// 유저 DB등록
 			userService.insertUserInfo(param);
 			userVO = param;
-			quizService.insertSelectQuizAll(userVO);
 		}
 
+		// 문제 맵핑
+		quizService.mergeSelectQuizAll(userVO);
+
+		// 세션 등록
 		HttpSession httpSession = req.getSession();
 		httpSession.setAttribute("userVO", userVO);
 
@@ -60,9 +65,8 @@ public class QuizController {
 	}
 
 	@RequestMapping("quiz/main.do")
-	public String quizMain(HttpServletRequest req, QuizMstrInfoVO param, Model model) {
+	public String quizMain(QuizMstrInfoVO param, Model model) {
 
-		HttpSession httpSession = req.getSession();
 		UserInfoVO session = (UserInfoVO) httpSession.getAttribute("userVO");
 		model.addAttribute("session", session);
 
@@ -101,20 +105,18 @@ public class QuizController {
 	}
 
 	@RequestMapping("quiz/result.do")
-	public String quizResult(HttpServletRequest req, QuizMstrInfoVO param, Model model) {
-		HttpSession httpSession = req.getSession();
+	public String quizResult(QuizMstrInfoVO param, Model model) {
 		UserInfoVO session = (UserInfoVO) httpSession.getAttribute("userVO");
-		model.addAttribute("session", session);
+		model.addAttribute("userVO", session);
 		model.addAttribute("quizMstrInfoVO", param);
 		return "view/quiz/result";
 	}
 
 	@RequestMapping("quiz/statistics.do")
-	public String statistics(HttpServletRequest req, QuizMstrInfoVO param, Model model) {
+	public String statistics(QuizMstrInfoVO param, Model model) {
 
-		HttpSession httpSession = req.getSession();
 		UserInfoVO session = (UserInfoVO) httpSession.getAttribute("userVO");
-		model.addAttribute("session", session);
+		model.addAttribute("userVO", session);
 
 		// 공통코드(과목코드)
 		List<Map<String, String>> cnmmCdList = baseUtil.getCnmmCdList("001");

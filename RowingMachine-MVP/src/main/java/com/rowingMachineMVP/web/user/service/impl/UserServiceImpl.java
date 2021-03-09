@@ -1,4 +1,4 @@
-package com.rowingMachineMVP.web.quiz.service.impl;
+package com.rowingMachineMVP.web.user.service.impl;
 
 import java.util.UUID;
 
@@ -6,9 +6,9 @@ import org.apache.groovy.parser.antlr4.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rowingMachineMVP.web.quiz.service.UserService;
-import com.rowingMachineMVP.web.quiz.vo.UserInfoVO;
 import com.rowingMachineMVP.web.user.mapper.UserInfoMapper;
+import com.rowingMachineMVP.web.user.service.UserService;
+import com.rowingMachineMVP.web.user.vo.UserInfoVO;
 
 @Service
 public class UserServiceImpl implements UserService {

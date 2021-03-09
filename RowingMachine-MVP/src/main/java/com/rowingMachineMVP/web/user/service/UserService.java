@@ -1,6 +1,6 @@
-package com.rowingMachineMVP.web.quiz.service;
+package com.rowingMachineMVP.web.user.service;
 
-import com.rowingMachineMVP.web.quiz.vo.UserInfoVO;
+import com.rowingMachineMVP.web.user.vo.UserInfoVO;
 
 public interface UserService {
 

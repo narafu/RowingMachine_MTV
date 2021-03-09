@@ -16,7 +16,7 @@
 			A.QUIZ_MSTR_INFO_SEQ
 			, A.SUBJECT_TYPE_CD
 			, <include refid="util.getComnCodeNm">
-				<property name="grpCd" value="002"/>
+				<property name="grpCd" value="001"/>
 				<property name="grpDtlCd" value="A.SUBJECT_TYPE_CD"/>
 				<property name="grpDtlNm" value="SUBJECT_TYPE_NM"/>
 			</include>

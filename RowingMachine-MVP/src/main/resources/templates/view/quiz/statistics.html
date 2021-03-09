@@ -26,7 +26,7 @@
 			</div>
 			
 			<div class="col-md">
-				<div class="display-5 text-primary my-3" th:text="${session.userNm}"></div>
+				<div class="display-6 my-3" th:text="${userVO.userNm}" style="font-family: 'KOTRA_BOLD-Bold';"></div>
 
 				<th:block th:each="quizCnt : ${quizCntList}">
 					<input type="hidden" th:name="|quizTotalCnt${quizCnt.subjectTypeCd}|" th:value="${quizCnt.quizTotalCnt}">
@@ -35,7 +35,7 @@
 
 				<th:block th:each="cnmmCd : ${cnmmCdList}">
 					<table class="table table-sm table-striped caption-top table-bordered border-primary align-middle text-center">
-						<caption class="fs-5" th:text="${cnmmCd.cmmnDtlNm}"></caption>
+						<caption class="fs-5" th:text="${cnmmCd.cmmnDtlNm}" style="font-family: 'GongGothicMedium';"></caption>
 						<!-- <thead>
 							<tr>
 								<th scope="col">문제</th>
@@ -54,7 +54,7 @@
 							<tr>
 								<th:block th:each="result : ${quizResultList}" th:if="${result.subjectTypeCd == cnmmCd.cmmnDtlCd}">
 									<td style="width:50px;" th:text="${result.userAnswer}"></td>
-									<td class="fw-bold" style="width:50px;"
+									<td class="fw-bold" style="width:50px; font-family: 'KOTRA_BOLD-Bold';"
 										th:classappend="${result.answerChk} == 'T' ? text-primary : text-danger"
 										th:text="${result.answerChk}"></td>
 								</th:block>
@@ -62,10 +62,12 @@
 						</tbody>
 					</table>
 				</th:block>
+				<div><i class="fas fa-asterisk"></i> 문제 번호를 클릭하여 [문제]와 [해설]을 다시 볼 수 있습니다.</div>
 			</div>
 			
 		</div>
 		
+		<hr class="my-5"/>
 		<div id="quizDiv"></div>
 		
 		<div class="row my-5">

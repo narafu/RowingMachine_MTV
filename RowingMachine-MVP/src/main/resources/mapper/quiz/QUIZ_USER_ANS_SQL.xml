@@ -8,10 +8,7 @@
 		AND B.USER_ID = #{userId}
 	</sql>
 	
-	<insert id="insertUserAnswer">
-		<selectKey keyProperty="quizUserAnsSeq" resultType="int" order="BEFORE">
-			SELECT IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1 FROM QUIZ_USER_ANS LIMIT 1
-		</selectKey>
+	<insert id="mergeUserAnswer">
 		INSERT INTO QUIZ_USER_ANS (
 			QUIZ_USER_ANS_SEQ
 			, QUIZ_MSTR_INFO_SEQ
@@ -21,7 +18,14 @@
 			, REGIST_ID
 			, REGIST_NM
 		) VALUES (
-			#{quizUserAnsSeq}
+			<choose>
+				<when test="quizUserAnsSeq == null or quizUserAnsSeq == ''">
+					(SELECT QUIZ_USER_ANS_SEQ FROM (SELECT IFNULL(MAX(QUIZ_USER_ANS_SEQ), 0) + 1 AS QUIZ_USER_ANS_SEQ FROM QUIZ_USER_ANS) X )
+				</when>
+				<otherwise>
+					#{quizUserAnsSeq}
+				</otherwise>
+			</choose>
 			, #{quizMstrInfoSeq}
 			, #{userId}
 			, #{userAnswer}
@@ -29,7 +33,12 @@
 				THEN 'T' ELSE 'F' END
 			, 'SYSTEM'
 			, 'SYSTEM'
-		)
+		) ON DUPLICATE KEY UPDATE
+			USER_ANSWER = #{userAnswer}
+			, ANSWER_CHK = CASE WHEN (SELECT #{userAnswer} = (SELECT ANSWER FROM QUIZ_MSTR_INFO WHERE QUIZ_MSTR_INFO_SEQ = #{quizMstrInfoSeq})) = '1'
+				THEN 'T' ELSE 'F' END
+			, DEL_YN = 'N'
+			, MDFY_TS = CURRENT_TIMESTAMP
 	</insert>
 	
 	<update id="updateUserAnswer">
@@ -77,11 +86,13 @@
 		ORDER BY SUBJECT_TYPE_CD
 	</select>
 	
-	<select id="selectQuizMstrInfoSeqAll" resultType="int">
+	<select id="selectQuizUsrAnsSeqAll" resultType="HashMap">
 		SELECT
-			QUIZ_MSTR_INFO_SEQ
-		FROM QUIZ_MSTR_INFO
-		WHERE DEL_YN = 'N'
+			A.QUIZ_MSTR_INFO_SEQ AS quizMstrInfoSeq
+			, B.QUIZ_USER_ANS_SEQ AS quizUserAnsSeq
+		FROM QUIZ_MSTR_INFO A
+		LEFT JOIN (SELECT * FROM QUIZ_USER_ANS WHERE USER_ID = #{userId}) B
+		ON A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ
 		ORDER BY SUBJECT_TYPE_CD, SRT_NO
 	</select>
 

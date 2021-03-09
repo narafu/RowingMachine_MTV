@@ -13,7 +13,7 @@ window.onload = function () {
 
 function getCountTimer() {
 	let quizTotalCnt = Number($('#quizTotalCnt').val());
-	let quizPerTime = 60; // 60초
+	let quizPerTime = 90; // 90초
 	let duration = quizTotalCnt * quizPerTime;
 	return duration;
 }
@@ -48,6 +48,64 @@ function paddedFormat(num) {
 	return num < 10 ? "0" + num : num;
 }
 
+function login() {
+	let url = '/quiz/modal/loginModal';
+	$.ajax(url).done(function (modalHtml) {
+		$('#modalDiv').html(modalHtml);
+		let loginModal = new bootstrap.Modal(document.getElementById('loginModal'))
+		loginModal.show();
+	})
+}
+
+function goQuizMain() {
+	let form = $('#startForm');
+	form.attr('action', '/quiz/index.do');
+	form.attr('target', '');
+	form.submit();
+}
+
+//카카오 로그인
+function kakaoLogin() {
+	// Kakao.init('e48108dd0d2c5884764f47d3937cc0d8');
+	$('#modalDiv .modal').modal('hide');
+	Kakao.Auth.login({
+		success: function () {
+			Kakao.API.request({
+				url: '/v2/user/me',
+				success: function (response) {
+					let userId = response['kakao_account']['email'];
+					$('#userId').val(userId);
+					goQuizMain();
+				},
+				fail: function (error) {
+					console.log(error)
+				},
+			})
+		},
+		fail: function (error) {
+			console.log(error)
+		},
+	})
+}
+
+//카카오 로그아웃
+function kakaoLogout() {
+	Kakao.init('e48108dd0d2c5884764f47d3937cc0d8');
+	if (Kakao.Auth.getAccessToken()) {
+		Kakao.API.request({
+			url: '/v1/user/unlink',
+			success: function (response) {
+				console.log(response)
+				location.replace('/quiz/index.do');
+			},
+			fail: function (error) {
+				console.log(error)
+			},
+		})
+		Kakao.Auth.setAccessToken(undefined)
+	}
+}
+
 function trigger(obj, answer) {
 	$(obj).toggleClass('active');
 	$(obj).siblings().removeClass('active');
@@ -55,12 +113,11 @@ function trigger(obj, answer) {
 }
 
 function invitation() {
-	let url = '/quiz/modal/invitation';
-	let userNm = $('#userNm').val();
-	$.ajax(url, { 'userNm': userNm }).done(function (modalHtml) {
-		$('#modal').html(modalHtml);
-		var inviteMsgModal = new bootstrap.Modal(document.getElementById('inviteMsgModal'))
-		inviteMsgModal.show()
+	let url = '/quiz/modal/invitationModal';
+	$.ajax(url).done(function (modalHtml) {
+		$('#modalDiv').html(modalHtml);
+		let invitationModal = new bootstrap.Modal(document.getElementById('invitationModal'))
+		invitationModal.show()
 	})
 }
 
@@ -68,7 +125,7 @@ function goHome() {
 	let url = '/quiz/modal/goHomeModal';
 	$.ajax(url).done(function (modalHtml) {
 		$('#modalDiv').html(modalHtml);
-		var goHomeMsgModal = new bootstrap.Modal(document.getElementById('goHomeModal'));
+		let goHomeMsgModal = new bootstrap.Modal(document.getElementById('goHomeModal'));
 		goHomeMsgModal.show();
 	})
 }
@@ -79,18 +136,23 @@ function goQuiz(obj) {
 	// 	let url = '/quiz/modal/quizNullModal?srtNo=' + srtNo;
 	// 	$.ajax(url).done(function (modalHtml) {
 	// 		$('#modalDiv').html(modalHtml);
-	// 		var quizNullModal = new bootstrap.Modal(document.getElementById('quizNullModal'));
+	// 		let quizNullModal = new bootstrap.Modal(document.getElementById('quizNullModal'));
 	// 		quizNullModal.show();
 	// 	})
 	// }
 
 	if (obj == 'prev') {
 		let srtNo = parseInt($('#srtNo').val()) - 1;
-		if (!srtNo) {
+		let selectedSubjectType = $('#subjectType option:selected').val();
+		let firstSubjectType = $('#subjectType option:first').val();
+		let selectedqQizNo = $('#quizNo option:selected').val();
+		let firstQuizNo = $('#quizNo option:first').val();
+
+		if (selectedSubjectType == firstSubjectType && selectedqQizNo == firstQuizNo) {
 			let url = '/quiz/modal/firstPageModal?srtNo=' + srtNo;
 			$.ajax(url).done(function (modalHtml) {
 				$('#modalDiv').html(modalHtml);
-				var firstPageModal = new bootstrap.Modal(document.getElementById('firstPageModal'));
+				let firstPageModal = new bootstrap.Modal(document.getElementById('firstPageModal'));
 				firstPageModal.show();
 			})
 		} else {
@@ -109,12 +171,12 @@ function goQuiz(obj) {
 			let url = '/quiz/modal/lastPageModal?srtNo=0';
 			$.ajax(url).done(function (modalHtml) {
 				$('#modalDiv').html(modalHtml);
-				var lastPageModal = new bootstrap.Modal(document.getElementById('lastPageModal'));
+				let lastPageModal = new bootstrap.Modal(document.getElementById('lastPageModal'));
 				lastPageModal.show();
 			})
 		} else {
 			if(selectedqQizNo == lastQuizNo) {
-				var subjectTypeCd = $('#subjectType option:selected').next().val();
+				let subjectTypeCd = $('#subjectType option:selected').next().val();
 				$('#subjectTypeCd').val(subjectTypeCd);
 				srtNo = 1;
 			}
@@ -126,7 +188,7 @@ function goQuiz(obj) {
 		let url = '/quiz/modal/resultPageModal?srtNo=0';
 		$.ajax(url).done(function (modalHtml) {
 			$('#modalDiv').html(modalHtml);
-			var resultPageModal = new bootstrap.Modal(document.getElementById('resultPageModal'));
+			let resultPageModal = new bootstrap.Modal(document.getElementById('resultPageModal'));
 			resultPageModal.show();
 		})
 	}
@@ -162,7 +224,7 @@ function movePage(srtNo) {
 		form.submit();
 
 	} else { // 다음 문제
-		var subjectTypeCd = $('#subjectTypeCd').val();
+		let subjectTypeCd = $('#subjectTypeCd').val();
 		moveQuiz(subjectTypeCd, srtNo, 'quizForm');
 	}
 }
@@ -184,60 +246,7 @@ function goStatistics(param) {
 	form.submit();
 }
 
-function goQuizMain() {
-	let form = $('#startForm');
-	form.attr('action', '/quiz/index.do');
-	form.attr('target', '');
-	form.submit();
-}
-
-//카카오 로그인
-function kakaoLogin() {
-	// Kakao.init('e48108dd0d2c5884764f47d3937cc0d8');
-	Kakao.Auth.login({
-		success: function (response) {
-			Kakao.API.request({
-				url: '/v2/user/me',
-				success: function (response) {
-					let userId = response['kakao_account']['email'];
-					if (userId == undefined) {
-						var loginMsgModal = new bootstrap.Modal(document.getElementById('loginMsg'))
-						loginMsgModal.show()
-					} else {
-						$('#userId').val(userId);
-						goQuizMain();
-					}
-				},
-				fail: function (error) {
-					console.log(error)
-				},
-			})
-		},
-		fail: function (error) {
-			console.log(error)
-		},
-	})
-}
-
-//카카오 로그아웃
-function kakaoLogout() {
-	Kakao.init('e48108dd0d2c5884764f47d3937cc0d8');
-	if (Kakao.Auth.getAccessToken()) {
-		Kakao.API.request({
-			url: '/v1/user/unlink',
-			success: function (response) {
-				console.log(response)
-				location.replace('/quiz/index.do');
-			},
-			fail: function (error) {
-				console.log(error)
-			},
-		})
-		Kakao.Auth.setAccessToken(undefined)
-	}
-}
-
-function selectQuiz() {
+function selectQuiz(obj) {
 	let subjectTypeCd = $('#subjectType :selected').val();
 	let quizNo = $('#quizNo :selected').val();
 	moveQuiz(subjectTypeCd, quizNo, 'quizForm');

@@ -1,4 +1,4 @@
-package com.rowingMachineMVP.web.quiz.vo;
+package com.rowingMachineMVP.web.user.vo;
 
 import com.rowingMachineMVP.web.common.BaseVO;
 

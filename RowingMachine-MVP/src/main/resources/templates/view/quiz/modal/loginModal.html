@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- Modal : loginModal-->
+<div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="btn-close" aria-label="Close" onclick="window.location.reload();"></button>
+			</div>
+			<div class="modal-body">
+				<form action="" method="post" id="startForm">
+					<div class="mb-3">
+						<label for="message-text" class="col-form-label d-grid">
+							<span>이메일을 입력하면 결과가 저장됩니다.</span>
+							<span>원치 않을 경우, 공란으로 입력하면, GUEST로 진행됩니다.</span>
+						</label>
+						<input type="text" class="form-control" name="userId" id="userId">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<a href="#"><img src="/images/kakao_login_medium.png" style="height:40px;" onclick="kakaoLogin()"></a>
+				<button type="button" class="btn btn-primary" onclick="goQuizMain();">Start</button>
+				<button type="button" class="btn btn-secondary" onclick="window.location.reload();">Close</button>
+			</div>
+		 </div>
+	</div>
+</div>
+</html>

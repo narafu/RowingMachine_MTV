@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<!-- Modal : inviteMsg-->
-<div class="modal fade" id="inviteMsgModal" tabindex="-1" aria-labelledby="inviteMsgHeader" aria-hidden="true">
+<!-- Modal : invitationModal-->
+<div class="modal fade" id="invitationModal" tabindex="-1" aria-labelledby="inviteMsgHeader" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -10,7 +10,7 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body text-center">
-				<span th:text="${#strings.defaultString(userNm, 'GUEST')}"></span>
+				<span th:text="${#strings.defaultString(userVO.userNm, 'GUEST')}"></span>
 				<span>님 환영합니다.</span>
 			</div>
 			<div class="modal-footer">

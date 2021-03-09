@@ -123,3 +123,7 @@ i {
 	cursor: pointer;
 	color: white !important;
 }
+
+#sidebar a:hover {
+	color: #086972 !important;
+}

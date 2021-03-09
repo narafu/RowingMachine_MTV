@@ -8,7 +8,7 @@
 			<input type="hidden" th:field="${quizMstrInfoVO.userId}"/>
 		</form>
 		<div>
-			<div class="display-5 text-primary my-3" th:text="${session.userNm}"></div>
+			<div class="display-5 my-3" th:text="${userVO.userNm}" style="font-family: 'KOTRA_BOLD-Bold';"></div>
 			<span class="d-block display-1 text-primary" style="font-family: 'KOTRA_BOLD-Bold';">수고하셨습니다.</span>
 			<div class="display-5 text-primary my-3" style="font-family: 'GongGothicMedium';">
 				<span>(총 소요시간 : </span>
@@ -19,7 +19,7 @@
 			</div>
 		</div>
 		<div class="my-5">
-			<button type="button" class="btn btn-primary btn-lg btn-block px-5 py-3" onclick="kakaoLogout();">홈으로</button>
+			<button type="button" class="btn btn-primary btn-lg btn-block px-5 py-3" onclick="goHome();">홈으로</button>
 			<button type="button" class="btn btn-primary btn-lg btn-block px-5 py-3" onclick="goStatistics('resultForm');">결과보기</button>
 		</div>
 	</div>

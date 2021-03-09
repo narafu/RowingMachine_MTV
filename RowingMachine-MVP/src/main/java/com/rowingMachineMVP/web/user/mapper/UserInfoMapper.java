@@ -2,7 +2,7 @@ package com.rowingMachineMVP.web.user.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.rowingMachineMVP.web.quiz.vo.UserInfoVO;
+import com.rowingMachineMVP.web.user.vo.UserInfoVO;
 
 @Mapper
 public interface UserInfoMapper {

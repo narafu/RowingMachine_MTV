@@ -1,16 +1,36 @@
 package com.rowingMachineMVP.web.quiz.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.rowingMachineMVP.web.user.vo.UserInfoVO;
 
 @Controller
 @RequestMapping("/quiz/modal/")
 public class ModalController {
 
+	@Autowired
+	private HttpSession httpSession;
+
+	@RequestMapping("loginModal")
+	public String loginModal() {
+		return "view/quiz/modal/loginModal";
+	}
+
 	@RequestMapping("goHomeModal")
 	public String goHomeModal() {
 		return "view/quiz/modal/goHomeModal";
+	}
+
+	@RequestMapping("invitationModal")
+	public String invitationModal(Model model) {
+		UserInfoVO session = (UserInfoVO) httpSession.getAttribute("userVO");
+		model.addAttribute("userVO", session);
+		return "view/quiz/modal/invitationModal";
 	}
 
 	@RequestMapping("firstPageModal")

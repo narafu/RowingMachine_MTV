@@ -3,7 +3,7 @@ package com.rowingMachineMVP.web.quiz.service;
 import java.util.List;
 
 import com.rowingMachineMVP.web.quiz.vo.QuizMstrInfoVO;
-import com.rowingMachineMVP.web.quiz.vo.UserInfoVO;
+import com.rowingMachineMVP.web.user.vo.UserInfoVO;
 
 public interface QuizService {
 
@@ -13,10 +13,8 @@ public interface QuizService {
 
 	List<QuizMstrInfoVO> getQuizCntList(QuizMstrInfoVO param);
 
-	int insertSelectQuizAll(UserInfoVO userVO);
-
-	List<Integer> selectQuizMstrInfoSeqAll();
-
 	int updateUserAnswer(QuizMstrInfoVO param);
+
+	int mergeSelectQuizAll(UserInfoVO userVO);
 
 }
