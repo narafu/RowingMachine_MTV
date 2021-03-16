@@ -13,7 +13,7 @@ window.onload = function () {
 
 function getCountTimer() {
 	let quizTotalCnt = Number($('#quizTotalCnt').val());
-	let quizPerTime = 90; // 90초
+	let quizPerTime = 60 * 3; // 문제당 시간
 	let duration = quizTotalCnt * quizPerTime;
 	return duration;
 }
