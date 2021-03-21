@@ -9,7 +9,6 @@
         
         ```yaml
         # jdbc:mysql:// + 앤드포인트:포트/데이터베이스/autoReconnect=true 
-        jdbc:mysql://rowingmachine.cakioqitx4ac.ap-northeast-2.rds.amazonaws.com:3306/rowing_db?autoReconnect=true
         ```
         
     3. dbeaver 구성(aws-rds 앤드포인트 이용)
