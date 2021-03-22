@@ -28,6 +28,20 @@
 
 	<!-- 카카오 스크립트 -->
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script>
+		let mobileYn;
+		$(function () {
+			if (matchMedia("screen and (min-width: 1024px)").matches) {
+				// 1024px 이상에서 사용할 JavaScript
+				console.log('1024px 이상 화면입니다.');
+				mobileYn = false;
+			} else {
+				// 1024px 미만에서 사용할 JavaScript
+				console.log('1024px 미만 화면입니다.');
+				mobileYn = true;
+			}
+		})
+	</script>
 </head>
 
 	<body class="w-100 h-100">
