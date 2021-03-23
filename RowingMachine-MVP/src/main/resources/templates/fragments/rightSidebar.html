@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="sidebarFragment" class="border-primary border-end">
+	<div class="p-5" style="font-family: 'KOTRA_BOLD-Bold';">
+		<th:block th:each=cnmmCd:${cnmmCdList}>
+			<div class="mb-5">
+				<div class="display-6">
+					<a href="#" th:text="${cnmmCd.cmmnDtlNm}"></a>
+				</div>
+				<div class="row row-cols-auto">
+					<th:block th:each="quiz : ${quizResultList}" th:if="${cnmmCd.cmmnDtlCd == quiz.subjectTypeCd}">
+						<div class="col fs-5" style="width:50px;"
+							th:classappend="${#strings.isEmpty(quiz.userAnswer)} ? '' : bg-secondary">
+							<a href="#" th:text="${#strings.length(quiz.srtNo) == 1 ? '0' + quiz.srtNo : quiz.srtNo}"
+								th:onclick="moveQuiz([[${quiz.subjectTypeCd}]], [[${quiz.srtNo}]])"></a>
+						</div>
+					</th:block>
+				</div>
+			</div>
+		</th:block>
+	</div>
+</div>

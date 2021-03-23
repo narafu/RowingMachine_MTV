@@ -5,7 +5,7 @@
 
 	<div layout:fragment="content" class="container">
 		<form action="" method="post" id="resultForm">
-			<input type="hidden" th:field="${quizMstrInfoVO.userId}"/>
+			<input type="hidden" th:field="${userVO.userId}"/>
 			<input type="hidden" th:field="${quizMstrInfoVO.subjectTypeCd}"/>
 			<input type="hidden" th:field="${quizMstrInfoVO.srtNo}"/>
 		</form>
@@ -44,12 +44,12 @@
 						</thead> -->
 						<tbody>
 							<tr>
-								<td class="fw-bold quizTd" colspan="2"
-									th:each="result : ${quizResultList}"
-									th:if="${result.subjectTypeCd == cnmmCd.cmmnDtlCd}"
-									th:text="${result.srtNo}"
-									th:onclick="moveQuiz([[${result.subjectTypeCd}]], [[${result.srtNo}]], 'resultForm')">
-								</td>
+								<th:block th:each="result : ${quizResultList}" th:if="${result.subjectTypeCd == cnmmCd.cmmnDtlCd}">
+									<td class="fw-bold quizNumTd" colspan="2" th:text="${result.srtNo}"
+										th:onclick="moveQuiz([[${result.subjectTypeCd}]], [[${result.srtNo}]], 'resultForm')"
+										style="width:50px;">
+									</td>
+								</th:block>
 							</tr>
 							<tr>
 								<th:block th:each="result : ${quizResultList}" th:if="${result.subjectTypeCd == cnmmCd.cmmnDtlCd}">

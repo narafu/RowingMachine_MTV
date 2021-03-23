@@ -28,6 +28,20 @@
 
 	<!-- 카카오 스크립트 -->
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script>
+		let mobileYn;
+		$(function () {
+			if (matchMedia("screen and (min-width: 1024px)").matches) {
+				// 1024px 이상에서 사용할 JavaScript
+				console.log('1024px 이상 화면입니다.');
+				mobileYn = false;
+			} else {
+				// 1024px 미만에서 사용할 JavaScript
+				console.log('1024px 미만 화면입니다.');
+				mobileYn = true;
+			}
+		})
+	</script>
 </head>
 
 	<body class="w-100 h-100">
@@ -37,16 +51,17 @@
 		
 		<div class="my-5 py-5 d-flex">
 			<!-- sidebar -->
-			<div class="col-2" id="sidebar">
-				<div th:replace="fragments/leftSidebar :: sidebarFragment"></div>
-			</div>
+			<div class="col"></div>
 		
 			<!-- content -->
-			<div class="col-8 container-lg">
+			<div class="col-7 container-lg">
 				<div layout:fragment="content"></div>
 			</div>
 
-			<div class="col-2"></div>
+			<!-- sidebar -->
+			<div class="col" id="sidebar">
+				<div th:replace="fragments/rightSidebar :: sidebarFragment"></div>
+			</div>
 		</div>
 		
 		<!-- modal -->

@@ -267,20 +267,29 @@ function movePage(srtNo) {
 
 	} else { // 다음 문제
 		let subjectTypeCd = $('#subjectTypeCd').val();
-		moveQuiz(subjectTypeCd, srtNo, 'quizForm');
+		moveQuiz(subjectTypeCd, srtNo);
 	}
 }
 
-function moveQuiz(subjectTypeCd, srtNo, param) {
+function moveQuiz(subjectTypeCd, srtNo) {
 	$('#subjectTypeCd').val(subjectTypeCd);
 	$('#srtNo').val(srtNo);
 	let url = '/quiz/quizAjax.do';
-	let form = $('#' + param);
+	let form = $('#quizForm');
 	$.post(url, form.serialize(), function (result) {
 		$('i.active').removeClass('active');
 		$('#quizDiv').replaceWith(result);
+		changeSideBar(form);
 	});
 }
+
+function changeSideBar(form) {
+	let url = '/quiz/sidebarAjax.do';
+	$.get(url, form.serialize(), function(result) {
+		$('#sidebar').html(result);
+	})
+}
+
 function goStatistics(param) {
 	let form = $('#' + param);
 	form.attr('action', '/quiz/statistics.do');
@@ -291,7 +300,7 @@ function goStatistics(param) {
 function selectQuiz(obj) {
 	let subjectTypeCd = $('#subjectType :selected').val();
 	let quizNo = $('#quizNo :selected').val();
-	moveQuiz(subjectTypeCd, quizNo, 'quizForm');
+	moveQuiz(subjectTypeCd, quizNo);
 }
 
 function toggleCmntr() {
