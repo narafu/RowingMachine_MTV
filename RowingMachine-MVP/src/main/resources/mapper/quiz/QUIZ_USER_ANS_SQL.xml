@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.rowingMachineMVP.web.quiz.mapper.QuizUserAnsMapper">
+<mapper namespace="com.rowingMachineMVP.quiz.mapper.QuizUserAnsMapper">
 
 	<sql id="selectQuizResultList-where">
 		AND A.DEL_YN = 'N'
