@@ -16,10 +16,6 @@
 		<input type="hidden" th:field="${quizMstrInfoVO.secSolving}"/>
 		<input type="hidden" th:field="${quizMstrInfoVO.minSolving}"/>
 		
-		<div class="mx-5 px-5">
-			<h1 class="text-center" id="count-down-timer"></h1>
-		</div>
-
 		<div class="row">
 			<div class="col text-center mt-5 pt-5">
 				<i class="fas fa-angle-left fa-3x mt-5 pt-5" onclick="goQuiz('prev');"></i>
@@ -28,9 +24,12 @@
 
 			<div class="col-9">
 				<div>
-					<div class="m-3 d-flex justify-content-end">
+					<div class="d-flex justify-content-between align-items-end">
 						<div>
-							<i class="fas fa-home fa-3x mx-3" onclick="goHome();"></i>
+							<h1 class="text-center" id="count-down-timer"></h1>
+						</div>
+						<div class="m-1">
+							<i class="fas fa-home fa-3x" onclick="goHome();"></i>
 							<i class="fas fa-poll fa-3x" onclick="goQuiz('result');"></i>
 						</div>
 					</div>
@@ -48,35 +47,13 @@
 						<input type="hidden" th:field="${quizMstrInfoVO.quizTotalCnt}"/>
 						<input type="hidden" th:field="${quizMstrInfoVO.userAnswer}"/>
 						
-						<div class="m-3 d-flex justify-content-between align-items-center">
-							<div>
-								<div class="fs-4 fw-bold d-flex" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">
-									<div style="width: 100px">
-										<span th:text="${quizMstrInfoVO.subjectTypeNm}"></span>
-										<span th:text="${#strings.length(quizMstrInfoVO.srtNo) == 1 ? '0' + quizMstrInfoVO.srtNo : quizMstrInfoVO.srtNo}"></span>
-									</div>
-									<button type="button" class="btn btn-primary mx-3" onclick="toggleCmntr();">해설</button>
-								</div>
+						<div class="my-3 d-flex justify-content-between align-items-center">
+							<div class="fs-4 fw-bold " style="width: 100px; font-family: 'NEXON Lv1 Gothic OTF Bold';">
+								<span th:text="${quizMstrInfoVO.subjectTypeNm}"></span>
+								<span th:text="${#strings.length(quizMstrInfoVO.srtNo) == 1 ? '0' + quizMstrInfoVO.srtNo : quizMstrInfoVO.srtNo}"></span>
 							</div>
-							<div class="row g-3 w-50 align-items-center" style="display:none">
-								<div class="col">
-									<select class="form-select form-select-lg fx-bold" aria-label=".form-select-lg example"
-										onchange="selectQuiz();" id="subjectType">
-										<th:block th:each=cnmmCd:${cnmmCdList}>
-											<option th:value="${cnmmCd.cmmnDtlCd}" th:text="${cnmmCd.cmmnDtlNm}"
-												th:selected="${cnmmCd.cmmnDtlCd == quizMstrInfoVO.subjectTypeCd}"/>
-										</th:block>
-									</select>
-								</div>
-								<div class="col" th:with="totalCnt=${quizMstrInfoVO.quizTotalCnt}">
-									<select class="form-select form-select-lg fx-bold" aria-label=".form-select-lg example"
-										onchange="selectQuiz();" id="quizNo">
-										<th:block th:each="num : ${#numbers.sequence(1, totalCnt)}">
-											<option th:value="${num}" th:text="${num}"
-												th:selected="${num == quizMstrInfoVO.srtNo}"/>
-										</th:block>
-									</select>
-								</div>
+							<div>
+								<button type="button" class="btn btn-primary mx-3" onclick="toggleCmntr();">해설</button>
 							</div>
 						</div>
 						
@@ -96,6 +73,26 @@
 						<!-- <i class="far fa-times-circle fa-5x"></i> -->
 					</div>
 					
+					<div class="row g-3 w-50 align-items-center" style="display:none">
+						<div class="col">
+							<select class="form-select form-select-lg fx-bold" aria-label=".form-select-lg example"
+								onchange="selectQuiz();" id="subjectType">
+								<th:block th:each=cnmmCd:${cnmmCdList}>
+									<option th:value="${cnmmCd.cmmnDtlCd}" th:text="${cnmmCd.cmmnDtlNm}"
+										th:selected="${cnmmCd.cmmnDtlCd == quizMstrInfoVO.subjectTypeCd}"/>
+								</th:block>
+							</select>
+						</div>
+						<div class="col" th:with="totalCnt=${quizMstrInfoVO.quizTotalCnt}">
+							<select class="form-select form-select-lg fx-bold" aria-label=".form-select-lg example"
+								onchange="selectQuiz();" id="quizNo">
+								<th:block th:each="num : ${#numbers.sequence(1, totalCnt)}">
+									<option th:value="${num}" th:text="${num}"
+										th:selected="${num == quizMstrInfoVO.srtNo}"/>
+								</th:block>
+							</select>
+						</div>
+					</div>
 				</div>
 			</div>
 			

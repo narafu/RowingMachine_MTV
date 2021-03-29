@@ -1,3 +1,7 @@
+@import 'style_pc.css';
+@import 'style_tablet.css';
+@import 'style_mobile.css';
+
 body, #wrapper {
 	display: flex;
 	flex-direction: column;
@@ -136,6 +140,10 @@ i {
 .quizNumTd:hover {
 	background-color: #086972;
 	cursor: pointer;
+	transition: background-color 1s;
+}
+
+.quizNumTd:hover div {
 	color: white !important;
 }
 

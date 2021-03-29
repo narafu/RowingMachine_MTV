@@ -1,4 +1,23 @@
 
+let mobileYn;
+
+$(window).resize(function () {
+	screenCheck();
+});
+
+function screenCheck() {
+	if (screen.width > 1200) {
+		mobileYn = false;
+		console.log('PC 화면입니다.');
+	} else if (screen.width < 767) {
+		mobileYn = false;
+		console.log('모바일 화면입니다.');
+	} else {
+		mobileYn = false;
+		console.log('태블릿 화면입니다.');
+	}
+}
+
 window.onload = function () {
 
 	let duration = getCountTimer();
@@ -12,8 +31,8 @@ window.onload = function () {
 }
 
 function getCountTimer() {
-	let quizTotalCnt = Number($('#quizTotalCnt').val());
-	let quizPerTime = 60 * 3; // 문제당 시간
+	let quizTotalCnt = $('.quizNavDiv div').length
+	let quizPerTime = 60; // 문제당 시간
 	let duration = quizTotalCnt * quizPerTime;
 	return duration;
 }
@@ -50,7 +69,10 @@ function paddedFormat(num) {
 
 function login() {
 	if (mobileYn) {
-		let userId = prompt('이메일을 입력하면 결과가 저장됩니다.\n원치 않을 경우, 공란으로 입력하면, GUEST로 진행됩니다.');
+		let userId = prompt('이메일을 입력하면 결과가 저장됩니다.\n원치 않을 경우, 공란으로 입력하면, \nGUEST로 진행됩니다.');
+		if (userId == null) {
+			return;
+		}
 		let form = document.createElement('form');
 		form.name = 'startForm';
 		form.method = 'post';
@@ -129,6 +151,7 @@ function trigger(obj, answer) {
 }
 
 function invitation() {
+	// screenCheck();
 	if (mobileYn) {
 		alert($('#userNm').val() + '님 환영합니다.');
 	} else {
@@ -143,7 +166,7 @@ function invitation() {
 
 function goHome() {
 	if (mobileYn) {
-		if (confirm('GUEST는 홈으로 가면, 모든 기록이 지워집니다.\n홈으로 이동하시겠습니까?')) {
+		if (confirm('GUEST는 홈으로 가면,\n모든 기록이 지워집니다.\n홈으로 이동하시겠습니까?')) {
 			location.replace('/quiz/index.do');
 		};
 	} else {
@@ -285,7 +308,7 @@ function moveQuiz(subjectTypeCd, srtNo) {
 
 function changeSideBar(form) {
 	let url = '/quiz/sidebarAjax.do';
-	$.get(url, form.serialize(), function(result) {
+	$.get(url, form.serialize(), function (result) {
 		$('#sidebar').html(result);
 	})
 }

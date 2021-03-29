@@ -5,20 +5,20 @@
 
 	<div layout:fragment="content" class="container">
 		<form action="" method="post" id="resultForm">
-			<input type="hidden" th:field="${userVO.userId}"/>
+			<input type="hidden" th:field="${quizMstrInfoVO.userId}"/>
 			<input type="hidden" th:field="${quizMstrInfoVO.subjectTypeCd}"/>
 			<input type="hidden" th:field="${quizMstrInfoVO.srtNo}"/>
 		</form>
 
-		<div class="m-3 text-end">
-			<i class="fas fa-home fa-3x" onclick="goHome();"></i>
+		<div class="mx-5 text-end">
+			<i class="fas fa-home fa-3x " onclick="goHome();"></i>
 		</div>
 		<div class="row">
 		
 			<div class="col-md">
 				<div class="bg-primary text-light px-4 py-3">
-					<span class="d-block fs-1 text-center" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">변호사시험 합계예측 결과</span>
-					<span class="d-block text-center fs-2" style="font-family: 'GongGothicMedium';">: <span id="totalResultRatio"></span> %의 확률로 합격 예상</span>
+					<span class="d-block fs-2 text-center" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">변호사시험 합계예측 결과</span>
+					<span class="d-block text-center fs-3" style="font-family: 'GongGothicMedium';">: <span id="totalResultRatio"></span> %의 확률로 합격 예상</span>
 				</div>
 				<div >
 					<canvas id="myChart"></canvas>
@@ -26,42 +26,30 @@
 			</div>
 			
 			<div class="col-md">
-				<div class="display-6 my-3" th:text="${userVO.userNm}" style="font-family: 'KOTRA_BOLD-Bold';"></div>
-
 				<th:block th:each="quizCnt : ${quizCntList}">
 					<input type="hidden" th:name="|quizTotalCnt${quizCnt.subjectTypeCd}|" th:value="${quizCnt.quizTotalCnt}">
 					<input type="hidden" th:name="|quizTrueCnt${quizCnt.subjectTypeCd}|" th:value="${quizCnt.quizTrueCnt}">
 				</th:block>
 
 				<th:block th:each="cnmmCd : ${cnmmCdList}">
-					<table class="table table-sm table-striped caption-top table-bordered border-primary align-middle text-center">
-						<caption class="fs-5" th:text="${cnmmCd.cmmnDtlNm}" style="font-family: 'GongGothicMedium';"></caption>
-						<!-- <thead>
-							<tr>
-								<th scope="col">문제</th>
-								<th scope="col">정답</th>
-							</tr>
-						</thead> -->
-						<tbody>
-							<tr>
-								<th:block th:each="result : ${quizResultList}" th:if="${result.subjectTypeCd == cnmmCd.cmmnDtlCd}">
-									<td class="fw-bold quizNumTd" colspan="2" th:text="${result.srtNo}"
-										th:onclick="moveQuiz([[${result.subjectTypeCd}]], [[${result.srtNo}]], 'resultForm')"
-										style="width:50px;">
-									</td>
-								</th:block>
-							</tr>
-							<tr>
-								<th:block th:each="result : ${quizResultList}" th:if="${result.subjectTypeCd == cnmmCd.cmmnDtlCd}">
-									<td style="width:50px;" th:text="${result.userAnswer}"></td>
-									<td class="fw-bold" style="width:50px; font-family: 'KOTRA_BOLD-Bold';"
-										th:classappend="${result.answerChk} == 'T' ? text-primary : text-danger"
-										th:text="${result.answerChk}"></td>
-								</th:block>
-							</tr>
-						</tbody>
-					</table>
+					<div class="mx-auto mb-4">
+						<div class="fs-5" th:text="${cnmmCd.cmmnDtlNm}" style="font-family: 'GongGothicMedium';"></div>
+						<div class="row row-cols-auto text-center mx-auto mt-2">
+							<th:block th:each="result : ${quizResultList}" th:if="${result.subjectTypeCd == cnmmCd.cmmnDtlCd}">
+								<div class="col border border-primary m-1 quizNumTd" th:onclick="moveQuiz([[${result.subjectTypeCd}]], [[${result.srtNo}]], 'resultForm')">
+									<div class="fw-bold w-100" th:text="${result.srtNo}"></div>
+									<div class="row">
+										<div class="col border border-primary" th:text="${result.userAnswer}"></div>
+										<div class="col border border-primary fw-bold" style="font-family: 'KOTRA_BOLD-Bold';"
+											th:classappend="${result.answerChk} == 'T' ? text-primary : text-danger"
+											th:text="${result.answerChk}"></div>
+									</div>
+								</div>
+							</th:block>
+						</div>
+					</div>
 				</th:block>
+				
 				<div><i class="fas fa-asterisk"></i> 문제 번호를 클릭하여 [문제]와 [해설]을 다시 볼 수 있습니다.</div>
 			</div>
 			
@@ -117,11 +105,13 @@
 				, options: {
 			        maintainAspectRatio: true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
 			        scales: {
-			            yAxes: [{
-			                ticks: {
-			                    beginAtZero:true
-			                }
-			            }]
+			            x: {
+			            },
+			            y: {
+			                type: 'linear',
+			                min: 0,
+			                max: 100
+			            }
 			        }
 			    }
 			});
