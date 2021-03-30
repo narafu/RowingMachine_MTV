@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.rowingMachineMVP.user.vo.UserInfoVO;
+import com.rowingMachineMVP.user.vo.UserVO;
 
 @Controller
 @RequestMapping("/quiz/modal/")
@@ -28,7 +28,7 @@ public class ModalController {
 
 	@RequestMapping("invitationModal")
 	public String invitationModal(Model model) {
-		UserInfoVO session = (UserInfoVO) httpSession.getAttribute("userVO");
+		UserVO session = (UserVO) httpSession.getAttribute("userVO");
 		model.addAttribute("userVO", session);
 		return "view/quiz/modal/invitationModal";
 	}

@@ -10,7 +10,7 @@ import com.rowingMachineMVP.quiz.mapper.QuizMstrInfoMapper;
 import com.rowingMachineMVP.quiz.mapper.QuizUserAnsMapper;
 import com.rowingMachineMVP.quiz.service.QuizService;
 import com.rowingMachineMVP.quiz.vo.QuizMstrInfoVO;
-import com.rowingMachineMVP.user.vo.UserInfoVO;
+import com.rowingMachineMVP.user.vo.UserVO;
 
 @Service
 public class QuizServiceImpl implements QuizService {
@@ -45,7 +45,7 @@ public class QuizServiceImpl implements QuizService {
 	}
 
 	@Override
-	public int mergeSelectQuizAll(UserInfoVO userVO) {
+	public int mergeSelectQuizAll(UserVO userVO) {
 		List<Map<String, String>> mapList = quizUserAnsMapper.selectQuizUsrAnsSeqAll(userVO);
 		for (Map<String, String> map : mapList) {
 			map.put("userId", userVO.getUserId());

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.rowingMachineMVP.user.mapper.UserInfoMapper;
 import com.rowingMachineMVP.user.service.UserService;
-import com.rowingMachineMVP.user.vo.UserInfoVO;
+import com.rowingMachineMVP.user.vo.UserVO;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
 	private UserInfoMapper userInfoMapper;
 
 	@Override
-	public int insertUserInfo(UserInfoVO param) {
+	public int insertUserInfo(UserVO param) {
 		String userId = param.getUserId();
 		if (StringUtils.isEmpty(userId)) {
 			String uuid = UUID.randomUUID().toString();
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserInfoVO getUserInfo(String userId) {
+	public UserVO getUserInfo(String userId) {
 		return userInfoMapper.getUserInfo(userId);
 	}
 

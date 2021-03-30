@@ -5,7 +5,7 @@ import com.rowingMachineMVP.common.BaseVO;
 import lombok.Data;
 
 @Data
-public class UserInfoVO extends BaseVO {
+public class UserVO extends BaseVO {
 
 	private int userInfoSeq;
 	private String userId;

@@ -18,7 +18,7 @@ import com.rowingMachineMVP.common.BaseUtil;
 import com.rowingMachineMVP.quiz.service.QuizService;
 import com.rowingMachineMVP.quiz.vo.QuizMstrInfoVO;
 import com.rowingMachineMVP.user.service.UserService;
-import com.rowingMachineMVP.user.vo.UserInfoVO;
+import com.rowingMachineMVP.user.vo.UserVO;
 
 @Controller
 @RequestMapping("/")
@@ -38,16 +38,16 @@ public class QuizController {
 
 	@GetMapping(value = { "", "quiz/index.do" })
 	public String indexGet(Model model) {
-		UserInfoVO userVO = new UserInfoVO();
+		UserVO userVO = new UserVO();
 		model.addAttribute("userVO", userVO);
 		return "view/quiz/index";
 	}
 
 	@PostMapping(value = { "quiz/index.do" })
-	public String indexPost(HttpServletRequest req, UserInfoVO param) {
+	public String indexPost(HttpServletRequest req, UserVO param) {
 
 		// 유저 조회
-		UserInfoVO userVO = userService.getUserInfo(param.getUserId());
+		UserVO userVO = userService.getUserInfo(param.getUserId());
 		if (userVO == null) {
 			// 유저 DB등록
 			userService.insertUserInfo(param);
@@ -67,15 +67,15 @@ public class QuizController {
 	@RequestMapping("quiz/main.do")
 	public String quizMain(QuizMstrInfoVO param, Model model) {
 
-		UserInfoVO session = (UserInfoVO) httpSession.getAttribute("userVO");
-		model.addAttribute("session", session);
+		UserVO userVO = (UserVO) httpSession.getAttribute("userVO");
+		model.addAttribute("userVO", userVO);
 
 		// 공통코드(과목코드)
 		List<Map<String, String>> cnmmCdList = baseUtil.getCnmmCdList("001");
 		model.addAttribute("cnmmCdList", cnmmCdList);
 
 		// 퀴즈문제 조회
-		param.setUserId(session.getUserId());
+		param.setUserId(userVO.getUserId());
 		QuizMstrInfoVO quizMstrInfoVO = quizService.getQuizInfo(param);
 		model.addAttribute("quizMstrInfoVO", quizMstrInfoVO);
 
@@ -99,10 +99,10 @@ public class QuizController {
 
 		return "view/quiz/main :: #quizDiv";
 	}
-	
+
 	@RequestMapping("quiz/sidebarAjax.do")
 	public String sidebarAjax(QuizMstrInfoVO param, Model model) {
-		
+
 		// 공통코드(과목코드)
 		List<Map<String, String>> cnmmCdList = baseUtil.getCnmmCdList("001");
 		model.addAttribute("cnmmCdList", cnmmCdList);
@@ -110,7 +110,7 @@ public class QuizController {
 		// 결과 리스트
 		List<QuizMstrInfoVO> quizResultList = quizService.selectQuizResultList(param);
 		model.addAttribute("quizResultList", quizResultList);
-		
+
 		return "view/quiz/sidebar/quizNav";
 	}
 
@@ -124,17 +124,11 @@ public class QuizController {
 
 	@RequestMapping("quiz/result.do")
 	public String quizResult(QuizMstrInfoVO param, Model model) {
-		UserInfoVO session = (UserInfoVO) httpSession.getAttribute("userVO");
-		model.addAttribute("userVO", session);
-		model.addAttribute("quizMstrInfoVO", param);
 		return "view/quiz/result";
 	}
 
 	@RequestMapping("quiz/statistics.do")
 	public String statistics(QuizMstrInfoVO param, Model model) {
-
-		UserInfoVO session = (UserInfoVO) httpSession.getAttribute("userVO");
-		model.addAttribute("userVO", session);
 
 		// 공통코드(과목코드)
 		List<Map<String, String>> cnmmCdList = baseUtil.getCnmmCdList("001");
@@ -149,6 +143,13 @@ public class QuizController {
 		model.addAttribute("quizCntList", quizCntList);
 
 		return "view/quiz/statistics";
+	}
+
+	@RequestMapping("quiz/popup/print/certificate.do")
+	public String certificatePrintPopup(Model model) {
+		UserVO userVO = (UserVO) httpSession.getAttribute("userVO");
+		model.addAttribute("userVO", userVO);
+		return "view/quiz/popup/certificatePrintPopup";
 	}
 
 }

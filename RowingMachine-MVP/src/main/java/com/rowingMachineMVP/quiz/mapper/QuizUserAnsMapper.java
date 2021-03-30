@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.rowingMachineMVP.quiz.vo.QuizMstrInfoVO;
-import com.rowingMachineMVP.user.vo.UserInfoVO;
+import com.rowingMachineMVP.user.vo.UserVO;
 
 @Mapper
 public interface QuizUserAnsMapper {
@@ -15,7 +15,7 @@ public interface QuizUserAnsMapper {
 
 	List<QuizMstrInfoVO> getQuizCntList(QuizMstrInfoVO param);
 
-	List<Map<String, String>> selectQuizUsrAnsSeqAll(UserInfoVO userVO);
+	List<Map<String, String>> selectQuizUsrAnsSeqAll(UserVO userVO);
 
 	int updateUserAnswer(QuizMstrInfoVO quizMstrInfoVO);
 

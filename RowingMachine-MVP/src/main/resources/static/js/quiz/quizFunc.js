@@ -1,6 +1,10 @@
 
 let mobileYn;
 
+$(function() {
+	screenCheck();
+})
+
 $(window).resize(function () {
 	screenCheck();
 });
@@ -10,10 +14,10 @@ function screenCheck() {
 		mobileYn = false;
 		console.log('PC 화면입니다.');
 	} else if (screen.width < 767) {
-		mobileYn = false;
+		mobileYn = true;
 		console.log('모바일 화면입니다.');
 	} else {
-		mobileYn = false;
+		mobileYn = true;
 		console.log('태블릿 화면입니다.');
 	}
 }
@@ -151,7 +155,7 @@ function trigger(obj, answer) {
 }
 
 function invitation() {
-	// screenCheck();
+	screenCheck();
 	if (mobileYn) {
 		alert($('#userNm').val() + '님 환영합니다.');
 	} else {
@@ -302,6 +306,7 @@ function moveQuiz(subjectTypeCd, srtNo) {
 	$.post(url, form.serialize(), function (result) {
 		$('i.active').removeClass('active');
 		$('#quizDiv').replaceWith(result);
+		$('html,body').animate({scrollTop:$('body').offset().top}, 1000);
 		changeSideBar(form);
 	});
 }
@@ -320,13 +325,14 @@ function goStatistics(param) {
 	form.submit();
 }
 
-function selectQuiz(obj) {
-	let subjectTypeCd = $('#subjectType :selected').val();
-	let quizNo = $('#quizNo :selected').val();
-	moveQuiz(subjectTypeCd, quizNo);
+function toggleCmntr() {
+	$('#cmntrDiv').toggle();
+	$('html,body').animate({scrollTop:$('#cmntrDiv').offset().top}, 1000);
 }
 
-function toggleCmntr() {
-	$('#cmntrDiv').slideToggle();
-	$('#cmntrDiv').scroll();
+function certificatePrintPopup() {
+	let url = '/quiz/popup/print/certificate.do';
+	let name = '예비합격증 인쇄'
+	var options = 'top=10, left=10, width=800, height=1000, status=no, menubar=no, toolbar=no, resizable=no';
+    window.open(url, name, options);
 }

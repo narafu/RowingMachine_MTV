@@ -1,10 +1,10 @@
 package com.rowingMachineMVP.user.service;
 
-import com.rowingMachineMVP.user.vo.UserInfoVO;
+import com.rowingMachineMVP.user.vo.UserVO;
 
 public interface UserService {
 
-	int insertUserInfo(UserInfoVO userVO);
+	int insertUserInfo(UserVO userVO);
 
-	UserInfoVO getUserInfo(String userId);
+	UserVO getUserInfo(String userId);
 }

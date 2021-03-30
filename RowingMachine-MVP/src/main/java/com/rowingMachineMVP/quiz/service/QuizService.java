@@ -3,7 +3,7 @@ package com.rowingMachineMVP.quiz.service;
 import java.util.List;
 
 import com.rowingMachineMVP.quiz.vo.QuizMstrInfoVO;
-import com.rowingMachineMVP.user.vo.UserInfoVO;
+import com.rowingMachineMVP.user.vo.UserVO;
 
 public interface QuizService {
 
@@ -15,6 +15,6 @@ public interface QuizService {
 
 	int updateUserAnswer(QuizMstrInfoVO param);
 
-	int mergeSelectQuizAll(UserInfoVO userVO);
+	int mergeSelectQuizAll(UserVO userVO);
 
 }

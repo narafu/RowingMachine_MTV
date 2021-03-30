@@ -24,7 +24,7 @@
 		)
 	</insert>
 	
-	<select id="getUserInfo" resultType="UserInfoVO">
+	<select id="getUserInfo" resultType="userVO">
 		SELECT
 			USER_INFO_SEQ
 			, USER_ID

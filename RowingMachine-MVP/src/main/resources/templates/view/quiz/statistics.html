@@ -5,7 +5,8 @@
 
 	<div layout:fragment="content" class="container">
 		<form action="" method="post" id="resultForm">
-			<input type="hidden" th:field="${quizMstrInfoVO.userId}"/>
+			<input type="hidden" name="userId" th:value="${param.userId}"/>
+			<input type="hidden" name="userNm" th:value="${param.userNm}"/>
 			<input type="hidden" th:field="${quizMstrInfoVO.subjectTypeCd}"/>
 			<input type="hidden" th:field="${quizMstrInfoVO.srtNo}"/>
 		</form>
@@ -60,7 +61,7 @@
 		
 		<div class="row my-5">
 			<div class="col text-center">
-				<button type="button" class="btn btn-primary btn-lg btn-block px-5 py-3 fw-bold">
+				<button type="button" class="btn btn-primary btn-lg btn-block px-5 py-3 fw-bold" onclick="certificatePrintPopup();">
 					<span>예비합격증 받기</span>
 					<img alt="" src="/images/lawyer_badge.png" class="mx-1" style="width: 30px">
 				</button>

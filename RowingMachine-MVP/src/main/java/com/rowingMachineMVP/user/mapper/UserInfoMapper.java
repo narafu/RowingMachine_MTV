@@ -2,13 +2,13 @@ package com.rowingMachineMVP.user.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.rowingMachineMVP.user.vo.UserInfoVO;
+import com.rowingMachineMVP.user.vo.UserVO;
 
 @Mapper
 public interface UserInfoMapper {
 
-	int insertUserInfo(UserInfoVO userVO);
+	int insertUserInfo(UserVO userVO);
 
-	UserInfoVO getUserInfo(String userId);
+	UserVO getUserInfo(String userId);
 
 }
