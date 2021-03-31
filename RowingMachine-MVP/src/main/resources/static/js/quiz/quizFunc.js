@@ -72,31 +72,31 @@ function paddedFormat(num) {
 }
 
 function login() {
-	if (mobileYn) {
-		let userId = prompt('이메일을 입력하면 결과가 저장됩니다.\n원치 않을 경우, 공란으로 입력하면, \nGUEST로 진행됩니다.');
-		if (userId == null) {
-			return;
-		}
-		let form = document.createElement('form');
-		form.name = 'startForm';
-		form.method = 'post';
-		form.action = '/quiz/index.do';
-		form.target = '';
-		let input = document.createElement('input');
-		input.setAttribute('tpye', 'hidden');
-		input.setAttribute('name', 'userId');
-		input.setAttribute('value', userId);
-		form.appendChild(input);
-		document.body.appendChild(form);
-		form.submit();
-	} else {
+	// if (mobileYn) {
+	// 	let userId = prompt('이메일을 입력하면 결과가 저장됩니다.\n원치 않을 경우, 공란으로 입력하면, \nGUEST로 진행됩니다.');
+	// 	if (userId == null) {
+	// 		return;
+	// 	}
+	// 	let form = document.createElement('form');
+	// 	form.name = 'startForm';
+	// 	form.method = 'post';
+	// 	form.action = '/quiz/index.do';
+	// 	form.target = '';
+	// 	let input = document.createElement('input');
+	// 	input.setAttribute('tpye', 'hidden');
+	// 	input.setAttribute('name', 'userId');
+	// 	input.setAttribute('value', userId);
+	// 	form.appendChild(input);
+	// 	document.body.appendChild(form);
+	// 	form.submit();
+	// } else {
 		let url = '/quiz/modal/loginModal';
 		$.ajax(url).done(function (modalHtml) {
 			$('#modalDiv').html(modalHtml);
 			let loginModal = new bootstrap.Modal(document.getElementById('loginModal'))
 			loginModal.show();
 		})
-	}
+	// }
 }
 
 function goQuizMain() {

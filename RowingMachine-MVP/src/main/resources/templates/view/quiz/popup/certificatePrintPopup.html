@@ -71,7 +71,7 @@
 	                    <span>성명 :</span>
 	                    <span th:text="${userVO.userNm}"></span>
 	                </div>
-	                <div>
+	                <div th:if="${userVO.userNm != 'GUEST'}">
 	                    <span>이메일 :</span>
 	                    <span th:text="${userVO.userId}"></span>
 	                </div>
