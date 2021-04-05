@@ -4,9 +4,8 @@
 	layout:decorate="~{layouts/defaultLayout}">
 
 	<div layout:fragment="content" class="container">
-		<form action="" method="post" id="resultForm">
+		<form action="" method="post" id="ststicsForm">
 			<input type="hidden" name="userId" th:value="${param.userId}"/>
-			<input type="hidden" name="userNm" th:value="${param.userNm}"/>
 			<input type="hidden" th:field="${quizMstrInfoVO.subjectTypeCd}"/>
 			<input type="hidden" th:field="${quizMstrInfoVO.srtNo}"/>
 		</form>
@@ -37,7 +36,7 @@
 						<div class="fs-5" th:text="${cnmmCd.cmmnDtlNm}" style="font-family: 'GongGothicMedium';"></div>
 						<div class="row row-cols-auto text-center mx-auto mt-2">
 							<th:block th:each="result : ${quizResultList}" th:if="${result.subjectTypeCd == cnmmCd.cmmnDtlCd}">
-								<div class="col border border-primary m-1 quizNumTd" th:onclick="moveQuiz([[${result.subjectTypeCd}]], [[${result.srtNo}]], 'resultForm')">
+								<div class="col border border-primary m-1 quizNumTd" th:onclick="resultQuizStastics([[${result.subjectTypeCd}]], [[${result.srtNo}]], 'resultForm')">
 									<div class="fw-bold w-100" th:text="${result.srtNo}"></div>
 									<div class="row">
 										<div class="col border border-primary" th:text="${result.userAnswer}"></div>
@@ -57,7 +56,7 @@
 		</div>
 		
 		<hr class="my-5"/>
-		<div id="quizDiv"></div>
+		<div id="resultQuizStasticsDiv"></div>
 		
 		<div class="row my-5">
 			<div class="col text-center">

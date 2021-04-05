@@ -306,7 +306,7 @@ function moveQuiz(subjectTypeCd, srtNo) {
 	$.post(url, form.serialize(), function (result) {
 		$('i.active').removeClass('active');
 		$('#quizDiv').replaceWith(result);
-		$('html,body').animate({scrollTop:$('body').offset().top}, 1000);
+		$('html,body').animate({scrollTop:$('#quizDiv').prev().offset().top}, 100);
 		changeSideBar(form);
 	});
 }
@@ -327,7 +327,7 @@ function goStatistics(param) {
 
 function toggleCmntr() {
 	$('#cmntrDiv').toggle();
-	$('html,body').animate({scrollTop:$('#cmntrDiv').offset().top}, 1000);
+	$('html,body').animate({scrollTop:$('#cmntrDiv').offset().top}, 100);
 }
 
 function certificatePrintPopup() {
@@ -335,4 +335,15 @@ function certificatePrintPopup() {
 	let name = '예비합격증 인쇄'
 	var options = 'top=10, left=10, width=800, height=1000, status=no, menubar=no, toolbar=no, resizable=no';
     window.open(url, name, options);
+}
+
+function resultQuizStastics(subjectTypeCd, srtNo) {
+	$('#subjectTypeCd').val(subjectTypeCd);
+	$('#srtNo').val(srtNo);
+	let url = '/quiz/resultQuizStasticsAjax.do';
+	let form = $('#ststicsForm');
+	$.post(url, form.serialize(), function (result) {
+		$('#resultQuizStasticsDiv').replaceWith(result);
+		$('html,body').animate({scrollTop:$('#resultQuizStasticsDiv').prev().offset().top}, 100);
+	});
 }

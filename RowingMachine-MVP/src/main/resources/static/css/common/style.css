@@ -126,7 +126,7 @@ h1 {
 	font-family: 'NEXON Lv1 Gothic OTF Bold';
 }
 
-i:hover {
+i:not(#resultQuizStastics i):hover {
 	color: #086972;
 }
 

@@ -20,6 +20,8 @@ import com.rowingMachineMVP.quiz.vo.QuizMstrInfoVO;
 import com.rowingMachineMVP.user.service.UserService;
 import com.rowingMachineMVP.user.vo.UserVO;
 
+import groovy.util.logging.Log4j;
+
 @Controller
 @RequestMapping("/")
 public class QuizController {
@@ -98,6 +100,20 @@ public class QuizController {
 		model.addAttribute("quizMstrInfoVO", quizMstrInfoVO);
 
 		return "view/quiz/main :: #quizDiv";
+	}
+	
+	@RequestMapping("quiz/resultQuizStasticsAjax.do")
+	public String resultQuizStasticsAjax(QuizMstrInfoVO param, Model model) {
+		
+		// 공통코드(과목코드)
+		List<Map<String, String>> cnmmCdList = baseUtil.getCnmmCdList("001");
+		model.addAttribute("cnmmCdList", cnmmCdList);
+		
+		// 퀴즈문제 조회
+		QuizMstrInfoVO quizMstrInfoVO = quizService.getQuizInfo(param);
+		model.addAttribute("quizMstrInfoVO", quizMstrInfoVO);
+		
+		return "view/quiz/resultQuizStastics";
 	}
 
 	@RequestMapping("quiz/sidebarAjax.do")
