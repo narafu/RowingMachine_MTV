@@ -59,18 +59,12 @@
 				<div id="cmntrDiv" class="p-5 my-5 fs-5" style="display:none; border:solid 1px #dddddd;" th:utext="${quizMstrInfoVO.cmntr}"></div>
 
 				<div class="d-flex justify-content-evenly align-items-center my-5 text-center btn-grp">
-				
 					<i class="fas fa-angle-left fa-3x" onclick="goQuiz('prev');"></i>
-					<!-- <i class="fas fa-chevron-circle-left fa-3x btn-prev-awesome"></i> -->
-					<i class="fas fa-check-circle fa-5x"
+					<i class="far fa-check-circle fa-5x"
 						th:classappend="${quizMstrInfoVO.userAnswer} == 'O' ? active" onclick="trigger(this, 'O')"></i>
-					<!-- <i class="far fa-check-circle fa-5x"></i> -->
-					<i class="fas fa-times-circle fa-5x"
+					<i class="far fa-times-circle fa-5x"
 						th:classappend="${quizMstrInfoVO.userAnswer} == 'X' ? active" onclick="trigger(this, 'X')"></i>
-					<!-- <i class="far fa-times-circle fa-5x"></i> -->
 					<i class="fas fa-angle-right fa-3x" onclick="goQuiz('next');"></i>
-					<!-- <i class="fas fa-chevron-circle-right fa-3x"></i> -->
-					
 				</div>
 				
 				<div class="row g-3 w-50 align-items-center" style="display:none">
