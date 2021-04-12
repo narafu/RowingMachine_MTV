@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/defaultLayout}">
+
+<head>
+    <title>quiz</title>
+</head>
+
+<div layout:fragment="content">
+
+
+	<div class="container">
+		<form action="" method="post" id="quizForm">
+			<input type="hidden" th:field="${userVO.userId}"/>
+			<input type="hidden" th:field="${userVO.userNm}"/>
+			<input type="hidden" th:field="${quizMstrInfoVO.secSolving}"/>
+			<input type="hidden" th:field="${quizMstrInfoVO.minSolving}"/>
+	
+			<div>
+				<div class="d-flex justify-content-between align-items-end">
+					<div>
+						<h1 class="text-center">ADMIN</h1>
+					</div>
+					<div class="m-1">
+						<i class="far fa-edit fa-3x"></i>
+						<i class="fas fa-edit fa-3x"></i>
+						<i class="fas fa-home fa-3x" onclick="goHome();"></i>
+					</div>
+				</div>
+			</div>
+
+			<div class="d-flex flex-column justify-content-between my-5 border px-5 py-3" id="quizDiv">
+				<div>
+					<input type="hidden" th:field="${quizMstrInfoVO.quizMstrInfoSeq}"/>
+					<input type="hidden" th:field="${quizMstrInfoVO.quizUserAnsSeq}"/>
+					<input type="hidden" th:field="${quizMstrInfoVO.subjectTypeCd}"/>
+					<input type="hidden" th:field="${quizMstrInfoVO.srtNo}"/>
+					<input type="hidden" th:field="${quizMstrInfoVO.quizTotalCnt}"/>
+					<input type="hidden" th:field="${quizMstrInfoVO.userAnswer}"/>
+					
+					<div class="my-3 d-flex justify-content-between align-items-center">
+						<div class="fs-4 fw-bold " style="font-family: 'NEXON Lv1 Gothic OTF Bold';">
+							<span th:text="${quizMstrInfoVO.subjectTypeNm}"></span>
+							<span th:text="${#strings.length(quizMstrInfoVO.srtNo) == 1 ? '0' + quizMstrInfoVO.srtNo : quizMstrInfoVO.srtNo}"></span>
+						</div>
+						<div class="row g-3 w-50 align-items-center">
+							<div class="col">
+								<select class="form-select form-select-lg fx-bold" aria-label=".form-select-lg example"
+									onchange="selectQuiz();" id="subjectType">
+									<th:block th:each=cnmmCd:${cnmmCdList}>
+										<option th:value="${cnmmCd.cmmnDtlCd}" th:text="${cnmmCd.cmmnDtlNm}"
+											th:selected="${cnmmCd.cmmnDtlCd == quizMstrInfoVO.subjectTypeCd}"/>
+									</th:block>
+								</select>
+							</div>
+							<div class="col" th:with="totalCnt=${quizMstrInfoVO.quizTotalCnt}">
+								<select class="form-select form-select-lg fx-bold" aria-label=".form-select-lg example"
+									onchange="selectQuiz();" id="quizNo">
+									<th:block th:each="num : ${#numbers.sequence(1, totalCnt)}">
+										<option th:value="${num}" th:text="${num}"
+											th:selected="${num == quizMstrInfoVO.srtNo}"/>
+									</th:block>
+								</select>
+							</div>
+						</div>
+					</div>
+					
+					<div class="fs-5" style="min-height: 200px;">
+						<textarea class="w-100 px-3 py-2" style="height:300px" th:utext="${quizMstrInfoVO.content}"></textarea>
+					</div>
+					
+					<div id="cmntrDiv" class="fs-5 my-3 py-3">
+						<span class="fs-4 fw-bold mx-1 fs-5" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">해설</span>
+						<textarea class="w-100 px-3 py-2" style="height:300px" th:utext="${quizMstrInfoVO.cmntr}"></textarea>
+					</div>
+				</div>
+
+				<div class="d-flex justify-content-between align-items-center text-center btn-grp">
+					<div class="list-group w-100 mx-5">
+						<th:block th:each="dtlInfo:${quizMstrInfoVO.quizMstrDtlList}">
+							<div class="text-start my-3 d-flex justify-content-between align-items-center">
+								<span class="fw-bold mx-1 fs-5" th:text="${dtlInfo.srtNo}"
+									style="font-family: 'NEXON Lv1 Gothic OTF Bold';"></span>
+								<textarea class="w-100 px-3 py-2 mx-4" style="height:110px" th:text="${dtlInfo.content}"></textarea>
+								<div>
+									<button type="button" class="btn btn-danger w-100 my-1">delete</button>
+									<button type="button" class="btn btn-success w-100 my-1">add</button>
+								</div>
+							</div>
+						</th:block>
+					</div>
+				</div>
+				
+				<div id="cloneDiv" style="display:none;">
+					<div class="text-start my-3 d-flex justify-content-between align-items-center">
+						<span class="fw-bold mx-1 fs-5"
+							style="font-family: 'NEXON Lv1 Gothic OTF Bold';"></span>
+						<textarea class="w-100 px-3 py-2 mx-4" style="height:110px"></textarea>
+						<div>
+							<button type="button" class="btn btn-danger w-100 my-1">delete</button>
+							<button type="button" class="btn btn-success w-100 my-1">add</button>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</form>
+	</div>
+</div>
+
+<th:block layout:fragment="script">
+	<script th:src="@{/js/quiz/quizFunc.js}"></script>
+</th:block>
+
+</html>

@@ -326,7 +326,7 @@ function goStatistics(param) {
 }
 
 function toggleCmntr() {
-	$('#cmntrDiv').toggle();
+	$('#cmntrDiv').slideToggle();
 	$('html,body').animate({scrollTop:$('#cmntrDiv').offset().top}, 100);
 }
 
@@ -346,4 +346,36 @@ function resultQuizStastics(subjectTypeCd, srtNo) {
 		$('#resultQuizStasticsDiv').replaceWith(result);
 		$('html,body').animate({scrollTop:$('#resultQuizStasticsDiv').prev().offset().top}, 100);
 	});
+}
+
+function eraser(obj) {
+	let exCntnt = $(obj).closest('.exDiv').find('.exCntnt');
+	let eraseYn = $(obj).closest('.exDiv').find('.eraseYn');
+	if(exCntnt.hasClass('text-decoration-line-through')) {
+		exCntnt.removeClass('text-decoration-line-through');
+		eraseYn.val('N');
+	} else {
+		exCntnt.addClass('text-decoration-line-through');
+		eraseYn.val('Y');
+	}
+}
+
+function chkAnswer(obj) {
+	let quizMstrDtlSeq = $(obj).children('.quizMstrDtlSeq').val();
+	if($(obj).hasClass('list-group-item-dark')) {
+		$(obj).removeClass('list-group-item-dark');
+		$('#userAnswer').val('');
+	} else {
+		$('.list-group-item-dark').removeClass('list-group-item-dark');
+		$(obj).addClass('list-group-item-dark');
+		$('#userAnswer').val(quizMstrDtlSeq);
+	}
+}
+
+function goAdminPage() {
+	var form = $('#quizForm');
+	var url = '/quiz/admin/quizForm.do';
+	form.attr('action', url);
+	form.attr('target', '');
+	form.submit();
 }

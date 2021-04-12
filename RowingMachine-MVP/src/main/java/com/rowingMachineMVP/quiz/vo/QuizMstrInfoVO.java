@@ -1,5 +1,7 @@
 package com.rowingMachineMVP.quiz.vo;
 
+import java.util.List;
+
 import com.rowingMachineMVP.common.BaseVO;
 
 import lombok.Data;
@@ -26,4 +28,6 @@ public class QuizMstrInfoVO extends BaseVO {
 
 	private int quizTotalCnt;
 	private int quizTrueCnt;
+
+	private List<QuizMstrDtlVO> quizMstrDtlList;
 }

@@ -13,7 +13,10 @@
 				<span th:text="${#strings.defaultString(userVO.userNm, 'GUEST')}"></span>
 				<span>님 환영합니다.</span>
 			</div>
-			<div class="modal-footer">
+			<div class="modal-footer d-flex justify-content-between">
+				<th:block th:if="${userVO.roleCd == 'ADMIN'}">
+					<button type="button" class="btn btn-dark" data-bs-dismiss="modal" onclick="goAdminPage();">ADMIN</button>
+				</th:block>
 				<button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
 			</div>
 		 </div>

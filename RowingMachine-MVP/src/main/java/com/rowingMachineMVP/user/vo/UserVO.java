@@ -11,6 +11,7 @@ public class UserVO extends BaseVO {
 	private String userId;
 	private String userNm;
 	private String password;
+	private String roleCd;
 	
 	private int takeRev;
 }

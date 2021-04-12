@@ -6,9 +6,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rowingMachineMVP.quiz.mapper.QuizMstrDtlMapper;
 import com.rowingMachineMVP.quiz.mapper.QuizMstrInfoMapper;
+import com.rowingMachineMVP.quiz.mapper.QuizUserAnsDtlMapper;
 import com.rowingMachineMVP.quiz.mapper.QuizUserAnsMapper;
 import com.rowingMachineMVP.quiz.service.QuizService;
+import com.rowingMachineMVP.quiz.vo.QuizMstrDtlVO;
 import com.rowingMachineMVP.quiz.vo.QuizMstrInfoVO;
 import com.rowingMachineMVP.user.vo.UserVO;
 
@@ -17,21 +20,38 @@ public class QuizServiceImpl implements QuizService {
 
 	@Autowired
 	private QuizMstrInfoMapper quizMstrInfoMapper;
+	
+	@Autowired
+	private QuizMstrDtlMapper quizMstrDtlMapper;
 
 	@Autowired
 	private QuizUserAnsMapper quizUserAnsMapper;
+	
+	@Autowired
+	private QuizUserAnsDtlMapper quizUserAnsDtlMapper;
 
 	@Override
 	public QuizMstrInfoVO getQuizInfo(QuizMstrInfoVO param) {
 		int quizTotalCnt = quizMstrInfoMapper.getQuizTotalCnt(param);
 		QuizMstrInfoVO quizMstrInfoVO = quizMstrInfoMapper.getQuizInfo(param);
 		quizMstrInfoVO.setQuizTotalCnt(quizTotalCnt);
+		quizMstrInfoVO.setQuizMstrDtlList(quizMstrDtlMapper.selectQuizMstrDtlList(quizMstrInfoVO));
 		return quizMstrInfoVO;
 	}
 
 	@Override
-	public int updateUserAnswer(QuizMstrInfoVO quizMstrInfoVO) {
-		return quizUserAnsMapper.updateUserAnswer(quizMstrInfoVO);
+	public int updateUserAnswer(QuizMstrInfoVO param) {
+		int resultCnt = 0;
+		int quizUserAnsSeq = param.getQuizUserAnsSeq();
+		resultCnt = quizUserAnsMapper.updateUserAnswer(param);
+		if (resultCnt > 0) {
+			List<QuizMstrDtlVO> quizMstrDtlList = param.getQuizMstrDtlList();
+			for (QuizMstrDtlVO quizMstrDtlVO : quizMstrDtlList) {
+				quizMstrDtlVO.setQuizUserAnsSeq(quizUserAnsSeq);
+				quizUserAnsDtlMapper.mergeUserAnswerDtl(quizMstrDtlVO);
+			}
+		}
+		return resultCnt;
 	}
 
 	@Override
