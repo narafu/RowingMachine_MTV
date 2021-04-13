@@ -72,7 +72,11 @@
 								<a class="list-group-item list-group-item-action"
 									th:classappend="${quizMstrInfoVO.userAnswer} == ${dtlInfo.quizMstrDtlSeq} ? list-group-item-dark"
 									onclick="chkAnswer(this);">
-									<span class="fw-bold mx-1" th:text="|${dtlInfo.srtNo}.|"></span>
+									<span class="fw-bold mx-1" th:if="${dtlInfo.srtNo == 1}">&#9312;</span>
+									<span class="fw-bold mx-1" th:if="${dtlInfo.srtNo == 2}">&#9313;</span>
+									<span class="fw-bold mx-1" th:if="${dtlInfo.srtNo == 3}">&#9314;</span>
+									<span class="fw-bold mx-1" th:if="${dtlInfo.srtNo == 4}">&#9315;</span>
+									<span class="fw-bold mx-1" th:if="${dtlInfo.srtNo == 5}">&#9316;</span>
 									<span class="exCntnt mx-1" th:text="${dtlInfo.content}"
 										th:classappend="${dtlInfo.eraseYn} == 'Y' ? text-decoration-line-through"></span>
 									<input type="hidden" class="quizMstrDtlSeq"

@@ -1,9 +1,11 @@
 package com.rowingMachineMVP.quiz.vo;
 
+import com.rowingMachineMVP.common.BaseVO;
+
 import lombok.Data;
 
 @Data
-public class QuizMstrDtlVO {
+public class QuizMstrDtlVO extends BaseVO {
 
 	private int quizMstrInfoSeq;
 	private int quizMstrDtlSeq;

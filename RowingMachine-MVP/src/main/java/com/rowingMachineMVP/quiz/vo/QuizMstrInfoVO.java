@@ -10,9 +10,9 @@ import lombok.Data;
 public class QuizMstrInfoVO extends BaseVO {
 
 	private int quizMstrInfoSeq;
-	private String subjectTypeCd = "10";
+	private String subjectTypeCd;
 	private String subjectTypeNm;
-	private int srtNo = 1;
+	private int srtNo;
 	private String content;
 	private String answer;
 	private String cmntr;
@@ -21,7 +21,7 @@ public class QuizMstrInfoVO extends BaseVO {
 	private String userId;
 	private String userAnswer;
 	private String answerChk;
-	private int takeRev = 1;
+	private int takeRev;
 
 	private int secSolving;
 	private int minSolving;

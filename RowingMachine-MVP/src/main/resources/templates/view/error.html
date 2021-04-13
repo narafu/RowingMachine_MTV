@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/defaultLayout}">
+
+<head>
+    <title>error</title>
+</head>
+
+	<div layout:fragment="content" class="text-center py-5 my-5">
+		<div>
+			<h1 class="display-1 text-primary">Error</h1>
+		</div>
+		<div>
+			<span class="d-block fs-5">오류입니다.</span>
+			<span class="d-block fs-5">관리자로 로그인하여 문제를 등록해주세요.</span>
+		</div>
+		<div class="my-5">
+			<button type="button" class="btn btn-primary btn-lg btn-block px-5 py-3 text-light" onclick="location.replace('/quiz/index.do');">홈으로</button>
+		</div>
+	</div>
+</html>

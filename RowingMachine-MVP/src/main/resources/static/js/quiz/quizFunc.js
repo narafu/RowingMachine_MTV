@@ -379,3 +379,54 @@ function goAdminPage() {
 	form.attr('target', '');
 	form.submit();
 }
+
+function selectQuiz() {
+	let url = '/quiz/admin/quizFormAjax.do';
+	let data = $('#adminForm').serialize();
+	$.post(url, data, function (result) {
+		$('#adminForm').replaceWith(result);
+	});
+}
+
+function saveQuiz() {
+
+	if(!$('[name=answer]:checked').val()) {
+		alert("정답을 선택해주세요.");
+		return;
+	}
+	
+	let message = '';
+	let srtNo = $('#srtNo').val();
+	let url = '';
+	
+	if(srtNo == 0) {
+		message = '등록하시겠습니까?';
+		url = '/quiz/admin/regQuiz.do';
+	} else {
+		message = '수정하시겠습니까?';
+		url = '/quiz/admin/editQuiz.do';
+	}
+	
+	let data = $('#adminForm').serialize();
+//	confirm(message, function() {
+		$.post(url, data, function (result) {
+			alert(result, function() {
+//				location.reload(true);
+			});
+		});
+//	});
+}
+
+function delQuiz() {
+	let message = '삭제하시겠습니까?';
+	let url = '/quiz/admin/delQuiz.do';
+	let data = {'quizMstrInfoSeq':$('#quizMstrInfoSeq').val()};
+	
+//	confirm(message, function() {
+		$.post(url, data, function (result) {
+			alert(result, function() {
+//				location.reload(true);
+			});
+		});
+//	})
+}

@@ -1,8 +1,10 @@
 package com.rowingMachineMVP.quiz.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.groovy.parser.antlr4.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,22 +22,39 @@ public class QuizServiceImpl implements QuizService {
 
 	@Autowired
 	private QuizMstrInfoMapper quizMstrInfoMapper;
-	
+
 	@Autowired
 	private QuizMstrDtlMapper quizMstrDtlMapper;
 
 	@Autowired
 	private QuizUserAnsMapper quizUserAnsMapper;
-	
+
 	@Autowired
 	private QuizUserAnsDtlMapper quizUserAnsDtlMapper;
 
 	@Override
 	public QuizMstrInfoVO getQuizInfo(QuizMstrInfoVO param) {
-		int quizTotalCnt = quizMstrInfoMapper.getQuizTotalCnt(param);
+
 		QuizMstrInfoVO quizMstrInfoVO = quizMstrInfoMapper.getQuizInfo(param);
+
+		if (quizMstrInfoVO == null) {
+			quizMstrInfoVO = new QuizMstrInfoVO();
+			quizMstrInfoVO.setSubjectTypeCd(param.getSubjectTypeCd());
+		}
+
+		int quizTotalCnt = quizMstrInfoMapper.getQuizTotalCnt(param);
 		quizMstrInfoVO.setQuizTotalCnt(quizTotalCnt);
-		quizMstrInfoVO.setQuizMstrDtlList(quizMstrDtlMapper.selectQuizMstrDtlList(quizMstrInfoVO));
+
+		List<QuizMstrDtlVO> quizMstrDtlList = quizMstrDtlMapper.selectQuizMstrDtlList(param);
+		if (quizMstrDtlList.isEmpty() || param.getSrtNo() == 0) {
+			quizMstrDtlList = new ArrayList<QuizMstrDtlVO>();
+			quizMstrDtlList.add(new QuizMstrDtlVO());
+			quizMstrDtlList.add(new QuizMstrDtlVO());
+			quizMstrDtlList.add(new QuizMstrDtlVO());
+			quizMstrDtlList.add(new QuizMstrDtlVO());
+			quizMstrDtlList.add(new QuizMstrDtlVO());
+		}
+		quizMstrInfoVO.setQuizMstrDtlList(quizMstrDtlList);
 		return quizMstrInfoVO;
 	}
 
@@ -72,6 +91,39 @@ public class QuizServiceImpl implements QuizService {
 			quizUserAnsMapper.mergeUserAnswer(map);
 		}
 		return mapList.size();
+	}
+
+	@Override
+	public List<Map<String, String>> selectQuizNoList(QuizMstrInfoVO quizMstrInfoVO) {
+		return quizMstrInfoMapper.selectQuizNoList(quizMstrInfoVO);
+	}
+
+	@Override
+	public int regQuiz(QuizMstrInfoVO param) {
+		int resultCnt = quizMstrInfoMapper.insertQuizMstrInfo(param);
+		if (resultCnt > 0) {
+			for (QuizMstrDtlVO quizMstrDtlVO : param.getQuizMstrDtlList()) {
+				quizMstrDtlVO.setQuizMstrInfoSeq(param.getQuizMstrInfoSeq());
+				quizMstrDtlMapper.insertQuizDtlInfo(quizMstrDtlVO);
+			}
+		}
+		return resultCnt;
+	}
+
+	@Override
+	public int editQuiz(QuizMstrInfoVO param) {
+		int resultCnt = quizMstrInfoMapper.updateQuizMstrInfo(param);
+		if (resultCnt > 0) {
+			for (QuizMstrDtlVO quizMstrDtlVO : param.getQuizMstrDtlList()) {
+				quizMstrDtlMapper.updateQuizDtlInfo(quizMstrDtlVO);
+			}
+		}
+		return resultCnt;
+	}
+
+	@Override
+	public int delQuiz(QuizMstrInfoVO param) {
+		return quizMstrInfoMapper.delQuiz(param);
 	}
 
 }

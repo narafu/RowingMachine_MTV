@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.groovy.parser.antlr4.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -74,10 +75,25 @@ public class QuizController {
 		List<Map<String, String>> cnmmCdList = baseUtil.getCnmmCdList("001");
 		model.addAttribute("cnmmCdList", cnmmCdList);
 
+		if (StringUtils.isEmpty(param.getSubjectTypeCd())) {
+			param.setSubjectTypeCd("10");
+		}
+		if (param.getSrtNo() == 0) {
+			param.setSrtNo(1);
+		}
+
 		// 퀴즈문제 조회
 		param.setUserId(userVO.getUserId());
 		QuizMstrInfoVO quizMstrInfoVO = quizService.getQuizInfo(param);
 		model.addAttribute("quizMstrInfoVO", quizMstrInfoVO);
+
+		if (quizMstrInfoVO.getQuizMstrInfoSeq() == 0) {
+			if ("ADMIN".equals(userVO.getRoleCd())) {
+				return "redirect:/quiz/admin/quizForm.do";
+			} else {
+				return "view/error";
+			}
+		}
 
 		// 결과 리스트
 		List<QuizMstrInfoVO> quizResultList = quizService.selectQuizResultList(param);
@@ -99,18 +115,18 @@ public class QuizController {
 
 		return "view/quiz/main :: #quizDiv";
 	}
-	
+
 	@RequestMapping("quiz/resultQuizStasticsAjax.do")
 	public String resultQuizStasticsAjax(QuizMstrInfoVO param, Model model) {
-		
+
 		// 공통코드(과목코드)
 		List<Map<String, String>> cnmmCdList = baseUtil.getCnmmCdList("001");
 		model.addAttribute("cnmmCdList", cnmmCdList);
-		
+
 		// 퀴즈문제 조회
 		QuizMstrInfoVO quizMstrInfoVO = quizService.getQuizInfo(param);
 		model.addAttribute("quizMstrInfoVO", quizMstrInfoVO);
-		
+
 		return "view/quiz/resultQuizStastics";
 	}
 
@@ -164,25 +180,5 @@ public class QuizController {
 		UserVO userVO = (UserVO) httpSession.getAttribute("userVO");
 		model.addAttribute("userVO", userVO);
 		return "view/quiz/popup/certificatePrintPopup";
-	}
-
-	@RequestMapping("quiz/admin/quizForm.do")
-	public String quizForm(QuizMstrInfoVO param, Model model) {
-		UserVO userVO = (UserVO) httpSession.getAttribute("userVO");
-		model.addAttribute("userVO", userVO);
-
-		// 공통코드(과목코드)
-		List<Map<String, String>> cnmmCdList = baseUtil.getCnmmCdList("001");
-		model.addAttribute("cnmmCdList", cnmmCdList);
-
-		// 퀴즈문제 조회
-		param.setUserId(userVO.getUserId());
-		QuizMstrInfoVO quizMstrInfoVO = quizService.getQuizInfo(param);
-		model.addAttribute("quizMstrInfoVO", quizMstrInfoVO);
-
-		// 결과 리스트
-		List<QuizMstrInfoVO> quizResultList = quizService.selectQuizResultList(param);
-		model.addAttribute("quizResultList", quizResultList);
-		return "view/quiz/admin/quizForm";
 	}
 }

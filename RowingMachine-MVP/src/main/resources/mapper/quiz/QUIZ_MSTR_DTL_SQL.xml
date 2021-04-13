@@ -19,4 +19,37 @@
 		WHERE A.QUIZ_MSTR_INFO_SEQ = #{quizMstrInfoSeq}
 	</select>
 
+	<insert id="insertQuizDtlInfo">
+		<selectKey keyProperty="quizMstrDtlSeq" resultType="int" order="BEFORE">
+			SELECT IFNULL(MAX(QUIZ_MSTR_DTL_SEQ), 0) + 1 FROM QUIZ_MSTR_DTL
+		</selectKey>
+		INSERT INTO QUIZ_MSTR_DTL (
+			QUIZ_MSTR_DTL_SEQ
+			, QUIZ_MSTR_INFO_SEQ
+			, SRT_NO
+			, CONTENT
+			, DEL_YN
+			, REGIST_ID
+			, REGIST_NM
+			, REG_TS
+			, MDFY_TS
+		) VALUES (
+			#{quizMstrDtlSeq}
+			, #{quizMstrInfoSeq}
+			, #{srtNo}
+			, #{content}
+			, 'N'
+			, #{registId}
+			, #{registNm}
+			, CURRENT_TIMESTAMP
+			, CURRENT_TIMESTAMP
+		)
+	</insert>
+	
+	<update id="updateQuizDtlInfo">
+		UPDATE QUIZ_MSTR_DTL SET
+			, CONTENT = #{content}
+			, MDFY_TS = CURRENT_TIMESTAMP
+		WHERE QUIZ_MSTR_DTL_SEQ = #{quizMstrDtlSeq}
+	</update>
 </mapper>
