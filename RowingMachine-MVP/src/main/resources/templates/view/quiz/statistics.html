@@ -74,7 +74,10 @@
 		var quizResultLaw10 = $('[name=quizTrueCnt10]').val() / $('[name=quizTotalCnt10]').val() * 100;
 		var quizResultLaw20 = $('[name=quizTrueCnt20]').val() / $('[name=quizTotalCnt20]').val() * 100;
 		var quizResultLaw30 = $('[name=quizTrueCnt30]').val() / $('[name=quizTotalCnt30]').val() * 100;
-		var totalResultRatio = (quizResultLaw10 + quizResultLaw20 + quizResultLaw30) / 3;
+		var quizResultLaw40 = $('[name=quizTrueCnt40]').val() / $('[name=quizTotalCnt40]').val() * 100;
+		var quizResultLaw50 = $('[name=quizTrueCnt50]').val() / $('[name=quizTotalCnt50]').val() * 100;
+		var quizResultLaw60 = $('[name=quizTrueCnt60]').val() / $('[name=quizTotalCnt60]').val() * 100;
+		var totalResultRatio = (quizResultLaw10 + quizResultLaw20 + quizResultLaw30 + quizResultLaw40 + quizResultLaw50 + quizResultLaw60) / 6;
 		$('#totalResultRatio').text(totalResultRatio.toFixed(1));
 
 		var context = document.getElementById('myChart').getContext('2d');
@@ -82,7 +85,7 @@
 				, {
 					type: 'bar' // 차트의 형태
 					, data: { // 차트에 들어갈 데이터
-						labels: ['헌법', '형법', '민법'] //x 축
+						labels: ['헌법', '행정법', '형법', '형사소송법', '민법', '민사소송법'] //x 축
 						, datasets: [ //데이터
 							{
 								label: '결과' //차트 제목
@@ -92,9 +95,15 @@
 									'rgba(255, 99, 132, 0.2)'
 									, 'rgba(54, 162, 235, 0.2)'
 									, 'rgba(255, 206, 86, 0.2)'
+									, 'rgba(255, 99, 132, 0.2)'
+									, 'rgba(54, 162, 235, 0.2)'
+									, 'rgba(255, 206, 86, 0.2)'
 								]
 								, borderColor: [ //경계선 색상
 									'rgba(255, 99, 132, 1)'
+									, 'rgba(54, 162, 235, 1)'
+									, 'rgba(255, 206, 86, 1)'
+									, 'rgba(255, 99, 132, 1)'
 									, 'rgba(54, 162, 235, 1)'
 									, 'rgba(255, 206, 86, 1)'
 								]

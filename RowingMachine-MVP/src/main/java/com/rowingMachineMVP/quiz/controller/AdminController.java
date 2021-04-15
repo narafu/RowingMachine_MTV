@@ -26,17 +26,19 @@ public class AdminController {
 	@RequestMapping("quizForm.do")
 	public String quizForm(Model model) {
 
-		// 문제 조회
-		QuizMstrInfoVO quizMstrInfoVO = quizService.getQuizInfo(new QuizMstrInfoVO());
-		model.addAttribute("quizMstrInfoVO", quizMstrInfoVO);
-
 		// 공통코드(과목코드)
 		List<Map<String, String>> cnmmCdList = baseUtil.getCnmmCdList("001");
 		model.addAttribute("cnmmCdList", cnmmCdList);
 
+		// 문제 조회
+		QuizMstrInfoVO quizMstrInfoVO = quizService.getQuizFormInfo(new QuizMstrInfoVO());
+		quizMstrInfoVO.setSubjectTypeCd("10");
+		model.addAttribute("quizMstrInfoVO", quizMstrInfoVO);
+
 		// 문제리스트
 		List<Map<String, String>> quizNoList = quizService.selectQuizNoList(quizMstrInfoVO);
 		model.addAttribute("quizNoList", quizNoList);
+
 		return "view/quiz/admin/quizForm";
 	}
 
@@ -47,13 +49,14 @@ public class AdminController {
 		List<Map<String, String>> cnmmCdList = baseUtil.getCnmmCdList("001");
 		model.addAttribute("cnmmCdList", cnmmCdList);
 
+		// 문제 조회
+		QuizMstrInfoVO quizMstrInfoVO = quizService.getQuizFormInfo(param);
+		model.addAttribute("quizMstrInfoVO", quizMstrInfoVO);
+
 		// 문제리스트
 		List<Map<String, String>> quizNoList = quizService.selectQuizNoList(param);
 		model.addAttribute("quizNoList", quizNoList);
 
-		// 퀴즈문제 조회
-		QuizMstrInfoVO quizMstrInfoVO = quizService.getQuizInfo(param);
-		model.addAttribute("quizMstrInfoVO", quizMstrInfoVO);
 		return "view/quiz/admin/quizForm :: #adminForm";
 	}
 

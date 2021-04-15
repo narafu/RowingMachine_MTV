@@ -6,14 +6,16 @@
 		<th:block th:each=cnmmCd:${cnmmCdList}>
 			<div class="mb-5">
 				<div class="display-6">
-					<a th:text="${cnmmCd.cmmnDtlNm}"></a>
+					<span th:text="${cnmmCd.cmmnDtlNm}"></span>
 				</div>
 				<div class="row row-cols-auto quizNavDiv">
 					<th:block th:each="quiz : ${quizResultList}" th:if="${cnmmCd.cmmnDtlCd == quiz.subjectTypeCd}">
 						<div class="col fs-5" style="width:50px;"
 							th:classappend="${#strings.isEmpty(quiz.userAnswer)} ? '' : bg-secondary">
-							<a th:text="${#strings.length(quiz.srtNo) == 1 ? '0' + quiz.srtNo : quiz.srtNo}"
+							<a th:text="${#strings.length(quiz.rno) == 1 ? '0' + quiz.rno : quiz.rno}"
 								th:onclick="moveQuiz([[${quiz.subjectTypeCd}]], [[${quiz.srtNo}]])"></a>
+							<input type="hidden" th:value="${quiz.rno}" class="sideRno">
+							<input type="hidden" th:value="${quiz.quizMstrInfoSeq}" class="quizMstrInfoSeq">
 						</div>
 					</th:block>
 				</div>

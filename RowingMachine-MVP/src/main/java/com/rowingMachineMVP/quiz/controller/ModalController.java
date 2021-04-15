@@ -34,14 +34,13 @@ public class ModalController {
 	}
 
 	@RequestMapping("firstPageModal")
-	public String firstPageModal(int srtNo, Model model) {
-		model.addAttribute("srtNo", srtNo);
+	public String firstPageModal() {
 		return "view/quiz/modal/firstPageModal";
 	}
 
 	@RequestMapping("lastPageModal")
-	public String lastPageModal(int srtNo, Model model) {
-		model.addAttribute("srtNo", srtNo);
+	public String lastPageModal(int quizMstrInfoSeq, Model model) {
+		model.addAttribute("quizMstrInfoSeq", quizMstrInfoSeq);
 		return "view/quiz/modal/lastPageModal";
 	}
 
@@ -52,8 +51,8 @@ public class ModalController {
 	}
 
 	@RequestMapping("resultPageModal")
-	public String resultPageModal(int srtNo, Model model) {
-		model.addAttribute("srtNo", srtNo);
+	public String resultPageModal(int quizMstrInfoSeq, Model model) {
+		model.addAttribute("quizMstrInfoSeq", quizMstrInfoSeq);
 		return "view/quiz/modal/resultPageModal";
 	}
 }

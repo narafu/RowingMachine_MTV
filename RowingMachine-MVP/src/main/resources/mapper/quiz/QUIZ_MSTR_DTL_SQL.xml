@@ -48,7 +48,7 @@
 	
 	<update id="updateQuizDtlInfo">
 		UPDATE QUIZ_MSTR_DTL SET
-			, CONTENT = #{content}
+			CONTENT = #{content}
 			, MDFY_TS = CURRENT_TIMESTAMP
 		WHERE QUIZ_MSTR_DTL_SEQ = #{quizMstrDtlSeq}
 	</update>

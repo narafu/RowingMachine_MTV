@@ -194,43 +194,67 @@ function goQuiz(obj) {
 	// 	})
 	// }
 
-	if (obj == 'prev') {
-		let srtNo = parseInt($('#srtNo').val()) - 1;
-		let selectedSubjectType = $('#subjectType option:selected').val();
-		let firstSubjectType = $('#subjectType option:first').val();
-		let selectedqQizNo = $('#quizNo option:selected').val();
-		let firstQuizNo = $('#quizNo option:first').val();
+	let quizMstrInfoSeq = $('#quizMstrInfoSeq').val();
+	let quizIndex = '';
 
-		if (selectedSubjectType == firstSubjectType && selectedqQizNo == firstQuizNo) {
+	$('#sidebar a').each(function(index) {
+		if(quizMstrInfoSeq == $(this).siblings('.quizMstrInfoSeq').val()) {
+			quizIndex = index;
+		}
+	})
+
+	if (obj == 'prev') {
+
+		if(quizIndex) {
+			quizIndex--;
+			let prevQuizMstrInfoSeq = $('#sidebar a:eq(' + quizIndex + ')').siblings('.quizMstrInfoSeq').val();
+			quizAnsSave(prevQuizMstrInfoSeq, 'N');
+		} else {
 			if (mobileYn) {
 				alert('첫 번째 문제입니다!');
 			} else {
-				let url = '/quiz/modal/firstPageModal?srtNo=' + srtNo;
+				let url = '/quiz/modal/firstPageModal';
 				$.ajax(url).done(function (modalHtml) {
 					$('#modalDiv').html(modalHtml);
 					let firstPageModal = new bootstrap.Modal(document.getElementById('firstPageModal'));
 					firstPageModal.show();
 				})
 			}
-		} else {
-			quizAnsSave(srtNo, 'N');
-		};
+		}
+
+		// let srtNo = parseInt($('#srtNo').val()) - 1;
+		// let selectedSubjectType = $('#subjectType option:selected').val();
+		// let firstSubjectType = $('#subjectType option:first').val();
+		// let selectedqQizNo = $('#quizNo option:selected').val();
+		// let firstQuizNo = $('#quizNo option:first').val();
+		//
+		// if (selectedSubjectType == firstSubjectType && selectedqQizNo == firstQuizNo) {
+		// 	if (mobileYn) {
+		// 		alert('첫 번째 문제입니다!');
+		// 	} else {
+		// 		let url = '/quiz/modal/firstPageModal?srtNo=' + srtNo;
+		// 		$.ajax(url).done(function (modalHtml) {
+		// 			$('#modalDiv').html(modalHtml);
+		// 			let firstPageModal = new bootstrap.Modal(document.getElementById('firstPageModal'));
+		// 			firstPageModal.show();
+		// 		})
+		// 	}
+		// } else {
+		// 	quizAnsSave(srtNo, 'N');
+		// };
 	}
 
 	if (obj == 'next') {
-		let srtNo = parseInt($('#srtNo').val()) + 1;
-		let selectedSubjectType = $('#subjectType option:selected').val();
-		let lastSubjectType = $('#subjectType option:last').val();
-		let selectedqQizNo = $('#quizNo option:selected').val();
-		let lastQuizNo = $('#quizNo option:last').val();
 
-		if (selectedSubjectType == lastSubjectType && selectedqQizNo == lastQuizNo) {
+		let lastQuizMstrInfoSeq = $('#sidebar a:last').siblings('.quizMstrInfoSeq').val();
+
+		if(quizMstrInfoSeq == lastQuizMstrInfoSeq) {
 			if (mobileYn) {
 				if (confirm('마지막 문제입니다.\n(풀지 않은 문제는 오답처리 됩니다.)\n결과로 이동하시겠습니?')) {
-					quizAnsSave(0, 'N');
+					quizAnsSave(quizMstrInfoSeq, 'N', 'Y');
 				}
 			} else {
-				let url = '/quiz/modal/lastPageModal?srtNo=0';
+				let url = '/quiz/modal/lastPageModal?quizMstrInfoSeq=' + quizMstrInfoSeq;
 				$.ajax(url).done(function (modalHtml) {
 					$('#modalDiv').html(modalHtml);
 					let lastPageModal = new bootstrap.Modal(document.getElementById('lastPageModal'));
@@ -238,22 +262,47 @@ function goQuiz(obj) {
 				})
 			}
 		} else {
-			if (selectedqQizNo == lastQuizNo) {
-				let subjectTypeCd = $('#subjectType option:selected').next().val();
-				$('#subjectTypeCd').val(subjectTypeCd);
-				srtNo = 1;
-			}
-			quizAnsSave(srtNo, 'N');
-		};
+			quizIndex++;
+			let nextQuizMstrInfoSeq = $('#sidebar a:eq(' + quizIndex + ')').siblings('.quizMstrInfoSeq').val();
+			quizAnsSave(nextQuizMstrInfoSeq, 'N');
+		}
+
+		// let selectedqQizNo = $('#quizNo option:selected').val();
+		// let lastQuizNo = $('#quizNo option:last').val();
+		// let srtNo = parseInt($('#srtNo').val()) + 1;
+		// let selectedSubjectType = $('#subjectType option:selected').val();
+		// let lastSubjectType = $('#subjectType option:last').val();
+
+		// if (selectedSubjectType == lastSubjectType && selectedqQizNo == lastQuizNo) {
+		// 	if (mobileYn) {
+		// 		if (confirm('마지막 문제입니다.\n(풀지 않은 문제는 오답처리 됩니다.)\n결과로 이동하시겠습니?')) {
+		// 			quizAnsSave(0, 'N');
+		// 		}
+		// 	} else {
+		// 		let url = '/quiz/modal/lastPageModal?srtNo=0';
+		// 		$.ajax(url).done(function (modalHtml) {
+		// 			$('#modalDiv').html(modalHtml);
+		// 			let lastPageModal = new bootstrap.Modal(document.getElementById('lastPageModal'));
+		// 			lastPageModal.show();
+		// 		})
+		// 	}
+		// } else {
+		// 	if (selectedqQizNo == lastQuizNo) {
+		// 		let subjectTypeCd = $('#subjectType option:selected').next().val();
+		// 		$('#subjectTypeCd').val(subjectTypeCd);
+		// 		srtNo = 1;
+		// 	}
+		// 	quizAnsSave(srtNo, 'N');
+		// };
 	}
 
 	if (obj == 'result') {
 		if (mobileYn) {
 			if (confirm('풀지 않은 문제는 오답처리 됩니다.\n결과로 이동하시겠습니까?')) {
-				quizAnsSave(0, 'N');
-			};
+				quizAnsSave(quizMstrInfoSeq, 'N', 'Y');
+			}
 		} else {
-			let url = '/quiz/modal/resultPageModal?srtNo=0';
+			let url = '/quiz/modal/lastPageModal?quizMstrInfoSeq=' + quizMstrInfoSeq;
 			$.ajax(url).done(function (modalHtml) {
 				$('#modalDiv').html(modalHtml);
 				let resultPageModal = new bootstrap.Modal(document.getElementById('resultPageModal'));
@@ -263,7 +312,7 @@ function goQuiz(obj) {
 	}
 }
 
-function quizAnsSave(srtNo, modalYn) {
+function quizAnsSave(quizMstrInfoSeq, modalYn, resultYn) {
 	let url = '/quiz/answer.do';
 	let param = $('#quizForm').serialize();
 	$.post(url, param, function (result) {
@@ -271,44 +320,42 @@ function quizAnsSave(srtNo, modalYn) {
 			if (modalYn == 'Y') {
 				$('#modalDiv .modal').modal('hide');
 			}
-			movePage(srtNo);
+			if(resultYn == 'Y') {
+				moveResultPage(quizMstrInfoSeq);
+			} else {
+				movePage(quizMstrInfoSeq);
+			}
 		} else {
 			alert("오류가 발생하였습니다.");
 		}
 	});
 }
 
-function movePage(srtNo) {
+function movePage(quizMstrInfoSeq) {
+	$('#quizMstrInfoSeq').val(quizMstrInfoSeq);
 	let form = $('#quizForm');
-	if (!srtNo) { // 결과 페이지
-		let duration = Number(getCountTimer());
-		let secondsRemaining = $('#count-down-timer').text().split(':');
-		let timeSolving = duration - (Number(secondsRemaining[0]) * 60 + Number(secondsRemaining[1]));
-
-		$('#minSolving').val(parseInt(timeSolving / 60));
-		$('#secSolving').val(parseInt(timeSolving % 60));
-
-		form.attr('action', '/quiz/result.do');
-		form.attr('target', '');
-		form.submit();
-
-	} else { // 다음 문제
-		let subjectTypeCd = $('#subjectTypeCd').val();
-		moveQuiz(subjectTypeCd, srtNo);
-	}
-}
-
-function moveQuiz(subjectTypeCd, srtNo) {
-	$('#subjectTypeCd').val(subjectTypeCd);
-	$('#srtNo').val(srtNo);
 	let url = '/quiz/quizAjax.do';
-	let form = $('#quizForm');
 	$.post(url, form.serialize(), function (result) {
 		$('i.active').removeClass('active');
 		$('#quizDiv').replaceWith(result);
 		$('html,body').animate({scrollTop:$('#quizDiv').prev().offset().top}, 100);
 		changeSideBar(form);
 	});
+}
+
+function moveResultPage(quizMstrInfoSeq) {
+	$('#quizMstrInfoSeq').val(quizMstrInfoSeq);
+	let form = $('#quizForm');
+	let duration = Number(getCountTimer());
+	let secondsRemaining = $('#count-down-timer').text().split(':');
+	let timeSolving = duration - (Number(secondsRemaining[0]) * 60 + Number(secondsRemaining[1]));
+
+	$('#minSolving').val(parseInt(timeSolving / 60));
+	$('#secSolving').val(parseInt(timeSolving % 60));
+
+	form.attr('action', '/quiz/result.do');
+	form.attr('target', '');
+	form.submit();
 }
 
 function changeSideBar(form) {
@@ -389,44 +436,35 @@ function selectQuiz() {
 }
 
 function saveQuiz() {
-
 	if(!$('[name=answer]:checked').val()) {
 		alert("정답을 선택해주세요.");
 		return;
 	}
-	
-	let message = '';
-	let srtNo = $('#srtNo').val();
-	let url = '';
-	
-	if(srtNo == 0) {
-		message = '등록하시겠습니까?';
-		url = '/quiz/admin/regQuiz.do';
-	} else {
-		message = '수정하시겠습니까?';
-		url = '/quiz/admin/editQuiz.do';
-	}
-	
+	let message = '등록하시겠습니까?';
+	let url = '/quiz/admin/regQuiz.do';
 	let data = $('#adminForm').serialize();
-//	confirm(message, function() {
-		$.post(url, data, function (result) {
-			alert(result, function() {
-//				location.reload(true);
-			});
-		});
-//	});
+	goAction(message, url, data);
+}
+
+function editQuiz() {
+	let message = '수정하시겠습니까?';
+	let url = '/quiz/admin/editQuiz.do';
+	let data = $('#adminForm').serialize();
+	goAction(message, url, data);
 }
 
 function delQuiz() {
 	let message = '삭제하시겠습니까?';
 	let url = '/quiz/admin/delQuiz.do';
 	let data = {'quizMstrInfoSeq':$('#quizMstrInfoSeq').val()};
-	
-//	confirm(message, function() {
+	goAction(message, url, data);
+}
+
+function goAction(message, url, data) {
+	if(confirm(message)) {
 		$.post(url, data, function (result) {
-			alert(result, function() {
-//				location.reload(true);
-			});
+			alert(result);
+			location.reload();
 		});
-//	})
+	};
 }

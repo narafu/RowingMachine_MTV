@@ -26,4 +26,6 @@ public interface QuizService {
 
 	int delQuiz(QuizMstrInfoVO param);
 
+	QuizMstrInfoVO getQuizFormInfo(QuizMstrInfoVO quizMstrInfoVO);
+
 }

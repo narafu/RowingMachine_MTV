@@ -34,21 +34,23 @@
 			WHERE USER_ID = #{userId}
 		) B
 		ON A.QUIZ_MSTR_INFO_SEQ = B.QUIZ_MSTR_INFO_SEQ
-		WHERE A.DEL_YN = 'N'
+		WHERE A.QUIZ_MSTR_INFO_SEQ = #{quizMstrInfoSeq}
+		<!-- WHERE A.DEL_YN = 'N'
 			AND A.SUBJECT_TYPE_CD = #{subjectTypeCd}
-			AND A.SRT_NO = (SELECT LEAST(#{srtNo}, (SELECT MAX(SRT_NO) FROM QUIZ_MSTR_INFO WHERE SUBJECT_TYPE_CD = #{subjectTypeCd})))
+			AND A.SRT_NO = (SELECT LEAST(#{srtNo}, (SELECT MAX(SRT_NO) FROM QUIZ_MSTR_INFO WHERE SUBJECT_TYPE_CD = #{subjectTypeCd}))) -->
 	</select>
 	
 	<select id="selectQuizNoList" resultType="HashMap">
 		SELECT
 			ROW_NUMBER() OVER(ORDER BY SUBJECT_TYPE_CD, SRT_NO) AS rno
+			, QUIZ_MSTR_INFO_SEQ AS quizMstrInfoSeq
 			, SUBJECT_TYPE_CD AS subjectTypeCd
 			, SRT_NO AS srtNo
-			FROM QUIZ_MSTR_INFO
-			WHERE DEL_YN = 'N'
-			<if test="subjectTypeCd != null and subjectTypeCd != ''">
-				 AND SUBJECT_TYPE_CD = ${subjectTypeCd}
-			</if>
+		FROM QUIZ_MSTR_INFO
+		WHERE DEL_YN = 'N'
+		<if test="subjectTypeCd != null and subjectTypeCd != ''">
+			 AND SUBJECT_TYPE_CD = ${subjectTypeCd}
+		</if>
 	</select>
 	
 	<insert id="insertQuizMstrInfo">
@@ -98,5 +100,28 @@
 			, MDFY_TS = CURRENT_TIMESTAMP
 		WHERE QUIZ_MSTR_INFO_SEQ = #{quizMstrInfoSeq}
 	</update>
+	
+	<select id="getQuizFormInfo" resultType="QuizMstrInfoVO">
+		SELECT
+			QUIZ_MSTR_INFO_SEQ
+			, SUBJECT_TYPE_CD
+			, SRT_NO
+			, CONTENT
+			, ANSWER
+			, CMNTR
+		FROM QUIZ_MSTR_INFO
+		WHERE QUIZ_MSTR_INFO_SEQ = #{quizMstrInfoSeq}
+	</select>
+	
+	<select id="getFstQuizInfo" resultType="QuizMstrInfoVO">
+		SELECT
+			ROW_NUMBER() OVER(ORDER BY SUBJECT_TYPE_CD, SRT_NO) AS rno
+			, SUBJECT_TYPE_CD
+			, SRT_NO
+			, QUIZ_MSTR_INFO_SEQ
+		FROM QUIZ_MSTR_INFO
+		WHERE DEL_YN = 'N'
+		LIMIT 1
+	</select>
 
 </mapper>

@@ -34,6 +34,16 @@ public class QuizServiceImpl implements QuizService {
 
 	@Override
 	public QuizMstrInfoVO getQuizInfo(QuizMstrInfoVO param) {
+		
+		String userId = param.getUserId();
+
+		if (param.getQuizMstrInfoSeq() == 0) {
+			param = quizMstrInfoMapper.getFstQuizInfo();
+			if(param == null) {
+				return new QuizMstrInfoVO();
+			}
+			param.setUserId(userId);
+		}
 
 		QuizMstrInfoVO quizMstrInfoVO = quizMstrInfoMapper.getQuizInfo(param);
 
@@ -45,7 +55,7 @@ public class QuizServiceImpl implements QuizService {
 		int quizTotalCnt = quizMstrInfoMapper.getQuizTotalCnt(param);
 		quizMstrInfoVO.setQuizTotalCnt(quizTotalCnt);
 
-		List<QuizMstrDtlVO> quizMstrDtlList = quizMstrDtlMapper.selectQuizMstrDtlList(param);
+		List<QuizMstrDtlVO> quizMstrDtlList = quizMstrDtlMapper.selectQuizMstrDtlList(quizMstrInfoVO);
 		if (quizMstrDtlList.isEmpty() || param.getSrtNo() == 0) {
 			quizMstrDtlList = new ArrayList<QuizMstrDtlVO>();
 			quizMstrDtlList.add(new QuizMstrDtlVO());
@@ -54,7 +64,9 @@ public class QuizServiceImpl implements QuizService {
 			quizMstrDtlList.add(new QuizMstrDtlVO());
 			quizMstrDtlList.add(new QuizMstrDtlVO());
 		}
+
 		quizMstrInfoVO.setQuizMstrDtlList(quizMstrDtlList);
+
 		return quizMstrInfoVO;
 	}
 
@@ -124,6 +136,32 @@ public class QuizServiceImpl implements QuizService {
 	@Override
 	public int delQuiz(QuizMstrInfoVO param) {
 		return quizMstrInfoMapper.delQuiz(param);
+	}
+
+	@Override
+	public QuizMstrInfoVO getQuizFormInfo(QuizMstrInfoVO param) {
+
+		QuizMstrInfoVO quizMstrInfoVO = quizMstrInfoMapper.getQuizFormInfo(param);
+		if (quizMstrInfoVO == null) {
+			quizMstrInfoVO = new QuizMstrInfoVO();
+			quizMstrInfoVO.setSubjectTypeCd(param.getSubjectTypeCd());
+		}
+
+		int quizTotalCnt = quizMstrInfoMapper.getQuizTotalCnt(param);
+		quizMstrInfoVO.setQuizTotalCnt(quizTotalCnt);
+
+		List<QuizMstrDtlVO> quizMstrDtlList = quizMstrDtlMapper.selectQuizMstrDtlList(param);
+		if (quizMstrDtlList.isEmpty() || param.getQuizMstrInfoSeq() == 0) {
+			quizMstrDtlList = new ArrayList<QuizMstrDtlVO>();
+			quizMstrDtlList.add(new QuizMstrDtlVO());
+			quizMstrDtlList.add(new QuizMstrDtlVO());
+			quizMstrDtlList.add(new QuizMstrDtlVO());
+			quizMstrDtlList.add(new QuizMstrDtlVO());
+			quizMstrDtlList.add(new QuizMstrDtlVO());
+		}
+
+		quizMstrInfoVO.setQuizMstrDtlList(quizMstrDtlList);
+		return quizMstrInfoVO;
 	}
 
 }

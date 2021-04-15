@@ -22,4 +22,8 @@ public interface QuizMstrInfoMapper {
 
 	int delQuiz(QuizMstrInfoVO param);
 
+	QuizMstrInfoVO getQuizFormInfo(QuizMstrInfoVO param);
+
+	QuizMstrInfoVO getFstQuizInfo();
+
 }
