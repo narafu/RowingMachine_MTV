@@ -1,5 +1,6 @@
 package com.rowingMachineMVP.quiz.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -26,13 +27,31 @@ public class AdminController {
 	@RequestMapping("quizForm.do")
 	public String quizForm(Model model) {
 
+		// 연도 리스트
+		int curYear = LocalDate.now().getYear();
+		int[] examYearArr = new int[5];
+		for (int i = 0; i < examYearArr.length; i++) {
+			examYearArr[i] = curYear - i;
+		}
+		model.addAttribute("examYearArr", examYearArr);
+
+		// 공통코드(시험구분 코드)
+		List<Map<String, String>> examCdList = baseUtil.getCnmmCdList("002");
+		model.addAttribute("examCdList", examCdList);
+
+		// 시험회차 리스트
+		int[] examNoArr = new int[10];
+		for (int i = 0; i < examNoArr.length; i++) {
+			examNoArr[i] = i + 1;
+		}
+		model.addAttribute("examNoArr", examNoArr);
+
 		// 공통코드(과목코드)
-		List<Map<String, String>> cnmmCdList = baseUtil.getCnmmCdList("001");
-		model.addAttribute("cnmmCdList", cnmmCdList);
+		List<Map<String, String>> subjectCdList = baseUtil.getCnmmCdList("001");
+		model.addAttribute("subjectCdList", subjectCdList);
 
 		// 문제 조회
 		QuizMstrInfoVO quizMstrInfoVO = quizService.getQuizFormInfo(new QuizMstrInfoVO());
-		quizMstrInfoVO.setSubjectTypeCd("10");
 		model.addAttribute("quizMstrInfoVO", quizMstrInfoVO);
 
 		// 문제리스트
@@ -45,9 +64,28 @@ public class AdminController {
 	@RequestMapping("quizFormAjax.do")
 	public String quizFormAjax(QuizMstrInfoVO param, Model model) {
 
+		// 연도 리스트
+		int curYear = LocalDate.now().getYear();
+		int[] examYearArr = new int[5];
+		for (int i = 0; i < examYearArr.length; i++) {
+			examYearArr[i] = curYear - i;
+		}
+		model.addAttribute("examYearArr", examYearArr);
+
+		// 공통코드(시험구분 코드)
+		List<Map<String, String>> examCdList = baseUtil.getCnmmCdList("002");
+		model.addAttribute("examCdList", examCdList);
+
+		// 시험회차 리스트
+		int[] examNoArr = new int[10];
+		for (int i = 0; i < examNoArr.length; i++) {
+			examNoArr[i] = i + 1;
+		}
+		model.addAttribute("examNoArr", examNoArr);
+
 		// 공통코드(과목코드)
-		List<Map<String, String>> cnmmCdList = baseUtil.getCnmmCdList("001");
-		model.addAttribute("cnmmCdList", cnmmCdList);
+		List<Map<String, String>> subjectCdList = baseUtil.getCnmmCdList("001");
+		model.addAttribute("subjectCdList", subjectCdList);
 
 		// 문제 조회
 		QuizMstrInfoVO quizMstrInfoVO = quizService.getQuizFormInfo(param);

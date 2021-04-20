@@ -52,4 +52,15 @@
 			, MDFY_TS = CURRENT_TIMESTAMP
 		WHERE QUIZ_MSTR_DTL_SEQ = #{quizMstrDtlSeq}
 	</update>
+
+	<select id="selectQuizMstrFormDtlList" resultType="QuizMstrDtlVO">
+		SELECT
+			ROW_NUMBER() OVER(ORDER BY SRT_NO) AS RNO
+			, QUIZ_MSTR_DTL_SEQ
+			, QUIZ_MSTR_INFO_SEQ
+			, SRT_NO
+			, CONTENT
+		FROM QUIZ_MSTR_DTL
+		WHERE QUIZ_MSTR_INFO_SEQ = #{quizMstrInfoSeq}
+	</select>
 </mapper>

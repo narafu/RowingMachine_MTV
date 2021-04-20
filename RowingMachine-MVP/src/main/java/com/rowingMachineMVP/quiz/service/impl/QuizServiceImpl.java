@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.groovy.parser.antlr4.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,7 +55,7 @@ public class QuizServiceImpl implements QuizService {
 		quizMstrInfoVO.setQuizTotalCnt(quizTotalCnt);
 
 		List<QuizMstrDtlVO> quizMstrDtlList = quizMstrDtlMapper.selectQuizMstrDtlList(quizMstrInfoVO);
-		if (quizMstrDtlList.isEmpty() || param.getSrtNo() == 0) {
+		if (quizMstrDtlList.isEmpty()) {
 			quizMstrDtlList = new ArrayList<QuizMstrDtlVO>();
 			quizMstrDtlList.add(new QuizMstrDtlVO());
 			quizMstrDtlList.add(new QuizMstrDtlVO());
@@ -143,15 +142,14 @@ public class QuizServiceImpl implements QuizService {
 
 		QuizMstrInfoVO quizMstrInfoVO = quizMstrInfoMapper.getQuizFormInfo(param);
 		if (quizMstrInfoVO == null) {
-			quizMstrInfoVO = new QuizMstrInfoVO();
-			quizMstrInfoVO.setSubjectTypeCd(param.getSubjectTypeCd());
+			quizMstrInfoVO = param;
 		}
 
 		int quizTotalCnt = quizMstrInfoMapper.getQuizTotalCnt(param);
 		quizMstrInfoVO.setQuizTotalCnt(quizTotalCnt);
 
-		List<QuizMstrDtlVO> quizMstrDtlList = quizMstrDtlMapper.selectQuizMstrDtlList(param);
-		if (quizMstrDtlList.isEmpty() || param.getQuizMstrInfoSeq() == 0) {
+		List<QuizMstrDtlVO> quizMstrDtlList = quizMstrDtlMapper.selectQuizMstrFormDtlList(param);
+		if (quizMstrDtlList.isEmpty()) {
 			quizMstrDtlList = new ArrayList<QuizMstrDtlVO>();
 			quizMstrDtlList.add(new QuizMstrDtlVO());
 			quizMstrDtlList.add(new QuizMstrDtlVO());

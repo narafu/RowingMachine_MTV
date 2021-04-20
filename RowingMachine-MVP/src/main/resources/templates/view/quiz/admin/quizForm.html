@@ -11,24 +11,58 @@
 
 	<div class="container">
 		<form action="" method="post" id="adminForm">
+		<input type="hidden" th:field="${quizMstrInfoVO.content}"/>
+		<input type="hidden" th:field="${quizMstrInfoVO.cmntr}"/>
+		
 			<div class="my-3 d-flex justify-content-between align-items-center">
-				<div class="row g-3 w-50 align-items-center">
+				<div class="row g-3 w-75 align-items-center">
+					<div class="col">
+						<select class="form-select form-select-lg fx-bold" name=examYear
+							onchange="selectQuiz(this);" id="examYear">
+							<option value="">선택</option>
+							<th:block th:each=examYear:${examYearArr}>
+								<option th:value="${examYear}" th:text="${examYear}"
+									th:selected="${#strings.equals(examYear, quizMstrInfoVO.examYear)}"/>
+							</th:block>
+						</select>
+					</div>
+					<div class="col">
+						<select class="form-select form-select-lg fx-bold" name=examGrpCd
+							onchange="selectQuiz(this);" id="examGrpCd">
+							<option value="">선택</option>
+							<th:block th:each=cnmmCd:${examCdList}>
+								<option th:value="${cnmmCd.cmmnDtlCd}" th:text="${cnmmCd.cmmnDtlNm}"
+									th:selected="${#strings.equals(cnmmCd.cmmnDtlCd, quizMstrInfoVO.examGrpCd)}"/>
+							</th:block>
+						</select>
+					</div>
+					<div class="col">
+						<select class="form-select form-select-lg fx-bold" name=examNo
+							onchange="selectQuiz(this);" id="examNo">
+							<option value="">선택</option>
+							<th:block th:each=examNo:${examNoArr}>
+								<option th:value="${examNo}" th:text="|${examNo}회|"
+									th:selected="${#strings.equals(examNo,quizMstrInfoVO.examNo)}"/>
+							</th:block>
+						</select>
+					</div>
 					<div class="col">
 						<select class="form-select form-select-lg fx-bold" name='subjectTypeCd'
-							onchange="selectQuiz();" id="subjectTypeCd">
-							<th:block th:each=cnmmCd:${cnmmCdList}>
+							onchange="selectQuiz(this);" id="subjectTypeCd">
+							<option value="">선택</option>
+							<th:block th:each=cnmmCd:${subjectCdList}>
 								<option th:value="${cnmmCd.cmmnDtlCd}" th:text="${cnmmCd.cmmnDtlNm}"
-									th:selected="${cnmmCd.cmmnDtlCd == quizMstrInfoVO.subjectTypeCd}"/>
+									th:selected="${#strings.equals(cnmmCd.cmmnDtlCd, quizMstrInfoVO.subjectTypeCd)}"/>
 							</th:block>
 						</select>
 					</div>
 					<div class="col" th:with="totalCnt=${quizMstrInfoVO.quizTotalCnt}">
 						<select class="form-select form-select-lg fx-bold" name='quizMstrInfoSeq'
-							onchange="selectQuiz();" id="quizMstrInfoSeq">
-							<option value=0>등록</option>
-							<th:block th:each="quizNo : ${quizNoList}" th:if="${quizNo.subjectTypeCd == quizMstrInfoVO.subjectTypeCd}">
-								<option th:value="${quizNo.quizMstrInfoSeq}" th:text="${quizNo.rno}"
-									th:selected="${quizNo.srtNo == quizMstrInfoVO.srtNo}"/>
+							onchange="selectQuiz(this);" id="quizMstrInfoSeq">
+							<option value='0'>등록</option>
+							<th:block th:each="quizNo : ${quizNoList}" th:if="${#strings.equals(quizNo.subjectTypeCd, quizMstrInfoVO.subjectTypeCd)}">
+								<option th:value="${quizNo.quizMstrInfoSeq}" th:text="|${quizNo.rno}번|"
+									th:selected="${#strings.equals(quizNo.srtNo, quizMstrInfoVO.srtNo)}"/>
 							</th:block>
 						</select>
 					</div>
@@ -38,102 +72,115 @@
 					<i class="fas fa-home fa-3x" onclick="location.replace('/quiz/index.do');"></i>
 				</div>
 			</div>
-
-			<div class="d-flex flex-column justify-content-between border px-5 py-3">
-				<div>
-					
-					<div id="editor"></div>
-				
-					<div class="fs-5" style="min-height: 200px;">
-						<h2 class="fs-4 fw-bold mx-1 fs-5" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">문제</h2>
-						<textarea class="w-100 px-3 py-2" style="height:300px" name="content" th:text="${quizMstrInfoVO.content}"></textarea>
-					</div>
-					<div id="cmntrDiv" class="fs-5 my-3 py-3">
-						<h2 class="fs-4 fw-bold mx-1 fs-5" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">해설</h2>
-						<textarea class="w-100 px-3 py-2" style="height:300px" name="cmntr" th:text="${quizMstrInfoVO.cmntr}"></textarea>
-					</div>
-				</div>
-				<div>
-					<div class="text-start my-3 d-flex align-items-center">
-						<span class="fw-bold mx-1 fs-3" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">&#9312;</span>
-						<input type="hidden" name="quizMstrDtlList[0].srtNo" value="1"/>
-						<textarea class="w-100 px-3 py-2 mx-4" style="height:110px"
-							name="quizMstrDtlList[0].content" th:text="${quizMstrInfoVO.quizMstrDtlList[0].content}"></textarea>
-						<input type="hidden" class="quizMstrDtlSeq" th:value="${quizMstrInfoVO.quizMstrDtlList[0].quizMstrDtlSeq}"
-							name="quizMstrDtlList[0].quizMstrDtlSeq" />
-					</div>
-					<div class="text-start my-3 d-flex align-items-center">
-						<span class="fw-bold mx-1 fs-3" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">&#9313;</span>
-						<input type="hidden" name="quizMstrDtlList[1].srtNo" value="2"/>
-						<textarea class="w-100 px-3 py-2 mx-4" style="height:110px"
-							name="quizMstrDtlList[1].content" th:text="${quizMstrInfoVO.quizMstrDtlList[1].content}"></textarea>
-						<input type="hidden" class="quizMstrDtlSeq" th:value="${quizMstrInfoVO.quizMstrDtlList[1].quizMstrDtlSeq}"
-							name="quizMstrDtlList[1].quizMstrDtlSeq" />
-					</div>
-					<div class="text-start my-3 d-flex align-items-center">
-						<span class="fw-bold mx-1 fs-3" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">&#9314;</span>
-						<input type="hidden" name="quizMstrDtlList[2].srtNo" value="3"/>
-						<textarea class="w-100 px-3 py-2 mx-4" style="height:110px"
-							name="quizMstrDtlList[2].content" th:text="${quizMstrInfoVO.quizMstrDtlList[2].content}"></textarea>
-						<input type="hidden" class="quizMstrDtlSeq" th:value="${quizMstrInfoVO.quizMstrDtlList[2].quizMstrDtlSeq}"
-							name="quizMstrDtlList[2].quizMstrDtlSeq" />
-					</div>
-					<div class="text-start my-3 d-flex align-items-center">
-						<span class="fw-bold mx-1 fs-3" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">&#9315;</span>
-						<input type="hidden" name="quizMstrDtlList[3].srtNo" value="4"/>
-						<textarea class="w-100 px-3 py-2 mx-4" style="height:110px"
-							name="quizMstrDtlList[3].content" th:text="${quizMstrInfoVO.quizMstrDtlList[3].content}"></textarea>
-						<input type="hidden" class="quizMstrDtlSeq" th:value="${quizMstrInfoVO.quizMstrDtlList[3].quizMstrDtlSeq}"
-							name="quizMstrDtlList[3].quizMstrDtlSeq" />
-					</div>
-					<div class="text-start my-3 d-flex align-items-center">
-						<span class="fw-bold mx-1 fs-3" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">&#9316;</span>
-						<input type="hidden" name="quizMstrDtlList[4].srtNo" value="5"/>
-						<textarea class="w-100 px-3 py-2 mx-4" style="height:110px"
-							name="quizMstrDtlList[4].content" th:text="${quizMstrInfoVO.quizMstrDtlList[4].content}"></textarea>
-						<input type="hidden" class="quizMstrDtlSeq" th:value="${quizMstrInfoVO.quizMstrDtlList[4].quizMstrDtlSeq}"
-							name="quizMstrDtlList[4].quizMstrDtlSeq" />
-					</div>
-				</div>
-			</div>
 			
-			<div class="d-flex justify-content-between my-3">
-				<div class="input-group align-items-center">
-					<span class="input-group-text" id="inputGroup-sizing-default">정답</span>
-					<div class="form-check form-check-inline mx-3">
-						<input class="form-check-input" type="radio" name="answer" id="answer1" value="1"
-							th:checked="${quizMstrInfoVO.answer == '1'}">
-						<label class="form-check-label" for="answer1">1</label>
+			<div id="quizCntntDiv">
+				<div class="d-flex flex-column justify-content-between border px-5 py-3">
+					<div>
+					
+						<div class="fs-5" style="min-height: 200px;">
+							<h2 class="fs-4 fw-bold mx-1 fs-5" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">문제</h2>
+							<div id="editorCntnt"></div>
+							<script>
+								var Editor = toastui.Editor;
+								var editorCntnt = new Editor({
+									  el: document.querySelector('#editorCntnt'),
+									  height: '400px',
+									});
+							</script>
+						</div>
+						<div id="cmntrDiv" class="fs-5 my-3 py-3">
+							<h2 class="fs-4 fw-bold mx-1 fs-5" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">해설</h2>
+							<div id="editorCmntr"></div>
+							<script>
+								var editorCmntr = new Editor({
+									  el: document.querySelector('#editorCmntr'),
+									  height: '400px',
+									});
+							</script>
+						</div>
 					</div>
-					<div class="form-check form-check-inline mx-3">
-						<input class="form-check-input" type="radio" name="answer" id="answer2" value="2"
-							th:checked="${quizMstrInfoVO.answer == '2'}">
-						<label class="form-check-label" for="answer2">2</label>
-					</div>
-					<div class="form-check form-check-inline mx-3">
-						<input class="form-check-input" type="radio" name="answer" id="answer3" value="3"
-							th:checked="${quizMstrInfoVO.answer == '3'}">
-						<label class="form-check-label" for="answer3">3</label>
-					</div>
-					<div class="form-check form-check-inline mx-3">
-						<input class="form-check-input" type="radio" name="answer" id="answer4" value="4"
-							th:checked="${quizMstrInfoVO.answer == '4'}">
-						<label class="form-check-label" for="answer4">4</label>
-					</div>
-					<div class="form-check form-check-inline mx-3">
-						<input class="form-check-input" type="radio" name="answer" id="answer5" value="5"
-							th:checked="${quizMstrInfoVO.answer == '5'}">
-						<label class="form-check-label" for="answer5">5</label>
+					<div>
+						<div class="text-start my-3 d-flex align-items-center">
+							<span class="fw-bold mx-1 fs-3" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">&#9312;</span>
+							<input type="hidden" name="quizMstrDtlList[0].srtNo" value="1"/>
+							<textarea class="w-100 px-3 py-2 mx-4" style="height:110px"
+								name="quizMstrDtlList[0].content" th:text="${quizMstrInfoVO.quizMstrDtlList[0].content}"></textarea>
+							<input type="hidden" class="quizMstrDtlSeq" th:value="${quizMstrInfoVO.quizMstrDtlList[0].quizMstrDtlSeq}"
+								name="quizMstrDtlList[0].quizMstrDtlSeq" />
+						</div>
+						<div class="text-start my-3 d-flex align-items-center">
+							<span class="fw-bold mx-1 fs-3" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">&#9313;</span>
+							<input type="hidden" name="quizMstrDtlList[1].srtNo" value="2"/>
+							<textarea class="w-100 px-3 py-2 mx-4" style="height:110px"
+								name="quizMstrDtlList[1].content" th:text="${quizMstrInfoVO.quizMstrDtlList[1].content}"></textarea>
+							<input type="hidden" class="quizMstrDtlSeq" th:value="${quizMstrInfoVO.quizMstrDtlList[1].quizMstrDtlSeq}"
+								name="quizMstrDtlList[1].quizMstrDtlSeq" />
+						</div>
+						<div class="text-start my-3 d-flex align-items-center">
+							<span class="fw-bold mx-1 fs-3" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">&#9314;</span>
+							<input type="hidden" name="quizMstrDtlList[2].srtNo" value="3"/>
+							<textarea class="w-100 px-3 py-2 mx-4" style="height:110px"
+								name="quizMstrDtlList[2].content" th:text="${quizMstrInfoVO.quizMstrDtlList[2].content}"></textarea>
+							<input type="hidden" class="quizMstrDtlSeq" th:value="${quizMstrInfoVO.quizMstrDtlList[2].quizMstrDtlSeq}"
+								name="quizMstrDtlList[2].quizMstrDtlSeq" />
+						</div>
+						<div class="text-start my-3 d-flex align-items-center">
+							<span class="fw-bold mx-1 fs-3" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">&#9315;</span>
+							<input type="hidden" name="quizMstrDtlList[3].srtNo" value="4"/>
+							<textarea class="w-100 px-3 py-2 mx-4" style="height:110px"
+								name="quizMstrDtlList[3].content" th:text="${quizMstrInfoVO.quizMstrDtlList[3].content}"></textarea>
+							<input type="hidden" class="quizMstrDtlSeq" th:value="${quizMstrInfoVO.quizMstrDtlList[3].quizMstrDtlSeq}"
+								name="quizMstrDtlList[3].quizMstrDtlSeq" />
+						</div>
+						<div class="text-start my-3 d-flex align-items-center">
+							<span class="fw-bold mx-1 fs-3" style="font-family: 'NEXON Lv1 Gothic OTF Bold';">&#9316;</span>
+							<input type="hidden" name="quizMstrDtlList[4].srtNo" value="5"/>
+							<textarea class="w-100 px-3 py-2 mx-4" style="height:110px"
+								name="quizMstrDtlList[4].content" th:text="${quizMstrInfoVO.quizMstrDtlList[4].content}"></textarea>
+							<input type="hidden" class="quizMstrDtlSeq" th:value="${quizMstrInfoVO.quizMstrDtlList[4].quizMstrDtlSeq}"
+								name="quizMstrDtlList[4].quizMstrDtlSeq" />
+						</div>
 					</div>
 				</div>
-				<div class="w-50 d-flex gap-3">
-					<th:block th:if="${quizMstrInfoVO.quizMstrInfoSeq == 0}">
-						<button type="button" class="btn btn-lg btn-primary my-3 px-5 w-100 fw-bold" onclick="saveQuiz();">등록</button>
-					</th:block>
-					<th:block th:unless="${quizMstrInfoVO.quizMstrInfoSeq == 0}">
-						<button type="button" class="btn btn-lg btn-warning my-3 px-5 w-100 fw-bold" onclick="editQuiz();">수정</button>
-						<button type="button" class="btn btn-lg btn-dark my-3 px-5 w-100 fw-bold" onclick="delQuiz();">삭제</button>
-					</th:block>
+				
+				<div class="d-flex justify-content-between my-3">
+					<div class="input-group align-items-center">
+						<span class="input-group-text" id="inputGroup-sizing-default">정답</span>
+						<div class="form-check form-check-inline mx-3">
+							<input class="form-check-input" type="radio" name="answer" id="answer1" value="1"
+								th:checked="${#strings.equals(quizMstrInfoVO.answer, '1')}">
+							<label class="form-check-label" for="answer1">1</label>
+						</div>
+						<div class="form-check form-check-inline mx-3">
+							<input class="form-check-input" type="radio" name="answer" id="answer2" value="2"
+								th:checked="${#strings.equals(quizMstrInfoVO.answer, '2')}">
+							<label class="form-check-label" for="answer2">2</label>
+						</div>
+						<div class="form-check form-check-inline mx-3">
+							<input class="form-check-input" type="radio" name="answer" id="answer3" value="3"
+								th:checked="${#strings.equals(quizMstrInfoVO.answer, '3')}">
+							<label class="form-check-label" for="answer3">3</label>
+						</div>
+						<div class="form-check form-check-inline mx-3">
+							<input class="form-check-input" type="radio" name="answer" id="answer4" value="4"
+								th:checked="${#strings.equals(quizMstrInfoVO.answer, '4')}">
+							<label class="form-check-label" for="answer4">4</label>
+						</div>
+						<div class="form-check form-check-inline mx-3">
+							<input class="form-check-input" type="radio" name="answer" id="answer5" value="5"
+								th:checked="${#strings.equals(quizMstrInfoVO.answer, '5')}">
+							<label class="form-check-label" for="answer5">5</label>
+						</div>
+					</div>
+					<div class="w-50 d-flex gap-3">
+						<th:block th:if="${#strings.equals(quizMstrInfoVO.quizMstrInfoSeq, '0')}">
+							<button type="button" class="btn btn-lg btn-primary my-3 px-5 w-100 fw-bold" onclick="saveQuiz('I');">등록</button>
+						</th:block>
+						<th:block th:unless="${#strings.equals(quizMstrInfoVO.quizMstrInfoSeq, '0')}">
+							<button type="button" class="btn btn-lg btn-warning my-3 px-5 w-100 fw-bold" onclick="saveQuiz('U');">수정</button>
+							<button type="button" class="btn btn-lg btn-dark my-3 px-5 w-100 fw-bold" onclick="delQuiz();">삭제</button>
+						</th:block>
+					</div>
 				</div>
 			</div>
 		</form>
@@ -141,14 +188,6 @@
 </div>
 
 <th:block layout:fragment="script">
-	<script>
-		const Editor = toastui.Editor;
-		 
-		const editor = new Editor({
-			  el: document.querySelector('#editor'),
-			  height: '600px',
-			});
-	</script>
 	<script th:src="@{/js/quiz/quizFunc.js}"></script>
 </th:block>
 

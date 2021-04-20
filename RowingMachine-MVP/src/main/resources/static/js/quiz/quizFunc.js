@@ -1,7 +1,7 @@
 
 let mobileYn;
 
-$(function() {
+$(function () {
 	screenCheck();
 })
 
@@ -90,12 +90,12 @@ function login() {
 	// 	document.body.appendChild(form);
 	// 	form.submit();
 	// } else {
-		let url = '/quiz/modal/loginModal';
-		$.ajax(url).done(function (modalHtml) {
-			$('#modalDiv').html(modalHtml);
-			let loginModal = new bootstrap.Modal(document.getElementById('loginModal'))
-			loginModal.show();
-		})
+	let url = '/quiz/modal/loginModal';
+	$.ajax(url).done(function (modalHtml) {
+		$('#modalDiv').html(modalHtml);
+		let loginModal = new bootstrap.Modal(document.getElementById('loginModal'))
+		loginModal.show();
+	})
 	// }
 }
 
@@ -197,15 +197,15 @@ function goQuiz(obj) {
 	let quizMstrInfoSeq = $('#quizMstrInfoSeq').val();
 	let quizIndex = '';
 
-	$('#sidebar a').each(function(index) {
-		if(quizMstrInfoSeq == $(this).siblings('.quizMstrInfoSeq').val()) {
+	$('#sidebar a').each(function (index) {
+		if (quizMstrInfoSeq == $(this).siblings('.quizMstrInfoSeq').val()) {
 			quizIndex = index;
 		}
 	})
 
 	if (obj == 'prev') {
 
-		if(quizIndex) {
+		if (quizIndex) {
 			quizIndex--;
 			let prevQuizMstrInfoSeq = $('#sidebar a:eq(' + quizIndex + ')').siblings('.quizMstrInfoSeq').val();
 			quizAnsSave(prevQuizMstrInfoSeq, 'N');
@@ -248,7 +248,7 @@ function goQuiz(obj) {
 
 		let lastQuizMstrInfoSeq = $('#sidebar a:last').siblings('.quizMstrInfoSeq').val();
 
-		if(quizMstrInfoSeq == lastQuizMstrInfoSeq) {
+		if (quizMstrInfoSeq == lastQuizMstrInfoSeq) {
 			if (mobileYn) {
 				if (confirm('마지막 문제입니다.\n(풀지 않은 문제는 오답처리 됩니다.)\n결과로 이동하시겠습니?')) {
 					quizAnsSave(quizMstrInfoSeq, 'N', 'Y');
@@ -302,7 +302,7 @@ function goQuiz(obj) {
 				quizAnsSave(quizMstrInfoSeq, 'N', 'Y');
 			}
 		} else {
-			let url = '/quiz/modal/lastPageModal?quizMstrInfoSeq=' + quizMstrInfoSeq;
+			let url = '/quiz/modal/resultPageModal?quizMstrInfoSeq=' + quizMstrInfoSeq;
 			$.ajax(url).done(function (modalHtml) {
 				$('#modalDiv').html(modalHtml);
 				let resultPageModal = new bootstrap.Modal(document.getElementById('resultPageModal'));
@@ -320,7 +320,7 @@ function quizAnsSave(quizMstrInfoSeq, modalYn, resultYn) {
 			if (modalYn == 'Y') {
 				$('#modalDiv .modal').modal('hide');
 			}
-			if(resultYn == 'Y') {
+			if (resultYn == 'Y') {
 				moveResultPage(quizMstrInfoSeq);
 			} else {
 				movePage(quizMstrInfoSeq);
@@ -338,7 +338,7 @@ function movePage(quizMstrInfoSeq) {
 	$.post(url, form.serialize(), function (result) {
 		$('i.active').removeClass('active');
 		$('#quizDiv').replaceWith(result);
-		$('html,body').animate({scrollTop:$('#quizDiv').prev().offset().top}, 100);
+		$('html,body').animate({ scrollTop: $('#quizDiv').prev().offset().top }, 100);
 		changeSideBar(form);
 	});
 }
@@ -374,31 +374,30 @@ function goStatistics(param) {
 
 function toggleCmntr() {
 	$('#cmntrDiv').slideToggle();
-	$('html,body').animate({scrollTop:$('#cmntrDiv').offset().top}, 100);
+	$('html,body').animate({ scrollTop: $('#cmntrDiv').prev().offset().top }, 100);
 }
 
 function certificatePrintPopup() {
 	let url = '/quiz/popup/print/certificate.do';
 	let name = '예비합격증 인쇄'
 	var options = 'top=10, left=10, width=800, height=1000, status=no, menubar=no, toolbar=no, resizable=no';
-    window.open(url, name, options);
+	window.open(url, name, options);
 }
 
-function resultQuizStastics(subjectTypeCd, srtNo) {
-	$('#subjectTypeCd').val(subjectTypeCd);
-	$('#srtNo').val(srtNo);
+function resultQuizStastics(quizMstrInfoSeq) {
+	$('#quizMstrInfoSeq').val(quizMstrInfoSeq);
 	let url = '/quiz/resultQuizStasticsAjax.do';
 	let form = $('#ststicsForm');
 	$.post(url, form.serialize(), function (result) {
 		$('#resultQuizStasticsDiv').replaceWith(result);
-		$('html,body').animate({scrollTop:$('#resultQuizStasticsDiv').prev().offset().top}, 100);
+		$('html,body').animate({ scrollTop: $('#resultQuizStasticsDiv').prev().offset().top }, 100);
 	});
 }
 
 function eraser(obj) {
 	let exCntnt = $(obj).closest('.exDiv').find('.exCntnt');
 	let eraseYn = $(obj).closest('.exDiv').find('.eraseYn');
-	if(exCntnt.hasClass('text-decoration-line-through')) {
+	if (exCntnt.hasClass('text-decoration-line-through')) {
 		exCntnt.removeClass('text-decoration-line-through');
 		eraseYn.val('N');
 	} else {
@@ -408,14 +407,14 @@ function eraser(obj) {
 }
 
 function chkAnswer(obj) {
-	let quizMstrDtlSeq = $(obj).children('.quizMstrDtlSeq').val();
-	if($(obj).hasClass('list-group-item-dark')) {
+	let dtlInfoSrtNo = $(obj).children('.dtlInfoSrtNo').val();
+	if ($(obj).hasClass('list-group-item-dark')) {
 		$(obj).removeClass('list-group-item-dark');
 		$('#userAnswer').val('');
 	} else {
 		$('.list-group-item-dark').removeClass('list-group-item-dark');
 		$(obj).addClass('list-group-item-dark');
-		$('#userAnswer').val(quizMstrDtlSeq);
+		$('#userAnswer').val(dtlInfoSrtNo);
 	}
 }
 
@@ -427,28 +426,64 @@ function goAdminPage() {
 	form.submit();
 }
 
-function selectQuiz() {
-	let url = '/quiz/admin/quizFormAjax.do';
-	let data = $('#adminForm').serialize();
-	$.post(url, data, function (result) {
-		$('#adminForm').replaceWith(result);
-	});
+function selectQuiz(obj) {
+
+	let objId = $(obj).prop('id');
+	let objIndex;
+
+	$('#adminForm select').each(function(index) {
+		if(objId == $(this).prop('id')) {
+			objIndex = index;
+		}
+		if(objIndex < index) {
+			$(this).val('');
+		}
+	})
+
+	if(objId == 'subjectTypeCd' || objId == 'quizMstrInfoSeq') {
+		let url = '/quiz/admin/quizFormAjax.do';
+		let data = $('#adminForm').serialize();
+		$.post(url, data, function (result) {
+			$('#adminForm').replaceWith(result);
+		});
+	} else {
+		$('#quizCntntDiv').hide();
+
+	}
+
 }
 
-function saveQuiz() {
-	if(!$('[name=answer]:checked').val()) {
+function saveQuiz(flag) {
+
+	if (!$('#examYear').val()) {
+		alert("시험연도을 선택해주세요.");
+		return;
+	} else if (!$('#examGrpCd').val()) {
+		alert("시험유형을 선택해주세요.");
+		return;
+	} else if (!$('#examNo').val()) {
+		alert("시험회차를 선택해주세요.");
+		return;
+	} else if (!$('#subjectTypeCd').val()) {
+		alert("시험과목 선택해주세요.");
+		return;
+	} else if (!$('[name=answer]:checked').val()) {
 		alert("정답을 선택해주세요.");
 		return;
 	}
-	let message = '등록하시겠습니까?';
-	let url = '/quiz/admin/regQuiz.do';
-	let data = $('#adminForm').serialize();
-	goAction(message, url, data);
-}
 
-function editQuiz() {
-	let message = '수정하시겠습니까?';
-	let url = '/quiz/admin/editQuiz.do';
+	$('#content').val(editorCntnt.getHTML());
+	$('#cmntr').val(editorCmntr.getHTML());
+	let message = '';
+	let url = '';
+	
+	if(flag == 'I') {
+		message = '등록하시겠습니까?';
+		url = '/quiz/admin/regQuiz.do';
+	} else {
+		message = '수정하시겠습니까?';
+		url = '/quiz/admin/editQuiz.do';
+	}
 	let data = $('#adminForm').serialize();
 	goAction(message, url, data);
 }
@@ -456,12 +491,12 @@ function editQuiz() {
 function delQuiz() {
 	let message = '삭제하시겠습니까?';
 	let url = '/quiz/admin/delQuiz.do';
-	let data = {'quizMstrInfoSeq':$('#quizMstrInfoSeq').val()};
+	let data = { 'quizMstrInfoSeq': $('#quizMstrInfoSeq').val() };
 	goAction(message, url, data);
 }
 
 function goAction(message, url, data) {
-	if(confirm(message)) {
+	if (confirm(message)) {
 		$.post(url, data, function (result) {
 			alert(result);
 			location.reload();

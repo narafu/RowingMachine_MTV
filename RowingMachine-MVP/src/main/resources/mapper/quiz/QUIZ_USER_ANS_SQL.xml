@@ -79,7 +79,7 @@
 		WHERE 1 = 1
 		<include refid="selectQuizResultList-where"></include>
 		GROUP BY SUBJECT_TYPE_CD
-		ORDER BY SUBJECT_TYPE_CD
+		ORDER BY SUBJECT_TYPE_CD, EXAM_YEAR, EXAM_GRP_CD, EXAM_NO
 	</select>
 	
 	<select id="selectQuizUsrAnsSeqAll" resultType="HashMap">

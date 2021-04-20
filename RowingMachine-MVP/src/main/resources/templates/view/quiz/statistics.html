@@ -6,6 +6,7 @@
 	<div layout:fragment="content" class="container">
 		<form action="" method="post" id="ststicsForm">
 			<input type="hidden" name="userId" th:value="${param.userId}"/>
+			<input type="hidden" th:field="${quizMstrInfoVO.quizMstrInfoSeq}"/>
 			<input type="hidden" th:field="${quizMstrInfoVO.subjectTypeCd}"/>
 			<input type="hidden" th:field="${quizMstrInfoVO.srtNo}"/>
 		</form>
@@ -27,6 +28,7 @@
 			
 			<div class="col-md">
 				<th:block th:each="quizCnt : ${quizCntList}">
+					<input type="hidden" name="subjectTypeNm" th:value="${quizCnt.subjectTypeNm}">
 					<input type="hidden" th:name="|quizTotalCnt${quizCnt.subjectTypeCd}|" th:value="${quizCnt.quizTotalCnt}">
 					<input type="hidden" th:name="|quizTrueCnt${quizCnt.subjectTypeCd}|" th:value="${quizCnt.quizTrueCnt}">
 				</th:block>
@@ -36,7 +38,7 @@
 						<div class="fs-5" th:text="${cnmmCd.cmmnDtlNm}" style="font-family: 'GongGothicMedium';"></div>
 						<div class="row row-cols-auto text-center mx-auto mt-2">
 							<th:block th:each="result : ${quizResultList}" th:if="${result.subjectTypeCd == cnmmCd.cmmnDtlCd}">
-								<div class="col border border-primary m-1 quizNumTd" th:onclick="resultQuizStastics([[${result.subjectTypeCd}]], [[${result.srtNo}]], 'resultForm')">
+								<div class="col border border-primary m-1 quizNumTd" th:onclick="|resultQuizStastics('${result.quizMstrInfoSeq}')|">
 									<div class="fw-bold w-100" th:text="${result.srtNo}"></div>
 									<div class="row">
 										<div class="col border border-primary" th:text="${result.userAnswer}"></div>
@@ -71,26 +73,33 @@
 <th:block layout:fragment="script">
 	<script type="text/javascript">
 
-		var quizResultLaw10 = $('[name=quizTrueCnt10]').val() / $('[name=quizTotalCnt10]').val() * 100;
-		var quizResultLaw20 = $('[name=quizTrueCnt20]').val() / $('[name=quizTotalCnt20]').val() * 100;
-		var quizResultLaw30 = $('[name=quizTrueCnt30]').val() / $('[name=quizTotalCnt30]').val() * 100;
-		var quizResultLaw40 = $('[name=quizTrueCnt40]').val() / $('[name=quizTotalCnt40]').val() * 100;
-		var quizResultLaw50 = $('[name=quizTrueCnt50]').val() / $('[name=quizTotalCnt50]').val() * 100;
-		var quizResultLaw60 = $('[name=quizTrueCnt60]').val() / $('[name=quizTotalCnt60]').val() * 100;
-		var totalResultRatio = (quizResultLaw10 + quizResultLaw20 + quizResultLaw30 + quizResultLaw40 + quizResultLaw50 + quizResultLaw60) / 6;
+		let totalResultRatio = 0;
+		let quizDataArr = [];
+		let quizSubjectArr = [];
+		$('input[name=subjectTypeNm]').each(function() {
+			let subjectNm = $(this).val()
+			let totalCnt = $(this).next().val();
+			let trueCnt = $(this).next().next().val();
+			let quizData = trueCnt / totalCnt * 100;
+			quizSubjectArr.push(subjectNm);
+			totalResultRatio += quizData;
+			quizDataArr.push(quizData);
+		})
+		
+		totalResultRatio = totalResultRatio / $('input[name=subjectTypeNm]').length;
 		$('#totalResultRatio').text(totalResultRatio.toFixed(1));
 
-		var context = document.getElementById('myChart').getContext('2d');
-		var myChart = new Chart(context
+		let context = document.getElementById('myChart').getContext('2d');
+		let myChart = new Chart(context
 				, {
 					type: 'bar' // 차트의 형태
 					, data: { // 차트에 들어갈 데이터
-						labels: ['헌법', '행정법', '형법', '형사소송법', '민법', '민사소송법'] //x 축
+						labels: quizSubjectArr //x 축
 						, datasets: [ //데이터
 							{
 								label: '결과' //차트 제목
 								, fill: false // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-								, data: [quizResultLaw10, quizResultLaw20, quizResultLaw30] //x축 label에 대응되는 데이터 값
+								, data: quizDataArr //x축 label에 대응되는 데이터 값
 								, backgroundColor: [ //색상
 									'rgba(255, 99, 132, 0.2)'
 									, 'rgba(54, 162, 235, 0.2)'
