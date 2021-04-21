@@ -448,7 +448,6 @@ function selectQuiz(obj) {
 		});
 	} else {
 		$('#quizCntntDiv').hide();
-
 	}
 
 }
