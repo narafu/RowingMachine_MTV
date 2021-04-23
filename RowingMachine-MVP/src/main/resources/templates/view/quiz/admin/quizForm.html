@@ -85,7 +85,9 @@
 								var Editor = toastui.Editor;
 								var editorCntnt = new Editor({
 									  el: document.querySelector('#editorCntnt'),
-									  height: '400px'
+									  height: '400px',
+									  initialValue: $('#content').val(),
+									  initialEditType: 'wysiwyg'
 									});
 							</script>
 						</div>
@@ -95,7 +97,9 @@
 							<script>
 								var editorCmntr = new Editor({
 									  el: document.querySelector('#editorCmntr'),
-									  height: '400px'
+									  height: '400px',
+									  initialValue: $('#cmntr').val(),
+  									  initialEditType: 'wysiwyg'
 									});
 							</script>
 						</div>
