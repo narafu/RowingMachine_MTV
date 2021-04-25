@@ -12,6 +12,7 @@
 			, B.QUIZ_USER_ANS_DTL_SEQ 
 			, A.SRT_NO
 			, A.CONTENT
+			, A.CMNTR
 			, B.ERASE_YN
 		FROM QUIZ_MSTR_DTL A
 		LEFT JOIN (SELECT * FROM QUIZ_USER_ANS_DTL WHERE QUIZ_USER_ANS_SEQ = #{quizUserAnsSeq}) B
@@ -28,6 +29,7 @@
 			, QUIZ_MSTR_INFO_SEQ
 			, SRT_NO
 			, CONTENT
+			, CMNTR
 			, DEL_YN
 			, REGIST_ID
 			, REGIST_NM
@@ -38,6 +40,7 @@
 			, #{quizMstrInfoSeq}
 			, #{srtNo}
 			, #{content}
+			, #{cmntr}
 			, 'N'
 			, #{registId}
 			, #{registNm}
@@ -49,6 +52,7 @@
 	<update id="updateQuizDtlInfo">
 		UPDATE QUIZ_MSTR_DTL SET
 			CONTENT = #{content}
+			, CMNTR = #{cmntr}
 			, MDFY_TS = CURRENT_TIMESTAMP
 		WHERE QUIZ_MSTR_DTL_SEQ = #{quizMstrDtlSeq}
 	</update>
@@ -60,6 +64,7 @@
 			, QUIZ_MSTR_INFO_SEQ
 			, SRT_NO
 			, CONTENT
+			, CMNTR
 		FROM QUIZ_MSTR_DTL
 		WHERE QUIZ_MSTR_INFO_SEQ = #{quizMstrInfoSeq}
 	</select>

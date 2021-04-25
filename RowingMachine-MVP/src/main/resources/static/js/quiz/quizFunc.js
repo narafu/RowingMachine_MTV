@@ -374,7 +374,7 @@ function goStatistics(param) {
 
 function toggleCmntr() {
 	$('#cmntrDiv').slideToggle();
-	$('html,body').animate({ scrollTop: $('#cmntrDiv').prev().offset().top }, 100);
+	$('html,body').animate({ scrollTop: $('#cmntrDiv').offset().top }, 100);
 }
 
 function certificatePrintPopup() {
@@ -501,4 +501,8 @@ function goAction(message, url, data) {
 			location.reload();
 		});
 	};
+}
+
+function toggleDtlCmntr(obj) {
+	$(obj).closest('div').next().slideToggle();
 }

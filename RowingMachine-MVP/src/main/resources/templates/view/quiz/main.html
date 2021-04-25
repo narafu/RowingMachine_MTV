@@ -56,7 +56,9 @@
 							</div>
 						</div>
 						<div>
-							<button type="button" class="btn btn-primary mx-3" onclick="toggleCmntr();">해설</button>
+							<th:block th:if="${not #strings.isEmpty(quizMstrInfoVO.cmntr)}">
+								<button type="button" class="btn btn-primary mx-3" onclick="toggleCmntr();">해설</button>
+							</th:block>
 						</div>
 					</div>
 					
@@ -66,8 +68,10 @@
 				</div>
 				
 				<div id="cmntrDiv" class="px-5 py-4 my-1 fs-5" style="display:none; border:solid 1px #dddddd;">
-					<button type="button" class="btn btn-primary my-3" onclick="toggleCmntr();">해설</button>
-					<div th:utext="${quizMstrInfoVO.cmntr}"></div>
+					<th:block th:if="${not #strings.isEmpty(quizMstrInfoVO.cmntr)}">
+						<button type="button" class="btn btn-primary my-3" onclick="toggleCmntr();">해설</button>
+						<div th:utext="${quizMstrInfoVO.cmntr}"></div>
+					</th:block>
 				</div>
 
 				<div class="d-flex justify-content-between align-items-center my-5 text-center btn-grp">
@@ -76,9 +80,9 @@
 					</div>
 					<div class="list-group w-100 mx-5">
 						<th:block th:each="dtlInfo:${quizMstrInfoVO.quizMstrDtlList}">
-							<div class="text-start my-3 exDiv">
+							<div class="my-3 exDiv d-flex text-start">
 								<i class="fas fa-eraser" onclick="eraser(this);"></i>
-								<a class="list-group-item list-group-item-action"
+								<a class="list-group-item list-group-item-action w-75 mx-3"
 									th:classappend="${quizMstrInfoVO.userAnswer} == ${dtlInfo.srtNo} ? list-group-item-dark"
 									onclick="chkAnswer(this);">
 									<span class="fw-bold mx-1" th:if="${dtlInfo.srtNo == 1}">&#9312;</span>
@@ -88,15 +92,23 @@
 									<span class="fw-bold mx-1" th:if="${dtlInfo.srtNo == 5}">&#9316;</span>
 									<span class="exCntnt mx-1" th:text="${dtlInfo.content}"
 										th:classappend="${dtlInfo.eraseYn} == 'Y' ? text-decoration-line-through"></span>
-									<input type="hidden" th:name="|quizMstrDtlList[${dtlInfoStat.index}].quizMstrDtlSeq|" 
-										th:value="${dtlInfo.quizMstrDtlSeq}"/>
-									<input type="hidden" th:name="|quizMstrDtlList[${dtlInfoStat.index}].srtNo|" 
-										th:value="${dtlInfo.srtNo}" class="dtlInfoSrtNo"/>
-									<input type="hidden" th:name="|quizMstrDtlList[${dtlInfoStat.index}].eraseYn|"
-										 th:value="${dtlInfo.eraseYn}" class="eraseYn"/>
-									<input type="hidden" th:name="|quizMstrDtlList[${dtlInfoStat.index}].quizUserAnsDtlSeq|"
-										th:value="${dtlInfo.quizUserAnsDtlSeq}" />
 								</a>
+								<th:block th:if="${not #strings.isEmpty(dtlInfo.cmntr)}">
+									<button type="button" class="btn btn-primary my-3" onclick="toggleDtlCmntr(this);">해설</button>
+								</th:block>
+								<input type="hidden" th:name="|quizMstrDtlList[${dtlInfoStat.index}].quizMstrDtlSeq|" 
+									th:value="${dtlInfo.quizMstrDtlSeq}"/>
+								<input type="hidden" th:name="|quizMstrDtlList[${dtlInfoStat.index}].srtNo|" 
+									th:value="${dtlInfo.srtNo}" class="dtlInfoSrtNo"/>
+								<input type="hidden" th:name="|quizMstrDtlList[${dtlInfoStat.index}].eraseYn|"
+									 th:value="${dtlInfo.eraseYn}" class="eraseYn"/>
+								<input type="hidden" th:name="|quizMstrDtlList[${dtlInfoStat.index}].quizUserAnsDtlSeq|"
+									th:value="${dtlInfo.quizUserAnsDtlSeq}" />
+							</div>
+							<div class="px-3 py-2 my-1 text-start border border-primary rounded-pill" style="display:none; border:solid 1px #dddddd;">
+								<th:block th:if="${not #strings.isEmpty(dtlInfo.cmntr)}">
+									<div th:utext="${dtlInfo.cmntr}"></div>
+								</th:block>
 							</div>
 						</th:block>
 					<!-- <i class="far fa-check-circle fa-5x"

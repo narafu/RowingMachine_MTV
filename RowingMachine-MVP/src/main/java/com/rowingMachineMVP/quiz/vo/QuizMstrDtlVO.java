@@ -13,5 +13,6 @@ public class QuizMstrDtlVO extends BaseVO {
 	private int quizUserAnsDtlSeq;
 	private int srtNo = 1;
 	private String content;
+	private String cmntr;
 	private String eraseYn = "N";
 }
