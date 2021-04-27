@@ -471,8 +471,20 @@ function saveQuiz(flag) {
 		return;
 	}
 
-	$('#content').val(editorCntnt.getHTML());
-	$('#cmntr').val(editorCmntr.getHTML());
+	let editorCntntHtml = editorCntnt.getHTML();
+	if(editorCntntHtml == '<p><br></p>') {
+		$('#content').val('');
+	} else {
+		$('#content').val(editorCntntHtml);
+	}
+	
+	let editorCmntrHtml = editorCmntr.getHTML();
+	if(editorCmntrHtml == '<p><br></p>') {
+		$('#cmntr').val('');
+	} else {
+		$('#cmntr').val(editorCmntrHtml);
+	}
+
 	let message = '';
 	let url = '';
 	
