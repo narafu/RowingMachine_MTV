@@ -407,7 +407,7 @@ function eraser(obj) {
 }
 
 function chkAnswer(obj) {
-	let dtlInfoSrtNo = $(obj).children('.dtlInfoSrtNo').val();
+	let dtlInfoSrtNo = $(obj).siblings('.dtlInfoSrtNo').val();
 	if ($(obj).hasClass('list-group-item-dark')) {
 		$(obj).removeClass('list-group-item-dark');
 		$('#userAnswer').val('');
@@ -477,7 +477,7 @@ function saveQuiz(flag) {
 	} else {
 		$('#content').val(editorCntntHtml);
 	}
-	
+
 	let editorCmntrHtml = editorCmntr.getHTML();
 	if(editorCmntrHtml == '<p><br></p>') {
 		$('#cmntr').val('');
@@ -487,7 +487,7 @@ function saveQuiz(flag) {
 
 	let message = '';
 	let url = '';
-	
+
 	if(flag == 'I') {
 		message = '등록하시겠습니까?';
 		url = '/quiz/admin/regQuiz.do';
